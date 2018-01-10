@@ -53,4 +53,12 @@ public abstract class User {
     public void setLastName(String lastName){
         this.lastName = lastName;
     }
+
+    public void setEmail(String newEmail){
+        this.email = newEmail;
+    }
+
+    public String toString(){
+        return String.format("%s | %s %s | %s", login, name, lastName, email);
+    }
 }
