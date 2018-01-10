@@ -34,4 +34,23 @@ public abstract class User {
         return this.lastName;
     }
 
+    public String getEmail(){
+        return this.email;
+    }
+
+    public void setLogin(String login){
+        this.login = login;
+    }
+
+    public void setPassword(String password){
+        this.password = password;
+    }
+
+    public void setName(String name){
+        this.name = name;
+    }
+
+    public void setLastName(String lastName){
+        this.lastName = lastName;
+    }
 }
