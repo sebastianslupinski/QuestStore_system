@@ -28,6 +28,15 @@ public class GroupModel{
         this.mentorList.remove(index);
     }
 
+    public StudentModel getStudentById(int id){
+        for (StudentModel student : studentList){
+            if (student.id == id){
+                return student;
+            }
+        }
+        return null;
+    }
+
     public Iterator createStudentsIterator(){
 
         return studentList.iterator();
