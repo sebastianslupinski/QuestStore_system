@@ -2,6 +2,7 @@ package controller;
 import view.*;
 
 public class RootController{
+  AdminView adminView = new AdminView();
   RootView rootView = new RootView();
   MentorView mentorView = new MentorView();
 
@@ -13,7 +14,7 @@ public class RootController{
 
     switch (option) {
       case "1":
-        System.out.println("cosik tu bedzie");
+        adminView.displayMenu();
         break;
       case "2":
         mentorView.displayMenu();
