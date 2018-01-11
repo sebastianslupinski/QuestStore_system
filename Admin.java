@@ -7,7 +7,5 @@ public class Admin extends User{
     public Admin(String login, String password, String name, String lastName){
         super(login, password, name, lastName);
         email = createEmail();
-
     }
-
 }
