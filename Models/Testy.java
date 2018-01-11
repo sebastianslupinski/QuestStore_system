@@ -16,7 +16,9 @@ public class Testy{
         grupa.addStudent(student3);
         grupa.addMentor(mentor);
         Quest quest = new Quest("quescik", "opis", 12, "basic");
-        System.out.println(grupa);
-        System.out.println(grupa.getStudentById(001));
+        grupa.printStudents();
+        grupa.removeStudentById(003);
+        System.out.println("USUWAM STUDENCIAKA");
+        grupa.printStudents();
     }
 }
