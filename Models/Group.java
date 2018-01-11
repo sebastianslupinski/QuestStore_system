@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.uti.Iterator;
 
 public class Group{
     String name;
@@ -15,7 +16,25 @@ public class Group{
         this.studentList.add(student);
     }
 
-    public void removeStudent(Student student){
-        this.studentList.remove()
+    public void removeStudent(int index){
+        this.studentList.remove(index);
+    }
+
+    public void addMentor(Mentor mentor){
+        this.mentorList.add(mentor);
+    }
+
+    public void removeMentor(int index){
+        this,mentorList.remove(index);
+    }
+
+    public Iterator createStudentsIterator(){
+
+        return studentList.iterator();
+    }
+
+    public Iterator createMentorsIterator(){
+
+        return mentorList.iterator();
     }
 }
