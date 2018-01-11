@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 import java.uti.Iterator;
 
-public class Group{
+public class GroupModel{
     String name;
     ArrayList<Mentor> mentorList;
     ArrayList<Student> studentList;

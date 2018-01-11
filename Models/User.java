@@ -1,4 +1,4 @@
-public abstract class User {
+public abstract class UserModel {
 
     protected String login;
     protected String password;
@@ -8,7 +8,7 @@ public abstract class User {
     protected final int id;
     protected static int lastId = 0;
 
-    protected User(String login, String password, String name, String lastName){
+    protected UserModel(String login, String password, String name, String lastName){
         this.login = login;
         this.password = password;
         this.name = name;
