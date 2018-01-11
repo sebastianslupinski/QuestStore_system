@@ -1,3 +1,6 @@
+package controller;
+import view.*;
+
 public class AdminController {
   private AdminModel model;
   private AdminView view;
@@ -8,7 +11,7 @@ public class AdminController {
   }
 
   public createMentor() {
-  
+
   }
 
   public createGroup() {

@@ -1,3 +1,6 @@
+package controller;
+import view.*;
+
 public class MentorController {
   private MentorModel model;
   private MentorView view;

@@ -1,4 +1,5 @@
 package view;
+
 import java.util.Scanner;
 
 
@@ -22,9 +23,9 @@ public class RootView{
         optionNumber ++;
     }
   }
-  
+
   public String getInput(){
-    Scanner scanner = new Scanner(system.in);
+    Scanner scanner = new Scanner(System.in);
     String input = scanner.nextLine();
     return input;
   }

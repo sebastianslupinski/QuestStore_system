@@ -1,3 +1,5 @@
+package view;
+
 public class StudentView extends ViewAbstract {
 
   public void displayWallet(String studentName, String studentWallet){
