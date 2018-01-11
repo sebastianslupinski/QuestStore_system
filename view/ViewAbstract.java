@@ -1,8 +1,11 @@
+package view;
+
 import java.util.Scanner;
+
 
 public abstract class ViewAbstract {
 
-  public displayText(String text) {
+  public void displayText(String text) {
     System.out.println(text);
   }
 
