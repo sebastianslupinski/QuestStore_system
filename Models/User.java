@@ -5,8 +5,8 @@ public abstract class User {
     protected String name;
     protected String lastName;
     protected String email;
-    private final int id;
-    private static int lastId = 0;
+    protected final int id;
+    protected static int lastId = 0;
 
     protected User(String login, String password, String name, String lastName){
         this.login = login;
