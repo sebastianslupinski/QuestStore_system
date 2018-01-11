@@ -22,6 +22,7 @@ public class RootView{
         optionNumber ++;
     }
   }
+  
   public String getInput(){
     Scanner scanner = new Scanner(system.in);
     String input = scanner.nextLine();

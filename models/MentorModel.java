@@ -23,7 +23,7 @@ public class MentorModel extends UserModel{
             }
         StudentModel newStudent = new StudentModel(login, password, name, lastName, group);
         group.addStudent(newStudent);
-        MentorView.displayText("Student added succesfully.")
+        MentorView.displayText("Student added succesfully.");
     }
 
     public getGroupByName(String name){

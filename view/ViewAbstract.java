@@ -15,7 +15,6 @@ public abstract class ViewAbstract {
 
   public String getInput() {
     Scanner sc = new Scanner(System.in);
-    System.out.println(message);
     String userInput = sc.next();
     return userInput;
   }
