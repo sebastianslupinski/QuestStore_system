@@ -2,27 +2,28 @@ package controller;
 import view.*;
 
 public class RootController{
+
   RootView rootView = new RootView();
-  MentorView mentorView = new MentorView();
+  //AdminController adminController = new AdminController();
+  MentorController mentorController = new MentorController();
+  //StudentController studentController = new StudentController();
 
   public void startApplication(){
-    rootView.displayText("Weclome in QUESTSTORE");
+    rootView.displayText("Welcome in QUESTSTORE");
     rootView.displayMenu();
 
     String option = rootView.getInput();
 
     switch (option) {
       case "1":
-        System.out.println("cosik tu bedzie");
+        // adminController.run(); to be implemented 
         break;
       case "2":
-        mentorView.displayMenu();
+        mentorController.run();
         break;
       case "3":
-        System.out.println("..........");
+        // studentController.run();
         break;
-
-
     }
 
 
