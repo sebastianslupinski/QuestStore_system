@@ -8,8 +8,12 @@ public class MentorModel extends UserModel{
         super(login, password, name, lastName);
     }
 
-    /*public createStudent(){
+    public createStudent(String login, String password, String name, String lastName, String group){
+        
+    }
 
-    }*/
+    public getGroup(){
+        
+    }
 
 }
