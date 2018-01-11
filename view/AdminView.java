@@ -1,10 +1,18 @@
 public class AdminView extends ViewAbstract {
 
-  public void displayMentor(String mentorToDisplay) {
-    System.out.println("Mentor: " + mentorToDisplay);
+  public void displayGroups(ArrayList groups) {
+    int index = 0;
+    for (GroupModel group : groups){
+      System.out.println(index + "--->" + group.name);
+      index++;
+    }
   }
 
-  public void displayGroups(String groupsToDisplay) {
-    System.out.println("Groups: " + groupsToDisplay);
+  public void displayMentors(ArrayList mentors){
+    int index = 0;
+    for (MentorModel mentor : mentors){
+      System.out.println(index + "--->" + mentor.toString());
+      index++;
+    }
   }
 }

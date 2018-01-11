@@ -1,4 +1,5 @@
 package models;
+import java.security.acl.Group;
 import java.util.ArrayList;
 
 public class AdminModel extends UserModel {
@@ -25,4 +26,40 @@ public class AdminModel extends UserModel {
     public getGroups(){
         return groups;
     }
+
+    public getGroup(){
+        boolean groupNotChosen = true;
+        while(groupNotChosen){
+            AdminView.displayGroups(getGroups());
+            int groupIndex = (Integer) AdminView.getInput("Choose group number");
+            if (groupIndex < groups.size()){
+                groupNotChosen = true;
+                return groups.get(groupIndex);
+            }
+        }
+    }
+
+    public getMentors(){
+        return mentors;
+    }
+
+    public getMentor(){
+        boolean mentorNotChosen = true;
+        while(mentorNotChosen){
+            AdminView.displayMentors(getMentors());
+            int mentorIndex = (Integer) AdminView.getInput("Choose mentor number");
+            if (mentorIndex < mentors.size()){
+                mentorNotChosen = true;
+                return mentors.get(mentorIndex);
+            }
+        }
+    }
+
+    public assignMentorToGroup(){
+        GroupModel groupToAssign = getGroup();
+        MentorModel mentorToAssign = getMentor();
+        groupToAssign.addMentor(mentorToAssign);
+        AdminView.displayText("Mentor assigned succesfully");
+    }
+
 }
