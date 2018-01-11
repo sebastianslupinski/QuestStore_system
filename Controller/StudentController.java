@@ -6,4 +6,12 @@ public class StudentController {
     this.model = model;
     this.view = view;
   }
+
+  public buyArtifacts() {
+
+  }
+
+  public buyArtifactsWithTeammates() {
+
+  }
 }
