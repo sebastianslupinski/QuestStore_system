@@ -12,8 +12,8 @@ public class RootView{
 
     int optionNumber = 1;
     System.out.println("=======WELCOME IN QUESTSTORY SYSTEM=======");
-    System.out.println(" ")
-    System,out.println("Please choose your role: ")
+    System.out.println(" ");
+    System.out.println("Please choose your role: ");
     final String[] OPTIONS = {"Admin", "Mentor", "Student"};
 
     for (String option : OPTIONS)
