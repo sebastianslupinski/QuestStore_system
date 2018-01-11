@@ -2,13 +2,14 @@ package dao;
 
 import models.AdminModel;
 import java.util.List;
+import java.util.ArrayList;
 
 public class AdminDAOImplement implements AdminDAO {
 
-    public static List<Admin> adminCollection = new List<Admin>;
+    public List<AdminModel> adminCollection = new ArrayList<AdminModel>();
 
-    public static List<Admin> readDataFromFile() { return new List<Admin>}
-    public static void saveDataToFile(List<Admin> adminCollection) {}
-    public static void addObject(Admin object) {}
-    public static void deleteObject(Admin object) {}
+    public List<AdminModel> readDataFromFile() { return adminCollection; }
+    public void saveDataToFile(List<AdminModel> adminCollection) {}
+    public void addObject(AdminModel object) {}
+    public void deleteObject(AdminModel object) {}
 }
