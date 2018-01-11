@@ -1,13 +1,16 @@
+package view;
+
 public class MentorView extends ViewAbstract {
 
   public void displayMenu(){
-   System,out.println("Hello Mentor")
+   int optionNumber = 1;
+   System.out.println("Hello Mentor");
    final String[] OPTIONS = {"1. Create student"};
 
    for (String option : OPTIONS)
     {
        System.out.println(optionNumber + "--->" + option);
-       optionNumber ++;
+      //  optionNumber ++;
      }
    }
 
