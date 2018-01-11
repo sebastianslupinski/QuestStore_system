@@ -16,4 +16,13 @@ public class AdminModel extends UserModel {
         mentors.add(newMentor);
         AdminView.displayText("Mentor created successfully");
     }
+
+    public createGroup(String name){
+        GroupModel newGroup = new GroupModel(name);
+        groups.add(newGroup);
+    }
+
+    public getGroups(){
+        return groups;
+    }
 }
