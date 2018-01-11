@@ -8,10 +8,9 @@ public class MentorDAOImplement implements MentorDAO {
 
     public List<MentorModel> mentorCollection = new ArrayList<MentorModel>();
 
-    public List<MentorModel> readDataFromFile() {
+    public MentorModel readDataFromFile() {
         MentorModel newMentor = new MentorModel("mentor1", "password1", "Dominik", "S");
-        mentorCollection.add(newMentor);
-        return mentorCollection;
+        return newMentor;
     }
     public void saveDataToFile(List<MentorModel> mentorCollection) {}
     public void addObject(MentorModel object) {}

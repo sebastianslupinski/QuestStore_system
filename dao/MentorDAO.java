@@ -4,7 +4,7 @@ import java.util.List;
 
 public interface MentorDAO {
 
-    public List<MentorModel> readDataFromFile();
+    public MentorModel readDataFromFile();
     public void saveDataToFile(List<MentorModel> mentorCollection);
     public void addObject(MentorModel object);
     public void deleteObject(MentorModel object);
