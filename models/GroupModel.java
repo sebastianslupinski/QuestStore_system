@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 public class GroupModel{
+
     String name;
     ArrayList<MentorModel> mentorList;
     ArrayList<StudentModel> studentList;
