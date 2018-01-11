@@ -1,4 +1,4 @@
-public abstract class Quest{
+public class Quest{
 
     public String name;
     public String description;
@@ -7,7 +7,7 @@ public abstract class Quest{
     public boolean mark;
     public String label;
 
-    public Quest(String name, String description, String category, int reward, boolean mark, String label){
+    public Quest(String name, String description, int reward, String label){
         this.name = name;
         this.description = description;
         this.reward = reward;
@@ -17,13 +17,13 @@ public abstract class Quest{
 
     public String getName(){ return name; }
 
-    public String getDescription(){ return description}
+    public String getDescription(){ return description;}
 
-    public int getReward(){ return reward }
+    public int getReward(){ return reward; }
 
-    public boolean getMark() { return mark }
+    public boolean getMark() { return mark; }
 
-    public String getLabel() { return label}
+    public String getLabel() { return label; }
 
     public void setName(String newName) { this.name = newName; }
 
@@ -33,7 +33,7 @@ public abstract class Quest{
 
     public void setLabel(String newLabel) { this.label = newLabel;}
 
-    public changeMark(){
+    public void changeMark(){
         if (this.mark){
             this.mark = false;
         }

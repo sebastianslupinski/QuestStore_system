@@ -14,5 +14,6 @@ public class Testy{
         grupa.addStudent(student);
         grupa.addStudent(student2);
         grupa.addStudent(student3);
+        Quest quest = new Quest("quescik", "opis", 12, "basic");
     }
 }
