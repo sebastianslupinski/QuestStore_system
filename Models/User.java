@@ -5,6 +5,8 @@ public abstract class User {
     protected String name;
     protected String lastName;
     protected String email;
+    private final int id;
+    private static int lastId = 0;
 
     protected User(String login, String password, String name, String lastName){
         this.login = login;
@@ -12,6 +14,7 @@ public abstract class User {
         this.name = name;
         this.lastName = lastName;
         this.email = createEmail();
+        this.id = ++lastId;
     }
 
     protected String createEmail(){
@@ -59,6 +62,10 @@ public abstract class User {
     }
 
     public String toString(){
-        return String.format("%s | %s %s | %s", login, name, lastName, email);
+        return String.format("%i | %s | %s %s | %s", id, login, name, lastName, email);
+    }
+
+    public int getId(){
+        return this.id;
     }
 }
