@@ -1,4 +1,5 @@
-public class MentorView {
+public class MentorView extends ViewAbstract {
+
   public void displayStudentWallet(String studentWallet) {
     System.out.println("Wallet: " + studentWallet);
   }

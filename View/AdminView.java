@@ -1,4 +1,5 @@
-public class AdminView {
+public class AdminView extends ViewAbstract {
+
   public void displayMentor(String mentorToDisplay) {
     System.out.println("Mentor: " + mentorToDisplay);
   }

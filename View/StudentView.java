@@ -1,4 +1,5 @@
-public class StudentView {
+public class StudentView extends ViewAbstract {
+
   public void displayWallet(String studentName, String studentWallet){
     System.out.println("Student's name: " + studentName);
     System.out.println("Wallet: " + studentWallet);
