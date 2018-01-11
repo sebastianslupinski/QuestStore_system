@@ -1,8 +1,11 @@
 package view;
+import models.*;
+
+import java.util.*;
 
 public class AdminView extends ViewAbstract {
 
-  public void displayGroups(ArrayList groups) {
+  public void displayGroups(ArrayList<GroupModel> groups) {
     int index = 0;
     for (GroupModel group : groups){
       System.out.println(index + "--->" + group.name);
