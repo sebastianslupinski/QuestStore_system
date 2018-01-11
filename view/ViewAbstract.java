@@ -1,5 +1,7 @@
 package view;
+
 import java.util.Scanner;
+
 
 public abstract class ViewAbstract {
 

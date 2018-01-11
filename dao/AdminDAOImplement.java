@@ -8,7 +8,11 @@ public class AdminDAOImplement implements AdminDAO {
 
     public List<AdminModel> adminCollection = new ArrayList<AdminModel>();
 
-    public List<AdminModel> readDataFromFile() { return adminCollection; }
+    public List<AdminModel> readDataFromFile() {
+        AdminModel newAdmin = new AdminModel("admin1", "password", "Jerzy", "Mardaus");
+        adminCollection.add(newAdmin);
+        return adminCollection;
+    }
     public void saveDataToFile(List<AdminModel> adminCollection) {}
     public void addObject(AdminModel object) {}
     public void deleteObject(AdminModel object) {}

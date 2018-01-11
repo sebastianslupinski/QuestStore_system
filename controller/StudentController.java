@@ -1,3 +1,6 @@
+package controller;
+import view.*;
+
 public class StudentController {
   private StudentModel model;
   private StudentView view;
