@@ -1,3 +1,5 @@
+package models;
+
 public abstract class UserModel {
 
     protected String login;

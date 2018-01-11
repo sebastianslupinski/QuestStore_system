@@ -1,6 +1,7 @@
+package models;
 import java.util.ArrayList;
 
-public class AdminModel extends User{
+public class AdminModel extends UserModel {
 
     //public ArrayList<Group> groups = new ArrayList();
 
