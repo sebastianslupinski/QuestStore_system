@@ -1,3 +1,5 @@
+package View;
+
 public class RootView{
 
   public void displayText(String text){
