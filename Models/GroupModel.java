@@ -37,6 +37,11 @@ public class GroupModel{
         return null;
     }
 
+    public void removeStudentById(int id){
+        int studentIndex = studentList.indexOf(getStudentById(id));
+        studentList.remove(studentIndex);
+    }
+
     public Iterator createStudentsIterator(){
 
         return studentList.iterator();
@@ -45,5 +50,12 @@ public class GroupModel{
     public Iterator createMentorsIterator(){
 
         return mentorList.iterator();
+    }
+
+    public void printStudents(){
+
+        for (StudentModel student : studentList){
+            System.out.println(student.toString());
+        }
     }
 }
