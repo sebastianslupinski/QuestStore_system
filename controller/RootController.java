@@ -2,7 +2,6 @@ package controller;
 import view.*;
 
 public class RootController{
-
   RootView rootView = new RootView();
   //AdminController adminController = new AdminController();
   MentorController mentorController = new MentorController();

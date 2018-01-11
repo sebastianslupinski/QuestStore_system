@@ -55,7 +55,7 @@ public class GroupModel{
         return mentorList.iterator();
     }
 
-    public void printStudents(){
+    public void displayStudents(){
 
         for (StudentModel student : studentList){
             System.out.println(student.toString());
