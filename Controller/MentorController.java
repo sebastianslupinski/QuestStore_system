@@ -34,6 +34,9 @@ public class MentorController {
   public void markStudentAchievedQuest() {
   }
 
+  public void markStudentBoughtArtifact() {
+  }
+
   public void displayInfo() {
   }
 
