@@ -1,3 +1,5 @@
+package models;
+
 public class StudentModel extends UserModel{
 
     String group;
