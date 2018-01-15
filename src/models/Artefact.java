@@ -7,13 +7,25 @@ public class Artefact {
     private String name;
     private String description;
     private int price;
+    private int id;
+    private static int lastID = 0; // powinno wczytywac z pliku!
 
     public Artefact(String label, String name, String description, int price) {
         this.label = label;
         this.name = name;
         this.description = description;
         this.price = price;
+        this.id = lastID++;
     }
+
+    // !!!ta metoda bedzie wymieniona w momencie wczytania pliku z ostatnim id!!!
+    // public Artefact(String label, String name, String description, int price, int lastID) {
+    //     this.label = label;
+    //     this.name = name;
+    //     this.description = description;
+    //     this.price = price;
+    //     this.id = ++lastID;
+    // }
 
     public String getLabel() {
         return this.label;
