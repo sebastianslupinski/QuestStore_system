@@ -1,6 +1,6 @@
-public class Testy{
+public class Testy {
 
-    public static void main(String[] args){
+    public static void main(String[] args) {
         AdminModel admin = new AdminModel("admin1", "admin1", "name", "lastName");
         System.out.println(admin.toString());
         StudentModel student = new StudentModel("studenciak", "hasło", "name", "lastname", "A");

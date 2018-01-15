@@ -3,6 +3,7 @@ package src.dao;
 import src.models.ArtefactModel;
 import java.util.List;
 
+
 public interface ArtefactDAO {
 
     public List<ArtefactModel> readDataFromFile();

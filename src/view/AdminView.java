@@ -4,6 +4,7 @@ import src.models.*;
 
 import java.util.*;
 
+
 public class AdminView extends ViewAbstract {
 
   public void displayGroups(ArrayList<GroupModel> groups) {

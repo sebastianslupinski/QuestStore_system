@@ -2,6 +2,7 @@ package src.models;
 
 import java.util.ArrayList;
 
+
 public class MentorModel extends UserModel{
 
     public ArrayList<GroupModel> guidedGroups = new ArrayList();

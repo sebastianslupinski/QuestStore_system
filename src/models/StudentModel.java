@@ -1,6 +1,7 @@
 package src.models;
 
-public class StudentModel extends UserModel{
+
+public class StudentModel extends UserModel {
 
     String group = "default";
 

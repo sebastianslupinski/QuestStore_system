@@ -1,5 +1,6 @@
 package src.models;
 
+
 public class Quest{
 
     public String name;

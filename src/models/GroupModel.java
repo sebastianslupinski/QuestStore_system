@@ -3,6 +3,7 @@ package src.models;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+
 public class GroupModel{
 
     public String name;

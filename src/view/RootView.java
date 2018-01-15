@@ -2,6 +2,7 @@ package src.view;
 
 import java.util.Scanner;
 
+
 public class RootView{
 
   public void displayText(String text){

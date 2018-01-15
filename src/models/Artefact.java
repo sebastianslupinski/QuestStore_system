@@ -1,5 +1,6 @@
 package src.models;
 
+
 public class Artefact {
 
     private String label;

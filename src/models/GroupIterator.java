@@ -1,8 +1,8 @@
 package src.models;
 
-import java.util.Iterator;
 
 public interface GroupIterator{
 
-    public Iterator createIterator();
+    public Boolean hasNext();
+    public Object next();
 }
