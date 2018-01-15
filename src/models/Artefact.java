@@ -1,6 +1,5 @@
 package src.models;
 
-
 public class Artefact {
 
     private String label;
@@ -18,8 +17,16 @@ public class Artefact {
         this.id = lastID++;
     }
 
+    public Artefact(String label, String name, String description, int price, int id) {
+        this.label = label;
+        this.name = name;
+        this.description = description;
+        this.price = price;
+        this.id = id;
+    }
+
     // !!!ta metoda bedzie wymieniona w momencie wczytania pliku z ostatnim id!!!
-    // public Artefact(String label, String name, String description, int price, int lastID) {
+    // public Artefact(String label, String name, String description, int price) {
     //     this.label = label;
     //     this.name = name;
     //     this.description = description;

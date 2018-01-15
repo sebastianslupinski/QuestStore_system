@@ -9,7 +9,7 @@ public abstract class UserModel {
     protected String lastName;
     protected String email;
     protected final int id;
-    protected static int lastId = 0;
+    protected static int lastId = 0; // powinno wczytywac sie z pliku przez DAO!
 
     protected UserModel(String login, String password, String name, String lastName){
         this.login = login;
@@ -19,6 +19,16 @@ public abstract class UserModel {
         this.email = createEmail();
         this.id = ++lastId;
     }
+
+    // !!!przeciazony konstruktor, bedzie potrzebny pozniej
+    // protected UserModel(String login, String password, String name, String lastName, int id){
+    //     this.login = login;
+    //     this.password = password;
+    //     this.name = name;
+    //     this.lastName = lastName;
+    //     this.email = createEmail();
+    //     this.id = id;
+    // }
 
     protected String createEmail(){
         return String.format("%s.%s@codecool.com", name, lastName);
