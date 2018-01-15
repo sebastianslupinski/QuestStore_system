@@ -6,7 +6,7 @@ import dao.MentorDAOImplement;
 
 public class MentorController {
 
-  public MentorDAOImplement newMentorDAO = new MentorDAOImplement();
+  private MentorDAOImplement newMentorDAO = new MentorDAOImplement();
   private MentorModel model = newMentorDAO.readDataFromFile();
   private MentorView view = new MentorView();
 
