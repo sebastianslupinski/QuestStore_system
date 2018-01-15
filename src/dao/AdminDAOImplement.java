@@ -1,6 +1,6 @@
-package dao;
+package src.dao;
 
-import models.AdminModel;
+import src.models.AdminModel;
 import java.util.List;
 import java.util.ArrayList;
 

@@ -1,6 +1,6 @@
-package dao;
+package src.dao;
 
-import models.MentorModel;
+import src.models.MentorModel;
 import java.util.List;
 import java.util.ArrayList;
 

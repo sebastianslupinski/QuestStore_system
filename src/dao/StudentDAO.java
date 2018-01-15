@@ -1,6 +1,6 @@
-package dao;
+package src.dao;
 
-import models.StudentModel;
+import src.models.StudentModel;
 import java.util.List;
 
 public interface StudentDAO {
