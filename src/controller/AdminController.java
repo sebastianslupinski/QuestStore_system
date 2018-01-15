@@ -48,6 +48,7 @@ public class AdminController{
     String name = view.getInput("Please enter mentor name: ");
     String lastName = view.getInput("Please enter mentor lastName: ");
     MentorModel newMentor = new MentorModel(login, password, name, lastName);
+    model.getMentors().add(newMentor);
     MentorView.pressEnterToContinue("Mentor created successfully, press enter to continue");
   }
 
@@ -78,9 +79,14 @@ public MentorModel getMentor(){
   while(mentorNotChosen){
       view.displayMentors(model.getMentors());
       mentorIndex = AdminView.getNumber("Please enter a mentor number");
-      if (mentorIndex.equals(model.getMentors().size())){
+      if (mentorIndex < model.getMentors().size()){
           mentorNotChosen = false;
       }
+      else {
+        MentorView.displayText("Wrong number");
+      }
+      
+      
   }
   return model.getMentors().get(Integer.valueOf(mentorIndex));
 }
