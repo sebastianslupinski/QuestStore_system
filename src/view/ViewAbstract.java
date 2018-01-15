@@ -6,21 +6,21 @@ import java.util.InputMismatchException;
 
 public abstract class ViewAbstract {
 
-  public static void displayText(String text) {
+  public void displayText(String text) {
     System.out.println(text);
   }
 
   public static String getInput(String message) {
-    Scanner sc = new Scanner(System.in);
+    Scanner scanner = new Scanner(System.in);
     System.out.println(message);
-    String userInput = sc.next();
+    String userInput = scanner.next();
     return userInput;
   }
 
   public static String pressEnterToContinue(String message){
     System.out.println(message);
-    Scanner input = new Scanner(System.in);
-    return input.nextLine();
+    Scanner scanner = new Scanner(System.in);
+    return scanner.nextLine();
   }
 
   public static Integer getNumber(String message) {
@@ -28,9 +28,9 @@ public abstract class ViewAbstract {
         Integer output = 0;
         while (notDone) {
             try {
-                Scanner newScanner = new Scanner(System.in);
+                Scanner scanner = new Scanner(System.in);
                 System.out.println(message);
-                output = newScanner.nextInt();
+                output = scanner.nextInt();
                 return output;
             } catch (InputMismatchException e) {
                 System.out.println("Wrong input! Must be '123' format");
