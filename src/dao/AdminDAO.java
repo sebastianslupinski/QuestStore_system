@@ -1,5 +1,5 @@
-package dao;
-import models.AdminModel;
+package src.dao;
+import src.models.AdminModel;
 import java.util.List;
 
 public interface AdminDAO {

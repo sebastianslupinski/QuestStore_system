@@ -1,9 +1,9 @@
-package controller;
-import view.*;
+package src.controller;
+import src.view.*;
 
 public class RootController{
   RootView rootView = new RootView();
-  //AdminController adminController = new AdminController();
+  AdminController adminController = new AdminController();
   MentorController mentorController = new MentorController();
   //StudentController studentController = new StudentController();
 
@@ -15,7 +15,7 @@ public class RootController{
 
     switch (option) {
       case "1":
-        // adminController.run(); to be implemented 
+        adminController.run();
         break;
       case "2":
         mentorController.run();
@@ -24,7 +24,5 @@ public class RootController{
         // studentController.run();
         break;
     }
-
-
   }
 }

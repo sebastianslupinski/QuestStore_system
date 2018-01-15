@@ -1,5 +1,5 @@
-package models;
-import view.*;
+package src.models;
+import src.view.*;
 
 import java.security.acl.Group;
 import java.util.ArrayList;
@@ -15,15 +15,8 @@ public class AdminModel extends UserModel {
         email = createEmail();
     }
 
-    // public void createMentor(String login, String password, String name, String lastName){
-    //     MentorModel newMentor = new MentorModel(login, password, name, lastName);
-    //     mentors.add(newMentor);
-    //     AdminView.displayText("Mentor created successfully");
-    // }
-
-    public void createGroup(String name){
-        GroupModel newGroup = new GroupModel(name);
-        groups.add(newGroup);
+    public void addGroup(GroupModel newGroup){
+        this.groups.add(newGroup);
     }
 
     public ArrayList<GroupModel> getGroups(){
@@ -50,10 +43,10 @@ public class AdminModel extends UserModel {
 
     public MentorModel getMentor(){
         boolean mentorNotChosen = true;
-        String mentorIndex;
+        Integer mentorIndex = 0;
         while(mentorNotChosen){
             view.displayMentors(getMentors());
-            mentorIndex = view.getInput("Choose mentor number");
+            mentorIndex = AdminView.getNumber("Please enter a mentor number");
             if (mentorIndex.equals(mentors.size())){
                 mentorNotChosen = false;
             }

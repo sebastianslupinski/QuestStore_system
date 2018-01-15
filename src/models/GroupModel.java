@@ -1,11 +1,11 @@
-package models;
+package src.models;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 
 public class GroupModel{
 
-    String name;
+    public String name;
     ArrayList<MentorModel> mentorList;
     ArrayList<StudentModel> studentList;
 

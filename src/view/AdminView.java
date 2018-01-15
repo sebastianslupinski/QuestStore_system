@@ -1,5 +1,5 @@
-package view;
-import models.*;
+package src.view;
+import src.models.*;
 
 import java.util.*;
 
@@ -14,7 +14,6 @@ public class AdminView extends ViewAbstract {
   }
 
   public void displayMenu(){
-
    int optionNumber = 1;
    System.out.println("======= HELLO-ADMIN =======");
    System.out.println(" ");
@@ -29,7 +28,7 @@ public class AdminView extends ViewAbstract {
    }
   }
 
-  public void displayMentors(ArrayList mentors){
+  public void displayMentors(ArrayList<MentorModel> mentors){
     int index = 0;
     for (MentorModel mentor : mentors){
       System.out.println(index + "--->" + mentor.toString());

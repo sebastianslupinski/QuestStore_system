@@ -1,5 +1,5 @@
-package controller;
-import view.*;
+package src.controller;
+import src.view.*;
 
 public class StudentController {
   private StudentModel model;
