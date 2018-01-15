@@ -27,7 +27,7 @@ public class AdminController{
         this.assignMentorToGroup();
         break;
       case 4:
-        System.out.println("Show mentor profile"); // to implement
+        this.editMentor();
         break;
       case 5:
         adminControllerRunning = false;
@@ -85,10 +85,45 @@ public MentorModel getMentor(){
       else {
         MentorView.displayText("Wrong number");
       }
-      
-      
   }
   return model.getMentors().get(Integer.valueOf(mentorIndex));
+}
+
+public void editMentor() {
+  boolean optionChosen = false;
+  while(!optionChosen) {
+    MentorModel mentorToEdit = getMentor();
+    AdminView.chooseAtributeToEdit();
+    Integer option = MentorView.getNumber("Enter your option");
+    switch (option) {
+      case 1:
+        String newLogin = AdminView.getInput("Enter new login");
+        mentorToEdit.setLogin(newLogin);
+        optionChosen = true;
+        break;
+      case 2:
+        String newPassword = AdminView.getInput("Enter new login");
+        mentorToEdit.setPassword(newPassword);
+        optionChosen = true;
+        break;
+      case 3:
+        String newName = AdminView.getInput("Enter new name");
+        mentorToEdit.setName(newName);
+        optionChosen = true;
+        break;
+      case 4:
+        String newLastName = AdminView.getInput("Enter new lastname");
+        mentorToEdit.setLastName(newLastName);
+        optionChosen = true;
+        break;
+      case 5:
+        String newEmail = AdminView.getInput("Enter new email");
+        mentorToEdit.setEmail(newEmail);
+        optionChosen = true;
+        break;
+    }
+  }
+
 }
 
 public void assignMentorToGroup(){
