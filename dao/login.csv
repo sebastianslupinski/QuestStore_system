@@ -1,0 +1,10 @@
+ID,login,password,role
+00,admin,admin00,A
+01,student01,student01,S
+02,mentor,mentor02,M
+03,student,student03,S
+04,John,student04,S
+05,Janusz,mentor05,M
+06,Joe,mentor06,M
+07,Kate,student07,S
+08,Eve,student08,S
