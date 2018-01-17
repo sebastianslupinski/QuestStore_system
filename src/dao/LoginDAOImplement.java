@@ -12,11 +12,11 @@ import java.io.IOException;
 import java.io.FileNotFoundException;
 
 
-public class LoginDaoImplement implements LoginDao {
+public class LoginDAOImplement implements LoginDAO {
 
     private ArrayList<String[]> loginCollection;
 
-    public LoginDaoImplement() {
+    public LoginDAOImplement() {
         this.loginCollection = new ArrayList<String[]>();
     }
 

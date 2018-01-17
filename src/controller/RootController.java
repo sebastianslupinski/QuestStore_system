@@ -5,33 +5,32 @@ import src.view.*;
 import java.util.ArrayList;
 import java.io.File;
 
-import src.dao.*;
-
 
 public class RootController{
 
-    RootView rootView = new RootView();
-    AdminController adminController = new AdminController();
-    MentorController mentorController = new MentorController();
-    StudentController studentController = new StudentController();
+    // RootView rootView = new RootView();
+    // AdminController adminController = new AdminController();
+    // MentorController mentorController = new MentorController();
+    // StudentController studentController = new StudentController();
 
     public void startApplication(){
-        
-        rootView.displayText("Welcome in QUESTSTORE");
-        rootView.displayMenu();
+        LoginController loginController = new LoginController();
+        String[] idAndRole = loginController.processValidation();
+    //     rootView.displayText("Welcome in QUESTSTORE");
+    //     rootView.displayMenu();
 
-        String option = rootView.getInput();
+    //     String option = rootView.getInput();
 
-        switch (option) {
-        case "1":
-            adminController.run();
-            break;
-        case "2":
-            mentorController.run();
-            break;
-        case "3":
-            // studentController.run();
-            break;
-        }
+    //     switch (option) {
+    //     case "1":
+    //         adminController.run();
+    //         break;
+    //     case "2":
+    //         mentorController.run();
+    //         break;
+    //     case "3":
+    //         // studentController.run();
+    //         break;
+    //     }
     }
 }

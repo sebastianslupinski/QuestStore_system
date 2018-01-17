@@ -1,12 +1,12 @@
 package src.controller;
 
-import src.dao.LoginDaoImplement;
+import src.dao.LoginDAOImplement;
 import src.view.LoginView;
 import java.util.ArrayList;
 
 public class LoginController {
 
-    LoginDaoImplement loginDAO = new LoginDaoImplement();
+    LoginDAOImplement loginDAO = new LoginDAOImplement();
     LoginView view = new LoginView();
     InputController userInput = new InputController();
 
@@ -28,16 +28,42 @@ public class LoginController {
         int roleColumn = 3;
         int id = 0;
         int role = 1;
-        String[] idAndRole = new String[2];
+        int arrayCapacity = 2;
+        String[] idAndRole = new String[arrayCapacity];
         ArrayList<String[]> loginCollection = loginDAO.readDataFromFile();
 
         for (int x = 0; x < loginCollection.size(); x++) {
             String[] row = loginCollection.get(x);
-            if (row[loginColumn].equals(login) && row[passwordColumn].equals(password)) {
+            if (login.equals(row[loginColumn]) && password.equals(row[passwordColumn])) {
                 idAndRole[id] = row[idColumn];
                 idAndRole[role] = row[roleColumn];
             }
         }
+        System.out.println(idAndRole[0] + idAndRole[1]);
         return idAndRole;
     }
-} 
+
+    public String[] processValidation() {
+
+        int counter = 3;
+        int arrayCapacity = 2;
+        String[] idAndRole = {"wrong", "wrong"};
+        Boolean process = true;
+
+
+        while (process && (counter > 0)) {
+            String login = this.getUserLogin();
+            String password = this.getUserPassword();
+            idAndRole = this.validateLoginData(login, password);
+            System.out.println(idAndRole.length);
+            
+            if (idAndRole[0] == null || idAndRole[1] == null) {
+                counter--;
+                view.displayText("Login or password incorrect, try again!");
+            } else {
+                process = false;
+            }
+        }
+        return idAndRole;
+    }
+}
