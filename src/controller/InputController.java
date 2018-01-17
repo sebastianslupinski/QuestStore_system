@@ -1,6 +1,7 @@
 package src.controller;
 
 import java.util.Scanner;
+import java.util.InputMismatchException;
 
 public class InputController{
 
@@ -24,5 +25,5 @@ public class InputController{
             }
         }
         return output;  
-
+      }
 }
