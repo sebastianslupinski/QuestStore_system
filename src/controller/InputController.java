@@ -10,10 +10,19 @@ public class InputController{
     return input;
   }
 
-  public int getNumber(){
-    Scanner scanner = new Scanner(System.in);
-    int input = scanner.nextInt();
-    return input;
-  }
+  public static Integer getNumber(String message) {
+        Boolean notDone = true;
+        Integer output = 0;
+        while (notDone) {
+            try {
+                Scanner scanner = new Scanner(System.in);
+                System.out.println(message);
+                output = scanner.nextInt();
+                return output;
+            } catch (InputMismatchException e) {
+                System.out.println("Wrong input! Must be '123' format");
+            }
+        }
+        return output;  
 
 }
