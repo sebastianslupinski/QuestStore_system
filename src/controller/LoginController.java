@@ -39,7 +39,6 @@ public class LoginController {
                 idAndRole[role] = row[roleColumn];
             }
         }
-        System.out.println(idAndRole[0] + idAndRole[1]);
         return idAndRole;
     }
 
@@ -50,12 +49,10 @@ public class LoginController {
         String[] idAndRole = {"wrong", "wrong"};
         Boolean process = true;
 
-
         while (process && (counter > 0)) {
             String login = this.getUserLogin();
             String password = this.getUserPassword();
             idAndRole = this.validateLoginData(login, password);
-            System.out.println(idAndRole.length);
             
             if (idAndRole[0] == null || idAndRole[1] == null) {
                 counter--;
