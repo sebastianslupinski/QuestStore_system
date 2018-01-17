@@ -1,11 +1,11 @@
 package src.dao;
 
-import java.util.List;
+import java.util.ArrayList;
 
 
 public interface LoginDao {
 
-    public List<String> readDataFromFile();
-    public void saveDataToFile(List<String>loginCollection);
+    public ArrayList<String[]> readDataFromFile();
+    public Boolean saveDataToFile(ArrayList<String[]> loginCollection);
 
 }
