@@ -1,11 +1,11 @@
 package src.dao;
 
-import java.util.List;
+import java.util.ArrayList;
 
 
-public class LoginDAOImplement implements LoginDAO {
+public class QuestDAOImplement implements QuestDAO {
 
-    public List<String> readDataFromFile() {}
-    public void saveDataToFile(List<String>loginCollection) {}
+    public ArrayList<String[]> readDataFromFile() {}
+    public void saveDataToFile(ArrayList<String>questCollection) {}
 
 }
