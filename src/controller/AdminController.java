@@ -150,7 +150,7 @@ public class AdminController{
   }
 
   public void createLevels() {
-    levels.setAllLevels();
+    levels.addLevels();
   }
-  
+
 }
