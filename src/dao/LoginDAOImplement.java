@@ -23,7 +23,8 @@ public class LoginDAOImplement implements LoginDAO {
     public ArrayList<String[]> readDataFromFile() {
         ArrayList<String[]> logins = this.getLoginCollection();
         File homedir = new File(System.getProperty("user.dir"));
-        File fileToRead = new File(homedir, "/resources/login.txt");
+        System.out.println(homedir.toString());
+        File fileToRead = new File(homedir, "/bin/resources/login.txt");
         BufferedReader br = null;
         String line = "";
         String splitBy = ",";
@@ -51,7 +52,7 @@ public class LoginDAOImplement implements LoginDAO {
     }
 
     public Boolean saveDataToFile(ArrayList<String[]> loginCollection) {
-        
+
         int idColumn = 0;
         int loginColumn = 1;
         int passwordColumn = 2;
