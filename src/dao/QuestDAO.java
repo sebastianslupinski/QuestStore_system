@@ -1,11 +1,11 @@
 package src.dao;
 
-import java.util.List;
+import java.util.ArrayList;
 
 
-public interface QuestDao {
+public interface QuestDAO {
 
-    public List<String> readDataFromFile();
-    public void saveDataToFile(List<String> questCollection);
+    public ArrayList<String[]> readDataFromFile();
+    public Boolean saveDataToFile(ArrayList<String[]> questsCollection);
 
 }

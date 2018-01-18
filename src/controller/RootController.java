@@ -14,8 +14,10 @@ public class RootController{
     // StudentController studentController = new StudentController();
 
     public void startApplication(){
+
         LoginController loginController = new LoginController();
         String[] idAndRole = loginController.processValidation();
+
     //     rootView.displayText("Welcome in QUESTSTORE");
     //     rootView.displayMenu();
 
