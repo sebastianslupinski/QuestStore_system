@@ -1,14 +1,14 @@
-package src.models;
+package src.model;
 
 
 public class Quest{
 
-    public String name;
-    public String description;
-    public String category;
-    public int reward;
-    public boolean mark;
-    public String label;
+    private String name;
+    private String description;
+    private String category;
+    private int reward;
+    private boolean mark;
+    private String label;
 
     public Quest(String name, String description, int reward, String label){
         this.name = name;
@@ -22,7 +22,7 @@ public class Quest{
 
     public String getDescription(){ return description;}
 
-    public int getReward(){ return reward; }
+    public int getReward() { return reward; }
 
     public boolean getMark() { return mark; }
 

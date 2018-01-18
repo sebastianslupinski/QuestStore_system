@@ -1,4 +1,4 @@
-package src.models;
+package src.model;
 
 
 public class StudentModel extends UserModel {

@@ -12,19 +12,19 @@ import java.io.IOException;
 import java.io.FileNotFoundException;
 
 
-public class QuestDAOImplement implements QuestDAO {
+public class UserDAOImplement implements UserDAO {
 
-    private ArrayList<String[]> questsCollection;
+    private ArrayList<String[]> usersCollection;
 
-    public QuestDAOImplement() {
-        this.questsCollection = new ArrayList<String[]>();
+    public UserDAOImplement() {
+        this.usersCollection = new ArrayList<String[]>();
     }
 
     public ArrayList<String[]> readDataFromFile() {
         
-        ArrayList<String[]> quests = this.getQuestsCollection();
+        ArrayList<String[]> users = this.getUsersCollection();
         File homedir = new File(System.getProperty("user.dir"));
-        File fileToRead = new File(homedir, "/bin/resources/quests.txt");
+        File fileToRead = new File(homedir, "/bin/resources/users.txt");
         BufferedReader br = null;
         String line = "";
         String splitBy = ",";
@@ -33,7 +33,7 @@ public class QuestDAOImplement implements QuestDAO {
             br = new BufferedReader(new FileReader(fileToRead));
             while ((line = br.readLine()) != null) {
                 String[] data = line.split(splitBy);
-                quests.add(data);
+                users.add(data);
             }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -48,25 +48,35 @@ public class QuestDAOImplement implements QuestDAO {
                 }
             }
         }
-        return quests;
+        return users;
     }
 
-    public Boolean saveDataToFile(ArrayList<String[]> questsCollection) {
+    public Boolean saveDataToFile(ArrayList<String[]> usersCollection) {
 
         int idColumn = 0;
-        int descriptionColumn = 1;
-        int rewardColumn = 2;
+        int nameColumn = 1;
+        int surnameColumn = 2;
+        int emailColumn = 3;
+        int roleColumn = 4;
+        int groupColumn = 5;
         BufferedWriter writer = null;
 
         try {
             File homedir = new File(System.getProperty("user.dir"));
-            File fileToWrite = new File(homedir, "bin/resources/quests.txt");
+            File fileToWrite = new File(homedir, "bin/resources/users.txt");
             fileToWrite.createNewFile();
             writer = new BufferedWriter(new FileWriter(fileToWrite, false));
-            for (int x = 0; x < questsCollection.size(); x++) {
-                String[] line = questsCollection.get(x);
-                writer.write(line[idColumn] + "," + line[descriptionColumn] + ","
-                             + line[rewardColumn] + "\n");
+            for (int x = 0; x < usersCollection.size(); x++) {
+                String[] line = usersCollection.get(x);
+                if (line.length == 6) {
+                    writer.write(line[idColumn] + "," + line[nameColumn] + ","
+                                 + line[surnameColumn] + "," + line[emailColumn] + ","
+                                 + line[roleColumn] + "," + line[groupColumn] + "\n");
+                } else {
+                    writer.write(line[idColumn] + "," + line[nameColumn] + ","
+                                 + line[surnameColumn] + "," + line[emailColumn] + ","
+                                 + line[roleColumn] + "\n");
+                }
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -79,7 +89,7 @@ public class QuestDAOImplement implements QuestDAO {
         return true;
     }
 
-    public ArrayList<String[]> getQuestsCollection() {
-      return questsCollection;
+    public ArrayList<String[]> getUsersCollection() {
+      return usersCollection;
     }
 }
