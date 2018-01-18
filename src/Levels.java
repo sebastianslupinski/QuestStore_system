@@ -7,7 +7,8 @@ public class Levels {
   private AdminView view = new AdminView();
   private InputController input = new InputController();
 
-  public int[] totalLevels = {0};
+  public ArrayList<int> listOfLevels = new ArrayList();
+  totalLevels.add(0);
   protected int MIN_LEVEL = 2;
   protected int MAX_LEVEL = 9;
 
@@ -28,20 +29,20 @@ public class Levels {
     int numberOfLevels = this.setNumberOfLevels();
     int oneIndex = 1;
     for(int actualLevel = 1; x <= numberOfLevels; x++) {
-      this.setCoinsAmountForLevel(actualLevel, totalLevels[actualLevel - oneIndex]);
+      this.setCoinsAmountForLevel(actualLevel, listOfLevels[actualLevel - oneIndex]);
     }
   }
 
   public void setAmountOfCoinsForLevel(int level, int minAmountOfCoins) {
     boolean amountOfCoinsNotChosen = true;
     while(amountOfCoinsNotChosen) {
-      int amountOfCoins = input.getNumber("Enter an amount of coins for level "+level+". More then "+minAmountOfCoins);
+      int amountOfCoins = input.getNumber("Enter an amount of coins for level "+level+". More then "+minAmountOfCoins+" coins.");
       if(amountOfCoins <= minAmountOfCoins) {
         view.displayText("Amount of coins is not correct. Try again.");
         continue;
       amountOfCoinsNotChosen = false;
       }
     }
-    levels.add(amountOfCoins);
+    listOfLevels.add(amountOfCoins);
   }
 }
