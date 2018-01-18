@@ -1,6 +1,7 @@
 package src.controller;
 
 import src.view.*;
+import src.models.TestQuest;
 
 import java.util.ArrayList;
 import java.io.File;
@@ -14,10 +15,10 @@ public class RootController{
     // StudentController studentController = new StudentController();
 
     public void startApplication(){
-
-        LoginController loginController = new LoginController();
-        String[] idAndRole = loginController.processValidation();
-
+            TestQuest testquest = new TestQuest();
+            testquest.createNewQuest();
+        // LoginController loginController = new LoginController();
+        // String[] idAndRole = loginController.processValidation();
     //     rootView.displayText("Welcome in QUESTSTORE");
     //     rootView.displayMenu();
 
