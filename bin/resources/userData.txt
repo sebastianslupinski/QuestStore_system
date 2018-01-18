@@ -1,5 +1,0 @@
-00,admin,admin00,Pan,Admin,Pan.Admin@codecool.com,A
-01,student01,student01,Augustyn,Sybidlo,Augustyn.Sybidlo@codecool.com,S,A
-02,theMentor,mentor02,Konrad,Gadzina,Konrad.Gadzina@codecool.com,M,A
-03,Seba,student03,Sebastian,Slupinski,Sebastian.Slupinski@codecool.com,S,A
-04,Wiola,student04,Wiola,Szczepanik,Wiola.Szczepanik@codecool.com,S,A
