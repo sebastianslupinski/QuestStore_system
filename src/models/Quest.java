@@ -18,15 +18,15 @@ public class Quest{
         this.label = label;
     }
 
-    public String getName(){ return name; }
+    public String getName(){ return this.name; }
 
-    public String getDescription(){ return description;}
+    public String getDescription(){ return this.description;}
 
-    public int getReward(){ return reward; }
+    public int getReward(){ return this.reward; }
 
-    public boolean getMark() { return mark; }
+    public boolean getMark() { return this.mark; }
 
-    public String getLabel() { return label; }
+    public String getLabel() { return this.label; }
 
     public void setName(String newName) { this.name = newName; }
 
@@ -35,6 +35,10 @@ public class Quest{
     public void setReward(int newReward) { this.reward = newReward;}
 
     public void setLabel(String newLabel) { this.label = newLabel;}
+
+    public String toString(){
+      return "{name:"+this.name+" description:"+this.description+" reward:"+this.reward+" label:"+this.label+"}";
+    }
 
     public void changeMark(){
         if (this.mark){
