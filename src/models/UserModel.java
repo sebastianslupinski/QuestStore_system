@@ -20,15 +20,15 @@ public abstract class UserModel {
         this.id = ++lastId;
     }
 
-    // !!!przeciazony konstruktor, bedzie potrzebny pozniej
-    // protected UserModel(String login, String password, String name, String lastName, int id){
-    //     this.login = login;
-    //     this.password = password;
-    //     this.name = name;
-    //     this.lastName = lastName;
-    //     this.email = createEmail();
-    //     this.id = id;
-    // }
+
+    protected UserModel(String login, String password, String name, String lastName, String email, int id) {
+        this.login = login;
+        this.password = password;
+        this.name = name;
+        this.lastName = lastName;
+        this.email = email;
+        this.id = id;
+    }
 
     protected String createEmail(){
         return String.format("%s.%s@codecool.com", name, lastName);
