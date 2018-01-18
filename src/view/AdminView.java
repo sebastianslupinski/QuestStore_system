@@ -40,8 +40,6 @@ public class AdminView extends ViewAbstract {
         System.out.println(optionNumber + "--->" + option);
         optionNumber ++;
     }
-
-
   }
 
   public void displayMentors(ArrayList<MentorModel> mentors){

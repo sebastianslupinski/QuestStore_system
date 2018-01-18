@@ -6,7 +6,7 @@ import java.util.InputMismatchException;
 
 public abstract class ViewAbstract {
 
-  public void displayText(String text) {
+  public static void displayText(String text) {
     System.out.println(text);
   }
 
