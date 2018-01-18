@@ -1,6 +1,6 @@
 package src.controller;
 
-import src.models.*;
+import src.model.*;
 import src.view.*;
 import src.dao.MentorDAOImplement;
 

@@ -1,14 +1,11 @@
 package src.dao;
 
-import src.models.StudentModel;
-
-import java.util.List;
+import java.util.ArrayList;
 
 
-public interface StudentDAO {
+public interface userDAO {
 
-    public List<StudentModel> readDataFromFile();
-    public void saveDataToFile(List<StudentModel> studentCollection);
-    public void addObject(StudentModel object);
-    public void deleteObject(StudentModel object);
+    public ArrayList<String[]> readDataFromFile();
+    public void saveDataToFile(ArrayList<String[]> studentCollection);
+    
 }
