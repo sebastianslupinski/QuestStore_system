@@ -7,8 +7,10 @@ public class Levels {
   private AdminView view = new AdminView();
   private InputController input = new InputController();
 
-  public ArrayList<int> listOfLevels = new ArrayList();
-  totalLevels.add(0);
+  public ArrayList<int> amountsOfCoinsForLevels = new ArrayList();
+  public ArrayList<String> namesOfLevels = new ArrayList();
+  amountsOfCoinsForLevels.add(0); // yes, level 0 exits!
+  amountsOfCoinsForLevels.add("Noobcooler"); // name for level 0
   protected int MIN_LEVEL = 2;
   protected int MAX_LEVEL = 9;
 
@@ -25,11 +27,12 @@ public class Levels {
     return numberOfLevels;
   }
 
-  public void setAllLevels() {
+  public void addLevels() {
     int numberOfLevels = this.setNumberOfLevels();
     int oneIndex = 1;
     for(int actualLevel = 1; x <= numberOfLevels; x++) {
-      this.setCoinsAmountForLevel(actualLevel, listOfLevels[actualLevel - oneIndex]);
+      this.setNameOfLevel(actualLevel);
+      this.setAmountOfCoinsForLevel(actualLevel, coinsOfLevels[actualLevel - oneIndex]);
     }
   }
 
@@ -43,6 +46,23 @@ public class Levels {
       amountOfCoinsNotChosen = false;
       }
     }
-    listOfLevels.add(amountOfCoins);
+    amountsOfCoinsForLevels.add(amountOfCoins);
+  }
+
+  public void setNameOfLevel(int level) {
+    view.displayText("Enter a name of level number "+level+".");
+    String levelsName = input.getString();
+    namesOfLevels.add(levelsName);
+  }
+
+  public String checkLevel(totalEarned) {
+    int levelCounter = 0;
+    int numberOfLevels = amountsOfCoinsForLevels.length;
+    for(int i = 0; i < numberOfLevels; i++) {
+      if(amountsOfCoinsForLevels[i] < totalEarned) {
+        count++;
+      }
+    }
+    return namesOfLevels[levelCounter];
   }
 }
