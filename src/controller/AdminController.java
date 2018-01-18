@@ -1,7 +1,7 @@
 package src.controller;
 
 import src.view.*;
-import src.models.*;
+import src.model.*;
 import src.dao.*;
 
 

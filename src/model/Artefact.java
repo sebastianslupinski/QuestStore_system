@@ -1,6 +1,6 @@
-package src.models;
+package src.model;
 
-public class Artefact {
+public class ArtefactModel {
 
     private String label;
     private String name;

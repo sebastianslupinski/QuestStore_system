@@ -3,7 +3,7 @@ package src.view;
 
 public class MentorView extends ViewAbstract {
 
-  public void displayMenu(){
+  public void displayMentorMenu() {
    int optionNumber = 1;
    System.out.println("Hello Mentor");
    final String[] OPTIONS = {"1. Create student"};
@@ -22,9 +22,4 @@ public class MentorView extends ViewAbstract {
   public void displayStudentData(String studentData) {
     System.out.println("Student's info: " + studentData);
   }
-
-  public void displayGroup(String groupToDisplay) {
-    System.out.println("Group: " + groupToDisplay);
-  }
-
 }
