@@ -10,14 +10,6 @@ public class LoginController {
     LoginView view = new LoginView();
     InputController userInput = new InputController();
 
-    public String getUserLogin() {
-        return userInput.getString("Please type your login: ");
-    }
-
-    public String getUserPassword() {
-        return userInput.getString("Please type your password: ");
-    }
-
     public String[] validateLoginData(String login, String password) {
         
         int idColumn = 0;
@@ -50,8 +42,8 @@ public class LoginController {
         Boolean process = true;
 
         while (process && (counter > 0)) {
-            String login = this.getUserLogin();
-            String password = this.getUserPassword();
+            String login = userInput.getString("Please enter your login");
+            String password = userInput.getString("Please enter your password");
             idAndRole = this.validateLoginData(login, password);
             
             if (idAndRole[idColumn] == null || idAndRole[roleColumn] == null) {

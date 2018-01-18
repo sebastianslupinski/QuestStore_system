@@ -20,6 +20,9 @@ public class AdminView extends ViewAbstract {
         optionNumber ++;
         }
     }
+<<<<<<< HEAD
+  }
+=======
 
     public static void displayAttributsEditMenu() {
         int optionNumber = 1;
@@ -32,6 +35,7 @@ public class AdminView extends ViewAbstract {
             optionNumber ++;
         }
     }
+>>>>>>> 4f83861c0aa25dc6e28690524ad109e55b55245b
 
     public void displayMentors(ArrayList<MentorModel> mentors) {
         int index = 0;

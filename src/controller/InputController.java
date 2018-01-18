@@ -14,6 +14,13 @@ public class InputController{
         return input;
     }
 
+    public String getString(String message) {
+        System.out.println(message);
+        Scanner scanner = new Scanner(System.in);
+        String input = scanner.nextLine();
+        return input;
+    }
+
     public Integer getNumber(String message) {
         Boolean notDone = true;
         Integer output = 0;
