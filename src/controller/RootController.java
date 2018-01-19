@@ -19,8 +19,6 @@ public class RootController{
             // testquest.createNewQuest();
         LoginController loginController = new LoginController();
         String[] idAndRole = loginController.processValidation();
-    //     rootView.displayText("Welcome in QUESTSTORE");
-    //     rootView.displayMenu();
     String id = idAndRole[0];
     String role = idAndRole[1];
 

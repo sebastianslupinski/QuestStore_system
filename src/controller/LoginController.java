@@ -11,7 +11,7 @@ public class LoginController {
     InputController userInput = new InputController();
 
     public String[] validateLoginData(String login, String password) {
-        
+
         int idColumn = 0;
         int loginColumn = 1;
         int passwordColumn = 2;

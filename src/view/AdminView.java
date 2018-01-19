@@ -5,7 +5,7 @@ import src.model.*;
 import java.util.*;
 
 
-public class AdminView extends ViewAbstract {
+public class AdminView extends ViewAbstract { 
 
 
     public void displayAdminMenu() {

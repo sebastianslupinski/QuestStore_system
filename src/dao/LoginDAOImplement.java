@@ -83,4 +83,17 @@ public class LoginDAOImplement implements LoginDAO {
     public ArrayList<String[]> getLoginCollection() {
       return loginCollection;
     }
+
+    public String[] getLoginAndPassword(String id){
+        String[] loginAndPassword = new String[2];
+        ArrayList<String[]> allLogins = readDataFromFile();
+        for (String[] userInfo : allLogins){
+            if (userInfo[0] = id){
+                userInfo[1] = loginAndPassword[0];
+                userInfo[2] = loginAndPassword[1];
+                return loginAndPassword;
+            }
+        }
+        return null;
+    }
 }

@@ -4,19 +4,24 @@ import src.view.*;
 import src.model.*;
 import src.dao.*;
 
+import java.util.ArrayList;
+
 
 public class AdminController{
 
   public UserDAOImplement newAdminDAO = new UserDAOImplement();
-  private AdminModel model = newAdminDAO.readDataFromFile();
+  private ArrayList users = newAdminDAO.readDataFromFile();
+  private LoginDAOImplement loginDAO = new LoginDAOImplement();
   private AdminView view = new AdminView();
+  private InputController inputController = new InputController();
 
   public void run(String id) {
+    AdminModel admin = this.createAdmin(users, id);
     boolean adminControllerRunning = true;
     while(adminControllerRunning){
-    view.displayMenu();
+    view.displayAdminMenu();
 
-    Integer option = view.getNumber("Choose option: ");
+    Integer option = inputController.getNumber("Choose option: ");
     switch (option) {
       case 1:
         this.createMentor();
@@ -38,9 +43,19 @@ public class AdminController{
   }
 }
 
-  public void AdminController(AdminModel model, AdminView view) {
-    this.model = model;
-    this.view = view;
+  public AdminModel createAdmin(ArrayList<String[]> users, String id){
+    for (String[] userInfo : users){
+      if (userInfo[0] == id){
+        String[] userLoginInfo = loginDAO.getLoginAndPassword(id);
+        String login = userLoginInfo[0];
+        String password = userLoginInfo[1];
+        String name = userInfo[1];
+        String lastName = userInfo[2];
+        String email = userInfo[3];
+        AdminModel Admin = new AdminModel(login, password, name, lastName, email, id);
+      }
+    }
+    return Admin;
   }
 
   public void createMentor() {
