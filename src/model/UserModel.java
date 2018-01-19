@@ -18,7 +18,6 @@ public abstract class UserModel {
         this.name = name;
         this.lastName = lastName;
         this.email = createEmail();
-        
     }
 
 

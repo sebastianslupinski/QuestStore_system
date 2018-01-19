@@ -1,4 +1,4 @@
 package src.view;
 
 
-public class LoginView extends ViewAbstract {}
+public class LoginView extends AbstractView {}

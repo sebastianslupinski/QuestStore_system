@@ -88,12 +88,12 @@ public class LoginDAOImplement implements LoginDAO {
         String[] loginAndPassword = new String[2];
         ArrayList<String[]> allLogins = readDataFromFile();
         for (String[] userInfo : allLogins){
-            if (userInfo[0] = id){
-                userInfo[1] = loginAndPassword[0];
-                userInfo[2] = loginAndPassword[1];
-                return loginAndPassword;
+            if (userInfo[0] == id){
+                loginAndPassword[0] = userInfo[1];
+                loginAndPassword[1] = userInfo[2];
+
             }
         }
-        return null;
+        return loginAndPassword;
     }
 }

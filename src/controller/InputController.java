@@ -1,13 +1,16 @@
 package src.controller;
 
 import java.util.Scanner;
+
+import org.w3c.dom.views.AbstractView;
+
 import java.util.InputMismatchException;
 
 public class InputController{
 
     public String getString(String message) {
         Scanner scanner = new Scanner(System.in);
-        view.displayText(message);
+        System.out.println(message);
         String input = scanner.nextLine();
         return input;
     }
@@ -24,7 +27,7 @@ public class InputController{
         while (notDone) {
             try {
                 Scanner scanner = new Scanner(System.in);
-                view.displayText(message);
+                System.out.println(message);
                 output = scanner.nextInt();
                 notDone = false;
             } catch (InputMismatchException e) {
