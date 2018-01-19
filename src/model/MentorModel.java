@@ -5,21 +5,17 @@ import java.util.ArrayList;
 
 public class MentorModel extends UserModel{
 
-    public ArrayList<GroupModel> guidedGroups = new ArrayList();
+    private String group;
 
-    public MentorModel(String login, String password, String name, String lastName){
+    public MentorModel(String id, String login, String password,
+                       String name, String lastName, String group) {
+        super(id, login, password, name, lastName);
+        this.group = group;
+    }
+    public MentorModel(String login, String password, String name, String lastName, String group){
         super(login, password, name, lastName);
+        this.group = group;
     }
-
-    public GroupModel getGroupByName(String name){
-        for (GroupModel group : guidedGroups){
-            if (group.name == name){
-                return group;
-            }
-        }
-        return null;
-    }
-
 }
     // public void createStudent(String login, String password, String name, String lastName){
     //     boolean studentNotAdded = true;
