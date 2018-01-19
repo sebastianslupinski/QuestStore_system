@@ -3,31 +3,34 @@ package src.model;
 
 public abstract class UserModel {
 
+    protected String id;
     protected String login;
     protected String password;
     protected String name;
     protected String lastName;
-    protected String email;
-    protected final int id;
-    protected static int lastId = 0; // powinno wczytywac sie z pliku przez DAO!
+    protected String email; 
 
-    protected UserModel(String login, String password, String name, String lastName){
+    protected UserModel(String id, String login, String password,
+                        String name, String lastName) {
+        this.id = id;
         this.login = login;
         this.password = password;
         this.name = name;
         this.lastName = lastName;
         this.email = createEmail();
-        this.id = ++lastId;
+        
     }
 
 
-    protected UserModel(String login, String password, String name, String lastName, String email, int id) {
+    protected UserModel(String id, String login, String password,
+                        String name, String lastName, String email) {
+        this.id = id;
         this.login = login;
         this.password = password;
         this.name = name;
         this.lastName = lastName;
         this.email = email;
-        this.id = id;
+        
     }
 
     protected String createEmail(){
@@ -78,7 +81,7 @@ public abstract class UserModel {
         return String.format("%03d | %s | %s %s | %s", id, login, name, lastName, email);
     }
 
-    public int getId(){
+    public String getId(){
         return this.id;
     }
 }

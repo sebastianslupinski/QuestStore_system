@@ -6,20 +6,20 @@ import src.dao.MentorDAOImplement;
 
 public class MentorController {
 
-  public MentorDAOImplement newMentorDAO = new MentorDAOImplement();
-  private MentorModel model = newMentorDAO.readDataFromFile();
-  private MentorView view = new MentorView();
+  // public MentorDAOImplement newMentorDAO = new MentorDAOImplement();
+  // private MentorModel model = newMentorDAO.readDataFromFile();
+  MentorView view = new MentorView();
 
-  public MentorController() {
-    this.model = model;
-    this.view = view;
-  }
+  // public MentorController() {
+  //   this.model = model;
+  //   this.view = view;
+  // }
 
-  public void run() {
+  public void run(String id) {
     view.displayText("Choose option:\n");
     view.displayMenu();
   
-    String option = view.getInput("Type option number: ");
+    String option = "2";
 
     switch (option) {
       case "1":
