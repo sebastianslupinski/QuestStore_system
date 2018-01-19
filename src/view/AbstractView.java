@@ -4,9 +4,9 @@ import java.util.Scanner;
 import java.util.InputMismatchException;
 
 
-public abstract class ViewAbstract {
+public abstract class AbstractView {
 
-  public static void displayText(String text) {
+  public void displayText(String text) {
     System.out.println(text);
   }
 }

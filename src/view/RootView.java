@@ -5,21 +5,7 @@ import java.util.Scanner;
 
 public class RootView extends AbstractView {
 
-    public void displayText(String text) {
-        System.out.println(text);
-    }
-
-    public void displayMenu(){
-
-        int optionNumber = 1;
-        System.out.println("=======WELCOME IN QUESTSTORY SYSTEM=======");
-        System.out.println(" ");
-        System.out.println("Please choose your role: ");
-        final String[] OPTIONS = {"Admin", "Mentor", "Student"};
-
-        for (String option : OPTIONS) {
-            System.out.println(optionNumber + "--->" + option);
-            optionNumber ++;
-        }
+    public void displayMenu() {
+        this.displayText("===WELCOME IN QUESTSTORE SYSTEM===\n\n\n");
     }
 }
