@@ -51,19 +51,19 @@ public class Quest{
       return quests;
     }
 
-    public Quest getQuest(){
-        boolean questNotChosen = true;
-        Integer questIndex = 0;
-        while(questNotChosen){
-            view.displayQuest(getQuests());
-            String userInput = view.getInput("Choose quest number");
-            questIndex = Integer.parseInt(userInput);
-            if (questIndex < quests.size()) {
-                questNotChosen = false;
-            }
-        }
-        return quests.get(questIndex);
-    }
+    // public Quest getQuest(){
+    //     boolean questNotChosen = true;
+    //     Integer questIndex = 0;
+    //     while(questNotChosen){
+    //         view.displayQuest(getQuests());
+    //         String userInput = view.getInput("Choose quest number");
+    //         questIndex = Integer.parseInt(userInput);
+    //         if (questIndex < quests.size()) {
+    //             questNotChosen = false;
+    //         }
+    //     }
+    //     return quests.get(questIndex);
+    // }
 
     public void changeMark(){
         if (this.mark){

@@ -7,11 +7,11 @@ import src.dao.*;
 
 public class AdminController{
 
-  public AdminDAOImplement newAdminDAO = new AdminDAOImplement();
+  public UserDAOImplement newAdminDAO = new UserDAOImplement();
   private AdminModel model = newAdminDAO.readDataFromFile();
   private AdminView view = new AdminView();
 
-  public void run() {
+  public void run(String id) {
     boolean adminControllerRunning = true;
     while(adminControllerRunning){
     view.displayMenu();
@@ -60,19 +60,19 @@ public class AdminController{
     MentorView.pressEnterToContinue("Group created successfully, press enter to continue");
   }
 
-  public GroupModel getGroup(){
-    boolean groupNotChosen = true;
-    Integer groupIndex = 0;
-    while(groupNotChosen){
-        view.displayGroups(model.getGroups());
-        String userInput = view.getInput("Choose group number");
-        groupIndex = Integer.parseInt(userInput);
-        if (groupIndex < model.getGroups().size()) {
-            groupNotChosen = false;
-        }
-    }
-    return model.getGroups().get(groupIndex);
-}
+//   public GroupModel getGroup(){
+//     boolean groupNotChosen = true;
+//     Integer groupIndex = 0;
+//     while(groupNotChosen){
+//         view.displayGroups(model.getGroups());
+//         String userInput = view.getInput("Choose group number");
+//         groupIndex = Integer.parseInt(userInput);
+//         if (groupIndex < model.getGroups().size()) {
+//             groupNotChosen = false;
+//         }
+//     }
+//     return model.getGroups().get(groupIndex);
+// }
 
 public MentorModel getMentor(){
   boolean mentorNotChosen = true;
@@ -124,7 +124,6 @@ public void editMentor() {
         break;
     }
   }
-
 }
 
 public void assignMentorToGroup(){
@@ -143,6 +142,4 @@ public boolean checkIfGroupExist(){
   }
   return true;
 }
-
-
 }

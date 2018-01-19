@@ -45,7 +45,7 @@ public class LoginController {
             String login = userInput.getString("Please enter your login");
             String password = userInput.getString("Please enter your password");
             idAndRole = this.validateLoginData(login, password);
-            
+
             if (idAndRole[idColumn] == null || idAndRole[roleColumn] == null) {
                 counter--;
                 view.displayText("Login or password incorrect, try again!");

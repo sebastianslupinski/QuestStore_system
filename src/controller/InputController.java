@@ -14,8 +14,7 @@ public class InputController{
         return input;
     }
 
-    public String getString(String message) {
-        System.out.println(message);
+    public String getString() {
         Scanner scanner = new Scanner(System.in);
         String input = scanner.nextLine();
         return input;
