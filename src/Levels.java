@@ -9,10 +9,14 @@ public class Levels {
 
   public ArrayList<int> amountsOfCoinsForLevels = new ArrayList();
   public ArrayList<String> namesOfLevels = new ArrayList();
-  amountsOfCoinsForLevels.add(0); // yes, level 0 exits!
-  amountsOfCoinsForLevels.add("Noobcooler"); // name for level 0
-  protected int MIN_LEVEL = 2;
-  protected int MAX_LEVEL = 9;
+
+  private final int MIN_LEVEL = 2;
+  private final int MAX_LEVEL = 9;
+
+  public void Levels() {
+    amountsOfCoinsForLevels.add(0); // yes, level 0 exits!
+    amountsOfCoinsForLevels.add("Noobcooler"); // name for level 0
+  }
 
   public int setNumberOfLevels() {
     boolean numberOfLevelsNotChosen = true;
@@ -55,7 +59,7 @@ public class Levels {
     namesOfLevels.add(levelsName);
   }
 
-  public String checkLevel(totalEarned) {
+  public String getLevel(totalEarned) {
     int levelCounter = 0;
     int numberOfLevels = amountsOfCoinsForLevels.length;
     for(int i = 0; i < numberOfLevels; i++) {
