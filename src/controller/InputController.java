@@ -2,21 +2,12 @@ package src.controller;
 
 import java.util.Scanner;
 import java.util.InputMismatchException;
-import src.view.QuestView;
 
 public class InputController{
-    QuestView view = new QuestView();
 
     public String getString(String message) {
         Scanner scanner = new Scanner(System.in);
         view.displayText(message);
-        String input = scanner.nextLine();
-        return input;
-    }
-
-    public String getString(String message) {
-        System.out.println(message);
-        Scanner scanner = new Scanner(System.in);
         String input = scanner.nextLine();
         return input;
     }
