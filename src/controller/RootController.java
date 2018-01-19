@@ -9,31 +9,31 @@ import java.io.File;
 
 public class RootController{
 
-    // RootView rootView = new RootView();
-    // AdminController adminController = new AdminController();
-    // MentorController mentorController = new MentorController();
-    // StudentController studentController = new StudentController();
+    RootView rootView = new RootView();
+    AdminController adminController = new AdminController();
+    MentorController mentorController = new MentorController();
+    StudentController studentController = new StudentController();
 
     public void startApplication(){
-            TestQuest testquest = new TestQuest();
-            testquest.createNewQuest();
-        // LoginController loginController = new LoginController();
-        // String[] idAndRole = loginController.processValidation();
-    //     rootView.displayText("Welcome in QUESTSTORE");
-    //     rootView.displayMenu();
+ 
+        rootView.displayMenu();
+        LoginController loginController = new LoginController();
+        String[] idAndRole = loginController.processValidation();
+        String id = idAndRole[0];
+        String role = idAndRole[1];
 
-    //     String option = rootView.getInput();
+        String option = role;
 
-    //     switch (option) {
-    //     case "1":
-    //         adminController.run();
-    //         break;
-    //     case "2":
-    //         mentorController.run();
-    //         break;
-    //     case "3":
-    //         // studentController.run();
-    //         break;
-    //     }
+        switch (option) {
+            case "A":
+                adminController.run(id);
+                break;
+            case "M":
+                mentorController.run(id);
+                break;
+            case "S":
+                studentController.run(id);
+                break;
+        }
     }
 }
