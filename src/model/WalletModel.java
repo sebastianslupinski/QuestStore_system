@@ -11,14 +11,14 @@ public class WalletModel {
     private int id;
     private int lastID = 0;
 
-    public void WalletModel(int balance, int totalEarned, ArrayList<Artefact> artefacts) {
+    public void WalletModel(int balance, int totalEarned, ArrayList<Artefact> artefacts, int id) {
         this.balance = balance;
         this.totalEarned = totalEarned;
         this.artefacts = artefacts;
         this.id = lastID++;
     }
 
-    public void WalletModel(int balance, int totalEarned, ArrayList<Artefact> artefacts, int id) {
+    public void WalletModel(int balance, int totalEarned, ArrayList<Artefact> artefacts) {
         this.balance = balance;
         this.totalEarned = totalEarned;
         this.artefacts = artefacts;
