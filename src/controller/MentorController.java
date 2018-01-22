@@ -2,22 +2,21 @@ package src.controller;
 
 import src.model.*;
 import src.view.*;
-import src.dao.MentorDAOImplement;
+import src.dao.UserDAOImplement;
 
 public class MentorController {
 
   // public MentorDAOImplement newMentorDAO = new MentorDAOImplement();
-  // private MentorModel model = newMentorDAO.readDataFromFile();
-  MentorView view = new MentorView();
-
-  // public MentorController() {
-  //   this.model = model;
-  //   this.view = view;
-  // }
+  MentorModel model;
+  MentorView view;
+  public MentorController() {
+    this.model = new MentorModel("10", "testMentor", "password101", "testowy", "mentor", "A");
+    this.view = new MentorView();
+  }
 
   public void run(String id) {
     view.displayText("Choose option:\n");
-    view.displayMenu();
+    view.displayMentorMenu();
   
     String option = "2";
 
@@ -26,10 +25,8 @@ public class MentorController {
         // createStudent();
         break;
       case "2":
-        System.out.println("Tutaj kolejna opcja");
         break;
       case "3":
-        System.out.println("ETC.");
         break;
     }
   }

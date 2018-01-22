@@ -1,10 +1,15 @@
 package src.controller;
 
 import java.util.Scanner;
+
+import src.view.RootView;
+
 import java.util.InputMismatchException;
 
 public class InputController{
 
+    RootView view = new RootView();
+    
     public String getString(String message) {
         Scanner scanner = new Scanner(System.in);
         view.displayText(message);

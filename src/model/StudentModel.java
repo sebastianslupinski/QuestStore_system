@@ -3,9 +3,9 @@ package src.model;
 
 public class StudentModel extends UserModel {
 
-    String group = "default";
+    String group;
 
-    public StudentModel(String login, String password, String name, String lastName){
+    public StudentModel(String login, String password, String name, String lastName, String group){
         super(login, password, name, lastName);
         this.group = group;
     }
