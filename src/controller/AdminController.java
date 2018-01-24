@@ -2,6 +2,7 @@ package controller;
 
 import view.AdminView;
 import model.AdminModel;
+import model.MentorModel;
 import dao.*;
 
 import java.util.ArrayList;
@@ -48,10 +49,10 @@ public class AdminController {
     AdminModel admin = null;
     for (String[] userInfo : users){
       if (userInfo[0] == id){
+        int newId = userInfo[0];
         String[] userLoginInfo = loginDAO.getLoginAndPassword(id);
         String login = userLoginInfo[0];
         String password = userLoginInfo[1];
-        String newId = userInfo[0];
         String name = userInfo[1];
         String lastName = userInfo[2];
         String email = userInfo[3];
@@ -74,7 +75,7 @@ public class AdminController {
 
     for (String[] userInfo : users){
       role = userInfo[4];
-      if(userInfo.length==6 && role=="M"){
+      if (userInfo.length==6 && role=="M") {
         id = userInfo[0];
         name = userInfo[1];
         lastName = userInfo[2];
@@ -85,8 +86,7 @@ public class AdminController {
         password = userLoginInfo[1];
         mentorToAdd = new MentorModel(id, login, password, name, lastName, email, group);
         admin.addMentor(mentorToAdd);
-      
-    }
+        }
     }
   }
 

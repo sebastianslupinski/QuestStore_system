@@ -17,7 +17,7 @@ public class MentorController {
 
   public void run(String id) {
     view.displayText("Choose option:\n");
-    view.displayMenu();
+    view.displayMentorMenu();
   
     String option = "2";
 
