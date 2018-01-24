@@ -1,12 +1,14 @@
 package controller;
 
-import view.*;
-import model.*;
+import model.MentorModel;
+import view.AdminView;
+import model.AdminModel;
 import dao.*;
 
 import java.util.ArrayList;
 
-public class AdminController{
+
+public class AdminController {
 
   public UserDAOImplement newAdminDAO = new UserDAOImplement();
   private ArrayList users = newAdminDAO.readDataFromFile();
@@ -59,7 +61,7 @@ public class AdminController{
     }
     return admin;
   }
-  
+
   public void addExistingMentors(ArrayList<String[]> users, AdminModel admin){
     MentorModel mentorToAdd = null;
     String role = null;

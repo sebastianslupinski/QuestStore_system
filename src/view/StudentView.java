@@ -13,6 +13,6 @@ public class StudentView extends ViewAbstract {
     }
 
     public void displayQuest(String questToDisplay) {
-        System.out.println("Quest: " + questToDisplay);
+        System.out.println("QuestModel: " + questToDisplay);
     }
 }

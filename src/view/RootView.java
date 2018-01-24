@@ -1,8 +1,5 @@
 package view;
 
-import java.util.Scanner;
-
-
 public class RootView extends AbstractView {
 
     public void displayMenu() {

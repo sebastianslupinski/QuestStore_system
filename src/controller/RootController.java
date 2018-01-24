@@ -1,6 +1,6 @@
 package controller;
 
-import view.*;
+import view.RootView;
 
 import java.util.ArrayList;
 import java.io.File;

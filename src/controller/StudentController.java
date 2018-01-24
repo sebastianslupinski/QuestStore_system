@@ -1,6 +1,7 @@
 package controller;
 
-import view.*;
+import view.StudentView;
+import model.StudentModel;
 
 
 public class StudentController {
@@ -12,11 +13,11 @@ public class StudentController {
         this.view = view;
     }
 
-    public buyArtifacts() {
+//    public buyArtifacts() {
+//
+//    }
 
-    }
-
-    public buyArtifactsWithTeammates() {
-
-    }
+//    public buyArtifactsWithTeammates() {
+//
+//    }
 }

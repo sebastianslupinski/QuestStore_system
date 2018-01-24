@@ -1,14 +1,14 @@
 package view;
 
-import model.*;
+import model.QuestModel;
 
-import java.util.*;
+import java.util.ArrayList;
 
 public class QuestView extends ViewAbstract{
 
-  public static void displayQuest(ArrayList<Quest> quests){
+  public static void displayQuest(ArrayList<QuestModel> quests){
     int index = 0;
-    for (Quest quest : quests){
+    for (QuestModel quest : quests){
       System.out.println(index + "--->" + quest.toString());
       index++;
     }
