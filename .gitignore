@@ -24,9 +24,10 @@
 *.iws
 *.xml
 
-# Database files #
+#Database file#
 sqlDataBase/
 *.sql
+*.csv
 *.db
 *.jar
 
