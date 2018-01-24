@@ -32,19 +32,16 @@ public class LoginDBImplement implements LoginDB {
 
     public void findUserIdAndRole(String login, String password){
 
-        String sql = "SELECT user_id, role FROM logins WHERE login='" + login + "' AND password='" + password + "';";
+        String sql = "SELECT user_id, role FROM logins WHERE login=? AND password=?;";
 
-        try (Statement statement = connection.createStatement();
-             ResultSet rs = statement.executeQuery(sql)) {
+        try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
+            pstmt.setString(1, login);
+            pstmt.setString(2, password);
+            ResultSet rs  = pstmt.executeQuery();
 
             while (rs.next()) {
-//                System.out.println(rs.getString("user_id") +  "\t" +
-//                        rs.getString("role") + "\t");
-                String login_id = rs.getString("user_id");
-                String role = rs.getString("role");
-
-                System.out.println("LOGIN_ID = " + login_id);
-                System.out.println("ROLE = " + role+"\n");
+                System.out.println("USER ID: " + rs.getString("user_id") +  "\t" + "ROLE: "+
+                        rs.getString("role") + "\t");
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -82,7 +79,7 @@ public class LoginDBImplement implements LoginDB {
 
 
     public void deleteAllUserLoginData(int user_id) {
-        
+
         String sql = "DELETE FROM logins WHERE user_id= ? ;";
 
         try (PreparedStatement pstmt = connection.prepareStatement(sql)) {

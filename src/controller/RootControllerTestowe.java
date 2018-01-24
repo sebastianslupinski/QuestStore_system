@@ -20,7 +20,7 @@ public class RootControllerTestowe {
         rootView.displayMenu();
 //        Connection c = loginDB.createConnection();
         System.out.println("AKUKU METODA FIND"+"\n");
-        loginDB.findUserIdAndRole("admin", "admin");
+        loginDB.findUserIdAndRole("Ania", "anana");
         System.out.println("Mamy tabelkę");
         System.out.println("\n");
 
