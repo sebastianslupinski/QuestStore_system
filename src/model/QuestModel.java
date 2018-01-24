@@ -10,7 +10,6 @@ public class QuestModel {
     public QuestView view = new QuestView();
     public String name;
     public String description;
-    public String category;
     public int reward;
     public boolean mark;
     public String label;

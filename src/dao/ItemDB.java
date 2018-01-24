@@ -1,5 +1,5 @@
-package src.dao;
+package dao;
 
-public interface IteamDB {
+public interface ItemDB {
   
 }

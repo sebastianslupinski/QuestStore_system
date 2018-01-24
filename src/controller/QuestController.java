@@ -18,7 +18,7 @@ public class QuestController {
     QuestModel newQuestModel = new QuestModel(name, description, reward, label);
     // questCollection.getQuest().add(newQuestModel);
     // QuestView.pressEnterToContinue("QuestModel created successfully, press enter to continue");
-
+    return newQuestModel;
   }
 
 
