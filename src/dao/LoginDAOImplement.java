@@ -86,15 +86,21 @@ public class LoginDAOImplement implements LoginDAO {
         String[] loginAndPassword = new String[2];
         ArrayList<String[]> allLogins = readDataFromFile();
         for (String[] userInfo : allLogins){
-//            System.out.println(userInfo[0] + "to tez jest id");
-//            System.out.println(id + "to jest id");
             if (userInfo[0].equals(id)){
                 loginAndPassword[0] = userInfo[1];
-//                System.out.println(loginAndPassword[0]);
                 loginAndPassword[1] = userInfo[2];
-//                System.out.println(loginAndPassword[1]);
             }
         }
         return loginAndPassword;
+    }
+
+    public String getLastId(){
+        String lastId = null;
+        ArrayList<String[]> allLogins = readDataFromFile();
+        for (String[] usersInfo : allLogins){
+            int highestId = Integer.parseInt(usersInfo[0]);
+            lastId = Integer.valueOf(highestId).toString();
+        }
+        return lastId;
     }
 }

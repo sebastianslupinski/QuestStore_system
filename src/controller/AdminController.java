@@ -4,116 +4,112 @@ import view.AdminView;
 import model.AdminModel;
 import model.MentorModel;
 import dao.*;
+import view.MentorView;
 
 import java.util.ArrayList;
 
 
 public class AdminController {
 
-  public UserDAOImplement newAdminDAO = new UserDAOImplement();
-  private ArrayList<String[]> users = newAdminDAO.readDataFromFile();
-  private LoginDAOImplement loginDAO = new LoginDAOImplement();
-  private AdminView view = new AdminView();
-  private InputController inputController = new InputController();
+    public UserDAOImplement newAdminDAO = new UserDAOImplement();
+    private ArrayList<String[]> users = newAdminDAO.readDataFromFile();
+    private LoginDAOImplement loginDAO = new LoginDAOImplement();
+    private AdminView view = new AdminView();
+    private InputController inputController = new InputController();
 
-  public void run(String id) {
-    AdminModel admin = this.createAdmin(users, id);
-    this.addExistingMentors(users, admin);
-    boolean adminControllerRunning = true;
-    while(adminControllerRunning){
-    view.displayAdminMenu();
+    public void run(String id) {
+        AdminModel admin = this.createAdmin(users, id);
+        this.addExistingMentors(users, admin);
+        boolean adminControllerRunning = true;
+        while (adminControllerRunning) {
+            view.displayAdminMenu();
 
-    Integer option = inputController.getNumber("Choose option: ");
-    switch (option) {
-      case 1:
-          view.displayMentors(admin.getMentors());
-          break;
-      case 2:
-        // this.createGroup();
-        break;
-      case 3:
-        // this.assignMentorToGroup();
-        break;
-      case 4:
-        // this.editMentor();
-        break;
-      case 5:
-        adminControllerRunning = false;
-        System.out.println("PAPA"); // to implement
-        break;
-    }
-  }
-}
-
-  public AdminModel createAdmin(ArrayList<String[]> users, String id){
-    AdminModel admin = null;
-//      System.out.println(id);
-    for (String[] userInfo : users){
-      if (userInfo[0].equals(id)){
-        String newId = userInfo[0];
-//          System.out.println(newId);
-        String[] userLoginInfo = loginDAO.getLoginAndPassword(id);
-        String login = userLoginInfo[0];
-//          System.out.println(login);
-        String password = userLoginInfo[1];
-//          System.out.println(password);
-        String name = userInfo[1];
-//          System.out.println(name);
-        String lastName = userInfo[2];
-//          System.out.println(lastName);
-        String email = userInfo[3];
-//          System.out.println(email);
-        admin = new AdminModel(newId, login, password, name, lastName, email);
-      }
-    }
-    return admin;
-  }
-
-  public void addExistingMentors(ArrayList<String[]> users, AdminModel admin){
-    MentorModel mentorToAdd = null;
-    String role = null;
-
-    String id = null;
-    String name = null;
-    String lastName = null;
-    String email = null;
-    String group = null;
-    String login = null;
-    String password = null;
-
-    for (String[] userInfo : users){
-      role = userInfo[4];
-      if (userInfo.length==6 && role.equals("M")) {
-        id = userInfo[0];
-        name = userInfo[1];
-        lastName = userInfo[2];
-        email = userInfo[3];
-        group = userInfo[5];
-        String[] userLoginInfo = loginDAO.getLoginAndPassword(id);
-        login = userLoginInfo[0];
-        password = userLoginInfo[1];
-        mentorToAdd = new MentorModel(id, login, password, name, lastName, email, group);
-        admin.addMentor(mentorToAdd);
+            Integer option = InputController.getNumber("Choose option: ");
+            switch (option) {
+                case 1:
+                    view.displayMentors(admin.getMentors());
+                    break;
+                case 2:
+                    this.createMentor(admin, loginDAO);
+                    break;
+                case 3:
+                    // this.assignMentorToGroup();
+                    break;
+                case 4:
+                    // this.editMentor();
+                    break;
+                case 5:
+                    adminControllerRunning = false;
+                    System.out.println("PAPA"); // to implement
+                    break;
+            }
         }
     }
-  }
 
-  // public void createMentor() {
-  //   String login = inputController.getString("Please enter mentor login: ");
-  //   String password = inputController.getString("Please enter mentor password: ");
-  //   String name = inputController.getString("Please enter mentor name: ");
-  //   String lastName = inputController.getString("Please enter mentor lastName: ");
-  //   MentorModel newMentor = new MentorModel(login, password, name, lastName);
-  //   model.getMentors().add(newMentor);
-  //   MentorView.pressEnterToContinue("Mentor created successfully, press enter to continue");
-  // }
+    public AdminModel createAdmin(ArrayList<String[]> users, String id) {
+        AdminModel admin = null;
+        for (String[] userInfo : users) {
+            if (userInfo[0].equals(id)) {
+                String newId = userInfo[0];
+                String[] userLoginInfo = loginDAO.getLoginAndPassword(id);
+                String login = userLoginInfo[0];
+                String password = userLoginInfo[1];
+                String name = userInfo[1];
+                String lastName = userInfo[2];
+                String email = userInfo[3];
+                admin = new AdminModel(newId, login, password, name, lastName, email);
+            }
+        }
+        return admin;
+    }
 
-  // public void createGroup() {
-  //   String name = view.getString("Please enter group name: ");
-  //   GroupModel newGroup = new GroupModel(name);
-  //   model.addGroup(newGroup);
-  //   MentorView.pressEnterToContinue("Group created successfully, press enter to continue");
-  // }
+    public void addExistingMentors(ArrayList<String[]> users, AdminModel admin) {
+        MentorModel mentorToAdd = null;
+        String role = null;
+
+        String id = null;
+        String name = null;
+        String lastName = null;
+        String email = null;
+        String group = null;
+        String login = null;
+        String password = null;
+
+        for (String[] userInfo : users) {
+            role = userInfo[4];
+            if (userInfo.length == 6 && role.equals("M")) {
+                id = userInfo[0];
+                name = userInfo[1];
+                lastName = userInfo[2];
+                email = userInfo[3];
+                group = userInfo[5];
+                String[] userLoginInfo = loginDAO.getLoginAndPassword(id);
+                login = userLoginInfo[0];
+                password = userLoginInfo[1];
+                mentorToAdd = new MentorModel(id, login, password, name, lastName, email, group);
+                admin.addMentor(mentorToAdd);
+            }
+        }
+    }
+
+    public static void createMentor(AdminModel admin, LoginDAOImplement dao) {
+        String id = dao.getLastId();
+        String login = InputController.getString("Please enter mentor login: ");
+        String password = InputController.getString("Please enter mentor password: ");
+        String name = InputController.getString("Please enter mentor name: ");
+        String lastName = InputController.getString("Please enter mentor lastName: ");
+        String group = setGroupForMentor(getExistingGroups(admin));
+        MentorModel newMentor = new MentorModel(id, login, password, name, lastName, group);
+        admin.getMentors().add(newMentor);
+        MentorView.displayText("Mentor created successfully");
+    }
+
+    // public void createGroup() {
+    //   String name = view.getString("Please enter group name: ");
+    //   GroupModel newGroup = new GroupModel(name);
+    //   model.addGroup(newGroup);
+    //   MentorView.pressEnterToContinue("Group created successfully, press enter to continue");
+    // }
 
 //   public GroupModel getGroup(){
 //     boolean groupNotChosen = true;
@@ -188,11 +184,32 @@ public class AdminController {
 // }
 
 
-// public boolean checkIfGroupExist(){
-//   if(model.getGroups().size()<1){
-//     MentorView.displayText("Group need to be created first");
-//     return false;
-//   }
-//   return true;
-// }
+    public static ArrayList<String> getExistingGroups(AdminModel admin) {
+        ArrayList<MentorModel> mentors = admin.getMentors();
+        ArrayList<String> existingGroups = new ArrayList<>();
+        for (MentorModel mentor : mentors) {
+            existingGroups.add(mentor.getGroup());
+        }
+        return existingGroups;
+    }
+
+    public static String setGroupForMentor(ArrayList<String> existingGroups) {
+        String group = null;
+        boolean groupNotChosen = true;
+        while (groupNotChosen) {
+            group = InputController.getString("Enter a group you want to assign mentor to");
+            if (!(existingGroups.contains(group))) {
+                AdminView.displayText("There is no group like this, do you want to create it ? Enter 'Y' if yes");
+                String answer = InputController.getString();
+                if (answer.equals("Y")) {
+                    groupNotChosen = false;
+                    return group;
+                }
+            }
+            else {
+                groupNotChosen = false;
+            }
+        }
+        return group;
+    }
 }
