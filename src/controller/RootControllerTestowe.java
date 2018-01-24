@@ -19,6 +19,11 @@ public class RootControllerTestowe {
         rootView.displayMenu();
         Connection c = loginDB.createConnection();
         System.out.println("AKUKU");
+        loginDB.findUserIdAndRole();
+        System.out.println("Mamy tabelkę");
+
+
+
 
 //        LoginController loginController = new LoginController();
 //        String[] idAndRole = loginController.processValidation();

@@ -1,9 +1,6 @@
 package dao;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 
 public class LoginDBImplement implements LoginDB {
 
@@ -22,26 +19,35 @@ public class LoginDBImplement implements LoginDB {
     public Connection createConnection() {
 
         String url = "jdbc:sqlite:queststore.db";
-        Connection conn = null;
+//        Connection conn = null;
         try {
-            conn = DriverManager.getConnection(url);
+            connection = DriverManager.getConnection(url);
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
         System.out.println("blleeeee");
-        return conn;
-
+        return connection;
     }
+
 
     public void findUserIdAndRole(){
-//        String sql = "SELECT user_id, role\n" +
-//                "\tFROM logins\n" +
-//                "\tWHERE login='admin'\n" +
-//                "\tAND password='admin';";
-//        try (Connection connection = this.createConnection();
-//             Statement statement =
-//        )
+        String sql = "SELECT user_id, role FROM logins WHERE login='admin' AND password='admin'";
+
+        try (Connection connection = this.createConnection();
+             Statement statement = connection.createStatement();
+             ResultSet rs = statement.executeQuery(sql)) {
+
+            while (rs.next()) {
+//                System.out.println(rs.getString("user_id") +  "\t" +
+//                        rs.getString("role") + "\t");
+                String login_id = rs.getString("user_id");
+                String role = rs.getString("role");
+
+                System.out.println( "FIRST NAME = " + login_id);
+                System.out.println( "ROLE = " + role+"\n");
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
     }
-
-
 }
