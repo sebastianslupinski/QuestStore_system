@@ -18,10 +18,17 @@ public class RootControllerTestowe {
     public void startApplication(){
  
         rootView.displayMenu();
-        Connection c = loginDB.createConnection();
-        System.out.println("AKUKU");
+//        Connection c = loginDB.createConnection();
+        System.out.println("AKUKU METODA FIND"+"\n");
         loginDB.findUserIdAndRole("admin", "admin");
         System.out.println("Mamy tabelkę");
+        System.out.println("\n");
+
+        System.out.println("AKUKU METODA INSERT"+"\n");
+        loginDB.insertAllLoginData("Ania","anana", "2");
+        System.out.println("Mamy tabelkę");
+        System.out.println("\n");
+
 
 
 

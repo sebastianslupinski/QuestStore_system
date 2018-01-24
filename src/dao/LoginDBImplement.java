@@ -50,4 +50,18 @@ public class LoginDBImplement implements LoginDB {
             System.out.println(e.getMessage());
         }
     }
+
+
+    public void insertAllLoginData(String login, String password, String role){
+        String sql = "INSERT INTO logins(login, password, role) VALUES(?, ?, ?);";
+
+        try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
+            pstmt.setString(1, login);
+            pstmt.setString(2, password);
+            pstmt.setString(3, role);
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
 }
