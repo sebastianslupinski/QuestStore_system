@@ -1,7 +1,7 @@
-package src.model;
+package model;
 
 import java.util.ArrayList;
-import src.view.*;
+import view.*;
 
 
 public class Quest{

@@ -1,6 +1,6 @@
-package src.controller;
+package controller;
 
-import src.view.*;
+import view.*;
 
 
 public class StudentController {

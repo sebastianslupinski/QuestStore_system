@@ -1,6 +1,6 @@
-package src.dao;
+package dao;
 
-import src.models.ArtefactModel;
+import models.ArtefactModel;
 
 import java.util.List;
 import java.util.ArrayList;

@@ -1,13 +1,13 @@
-package src.dao;
+package dao;
 
-import src.models.ArtefactModel;
+import model.ArtefactModel;
 import java.util.List;
 
 
 public interface ArtefactDAO {
 
-    public List<> readDataFromFile();
-    public void saveDataToFile(List<Artefact> artefactCollection);
+    public List readDataFromFile();
+    public void saveDataToFile(List<ArtefactModel> artefactCollection);
     public void addObject(ArtefactModel object);
     public void deleteObject(ArtefactModel object);
 }

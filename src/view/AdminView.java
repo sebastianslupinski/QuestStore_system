@@ -1,6 +1,6 @@
-package src.view;
+package view;
 
-import src.model.*;
+import model.*;
 
 import java.util.*;
 

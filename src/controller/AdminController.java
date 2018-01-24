@@ -1,11 +1,10 @@
-package src.controller;
+package controller;
 
-import src.view.*;
-import src.model.*;
-import src.dao.*;
+import view.*;
+import model.*;
+import dao.*;
 
 import java.util.ArrayList;
-
 
 public class AdminController{
 
@@ -60,7 +59,7 @@ public class AdminController{
     }
     return admin;
   }
-
+  
   public void addExistingMentors(ArrayList<String[]> users, AdminModel admin){
     MentorModel mentorToAdd = null;
     String role = null;

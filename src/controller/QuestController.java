@@ -1,8 +1,8 @@
-package src.controller;
+package controller;
 
-import src.view.*;
-import src.models.*;
-import src.dao.*;
+import view.*;
+import models.*;
+import dao.*;
 import java.util.ArrayList;
 
 
@@ -21,6 +21,5 @@ public class QuestController {
     // QuestView.pressEnterToContinue("Quest created successfully, press enter to continue");
 
   }
-
 
 }

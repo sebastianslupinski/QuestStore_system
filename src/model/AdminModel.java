@@ -1,6 +1,6 @@
-package src.model;
+package model;
 
-import src.view.*;
+import view.*;
 
 import java.security.acl.Group;
 import java.util.ArrayList;

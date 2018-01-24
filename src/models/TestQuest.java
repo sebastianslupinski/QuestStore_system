@@ -1,6 +1,6 @@
-package src.models;
+package models;
 
-import src.controller.*;
+import controller.*;
 
 
 public class TestQuest{
