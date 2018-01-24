@@ -1,4 +1,4 @@
-package src.model;
+package model;
 
 public class ArtefactModel {
 
@@ -9,7 +9,7 @@ public class ArtefactModel {
     private int id;
     private static int lastID = 0; // powinno wczytywac z pliku!
 
-    public Artefact(String label, String name, String description, int price) {
+    public ArtefactModel(String label, String name, String description, int price) {
         this.label = label;
         this.name = name;
         this.description = description;
@@ -17,7 +17,7 @@ public class ArtefactModel {
         this.id = lastID++;
     }
 
-    public Artefact(String label, String name, String description, int price, int id) {
+    public ArtefactModel(String label, String name, String description, int price, int id) {
         this.label = label;
         this.name = name;
         this.description = description;

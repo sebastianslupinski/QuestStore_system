@@ -1,8 +1,8 @@
-package src.controller;
+package controller;
 
-import src.model.*;
-import src.view.*;
-import src.dao.MentorDAOImplement;
+import model.MentorModel;
+import view.MentorView;
+import dao.UserDAOImplement;
 
 public class MentorController {
 

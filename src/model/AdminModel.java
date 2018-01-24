@@ -1,8 +1,7 @@
-package src.model;
+package model;
 
-import src.view.*;
+import view.AdminView;
 
-import java.security.acl.Group;
 import java.util.ArrayList;
 
 

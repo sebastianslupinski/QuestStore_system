@@ -1,8 +1,4 @@
-package src.view;
-
-import java.util.Scanner;
-import java.util.InputMismatchException;
-
+package view;
 
 public abstract class AbstractView {
 

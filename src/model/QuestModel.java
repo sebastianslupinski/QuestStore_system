@@ -1,14 +1,13 @@
-package src.model;
+package model;
 
 import java.util.ArrayList;
-import src.view.*;
+import view.QuestView;
 
 
-public class Quest{
+public class QuestModel {
 
-  private ArrayList<Quest> quests = new ArrayList();
-  public QuestView view = new QuestView();
-
+    private ArrayList<QuestModel> quests = new ArrayList();
+    public QuestView view = new QuestView();
     public String name;
     public String description;
     public String category;
@@ -16,7 +15,7 @@ public class Quest{
     public boolean mark;
     public String label;
 
-    public Quest(String name, String description, int reward, String label){
+    public QuestModel(String name, String description, int reward, String label){
 
         this.name = name;
         this.description = description;
@@ -47,11 +46,11 @@ public class Quest{
       return "{name:"+this.name+" description:"+this.description+" reward:"+this.reward+" label:"+this.label+"}";
     }
 
-    public ArrayList<Quest> getQuests(){
+    public ArrayList<QuestModel> getQuests(){
       return quests;
     }
 
-    // public Quest getQuest(){
+    // public QuestModel getQuest(){
     //     boolean questNotChosen = true;
     //     Integer questIndex = 0;
     //     while(questNotChosen){

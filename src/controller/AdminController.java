@@ -1,13 +1,13 @@
-package src.controller;
+package controller;
 
-import src.view.*;
-import src.model.*;
-import src.dao.*;
+import view.AdminView;
+import model.AdminModel;
+import dao.*;
 
 import java.util.ArrayList;
 
 
-public class AdminController{
+public class AdminController {
 
   public UserDAOImplement newAdminDAO = new UserDAOImplement();
   private ArrayList users = newAdminDAO.readDataFromFile();

@@ -1,7 +1,7 @@
-package src.controller;
+package controller;
 
-import src.dao.LoginDAOImplement;
-import src.view.LoginView;
+import dao.LoginDAOImplement;
+import view.LoginView;
 import java.util.ArrayList;
 
 public class LoginController {

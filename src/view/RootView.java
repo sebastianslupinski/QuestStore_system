@@ -1,7 +1,4 @@
-package src.view;
-
-import java.util.Scanner;
-
+package view;
 
 public class RootView extends AbstractView {
 
