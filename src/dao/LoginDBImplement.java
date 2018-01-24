@@ -64,4 +64,19 @@ public class LoginDBImplement implements LoginDB {
             System.out.println(e.getMessage());
         }
     }
+
+
+    public void updateUserLoginAndPassword(String login, String password, int user_id) {
+
+        String sql = "UPDATE logins SET login=?, password=? WHERE user_id=?;";
+
+        try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
+            pstmt.setString(1, login);
+            pstmt.setString(2, password);
+            pstmt.setInt(3,user_id);
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
 }

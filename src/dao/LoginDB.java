@@ -6,5 +6,7 @@ public interface LoginDB {
     public Connection createConnection();
     public void findUserIdAndRole(String login, String password);
     public void insertAllLoginData(String login, String password, String role);
+    public void updateUserLoginAndPassword(String login, String password, int user_id);
+
 
 }
