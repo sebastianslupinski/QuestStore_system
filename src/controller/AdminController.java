@@ -49,7 +49,7 @@ public class AdminController {
     AdminModel admin = null;
     for (String[] userInfo : users){
       if (userInfo[0] == id){
-        int newId = Integer.parseInt(userInfo[0]);
+        String newId = userInfo[0];
         String[] userLoginInfo = loginDAO.getLoginAndPassword(id);
         String login = userLoginInfo[0];
         String password = userLoginInfo[1];
@@ -65,7 +65,7 @@ public class AdminController {
   public void addExistingMentors(ArrayList<String[]> users, AdminModel admin){
     MentorModel mentorToAdd = null;
     String role = null;
-    int id;
+    String id;
     String name = null;
     String lastName = null;
     String email = null;
@@ -76,7 +76,7 @@ public class AdminController {
     for (String[] userInfo : users){
       role = userInfo[4];
       if (userInfo.length==6 && role=="M") {
-        id = Integer.parseInt(userInfo[0]);
+        id = userInfo[0];
         name = userInfo[1];
         lastName = userInfo[2];
         email = userInfo[3];

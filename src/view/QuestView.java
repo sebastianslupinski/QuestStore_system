@@ -13,5 +13,4 @@ public class QuestView extends AbstractView {
       index++;
     }
   }
-
 }
