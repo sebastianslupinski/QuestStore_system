@@ -11,7 +11,7 @@ import java.util.ArrayList;
 public class AdminController {
 
   public UserDAOImplement newAdminDAO = new UserDAOImplement();
-  private ArrayList users = newAdminDAO.readDataFromFile();
+  private ArrayList<String[]> users = newAdminDAO.readDataFromFile();
   private LoginDAOImplement loginDAO = new LoginDAOImplement();
   private AdminView view = new AdminView();
   private InputController inputController = new InputController();
@@ -26,8 +26,8 @@ public class AdminController {
     Integer option = inputController.getNumber("Choose option: ");
     switch (option) {
       case 1:
-        //this.createMentor();
-        break;
+          view.displayMentors(admin.getMentors());
+          break;
       case 2:
         // this.createGroup();
         break;
@@ -47,15 +47,22 @@ public class AdminController {
 
   public AdminModel createAdmin(ArrayList<String[]> users, String id){
     AdminModel admin = null;
+//      System.out.println(id);
     for (String[] userInfo : users){
-      if (userInfo[0] == id){
+      if (userInfo[0].equals(id)){
         String newId = userInfo[0];
+//          System.out.println(newId);
         String[] userLoginInfo = loginDAO.getLoginAndPassword(id);
         String login = userLoginInfo[0];
+//          System.out.println(login);
         String password = userLoginInfo[1];
+//          System.out.println(password);
         String name = userInfo[1];
+//          System.out.println(name);
         String lastName = userInfo[2];
+//          System.out.println(lastName);
         String email = userInfo[3];
+//          System.out.println(email);
         admin = new AdminModel(newId, login, password, name, lastName, email);
       }
     }
@@ -65,7 +72,8 @@ public class AdminController {
   public void addExistingMentors(ArrayList<String[]> users, AdminModel admin){
     MentorModel mentorToAdd = null;
     String role = null;
-    String id;
+
+    String id = null;
     String name = null;
     String lastName = null;
     String email = null;
@@ -75,13 +83,13 @@ public class AdminController {
 
     for (String[] userInfo : users){
       role = userInfo[4];
-      if (userInfo.length==6 && role=="M") {
+      if (userInfo.length==6 && role.equals("M")) {
         id = userInfo[0];
         name = userInfo[1];
         lastName = userInfo[2];
         email = userInfo[3];
         group = userInfo[5];
-        String[] userLoginInfo = loginDAO.getLoginAndPassword(Integer.valueOf(id).toString());
+        String[] userLoginInfo = loginDAO.getLoginAndPassword(id);
         login = userLoginInfo[0];
         password = userLoginInfo[1];
         mentorToAdd = new MentorModel(id, login, password, name, lastName, email, group);

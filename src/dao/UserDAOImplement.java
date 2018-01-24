@@ -46,6 +46,7 @@ public class UserDAOImplement implements UserDAO {
                 }
             }
         }
+        System.out.println("dupa");
         return users;
     }
 

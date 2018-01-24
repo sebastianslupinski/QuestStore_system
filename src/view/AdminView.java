@@ -12,7 +12,7 @@ public class AdminView extends AbstractView {
     int optionNumber = 1;
     System.out.println("======= HELLO-ADMIN =======\n");
     System.out.println("Please choose option: ");
-    final String[] OPTIONS = {"Create Mentor", "Create Group", "Assign mentor to the group",
+    final String[] OPTIONS = {"Display existin mentors", "Create Mentor", "Create Group", "Assign mentor to the group",
                               "Edit Mentor", "Exit"};
 
     for (String option : OPTIONS) {
