@@ -29,6 +29,11 @@ public class RootControllerTestowe {
         System.out.println("Mamy tabelkę");
         System.out.println("\n");
 
+        System.out.println("AKUKU METODA DELETE"+"\n");
+        loginDB.deleteAllUserLoginData(12);
+        System.out.println("Mamy tabelkę");
+        System.out.println("\n");
+
         System.out.println("AKUKU METODA INSERT"+"\n");
         loginDB.updateUserLoginAndPassword("Anna","A3mna",11);
         System.out.println("Mamy tabelkę");

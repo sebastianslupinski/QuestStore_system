@@ -79,4 +79,17 @@ public class LoginDBImplement implements LoginDB {
             System.out.println(e.getMessage());
         }
     }
+
+
+    public void deleteAllUserLoginData(int user_id) {
+        
+        String sql = "DELETE FROM logins WHERE user_id= ? ;";
+
+        try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
+            pstmt.setInt(1, user_id);
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
 }
