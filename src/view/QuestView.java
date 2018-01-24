@@ -4,7 +4,7 @@ import model.QuestModel;
 
 import java.util.ArrayList;
 
-public class QuestView extends ViewAbstract{
+public class QuestView extends AbstractView {
 
   public static void displayQuest(ArrayList<QuestModel> quests){
     int index = 0;

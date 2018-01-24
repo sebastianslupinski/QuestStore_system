@@ -1,7 +1,7 @@
 package view;
 
 
-public class StudentView extends ViewAbstract {
+public class StudentView extends AbstractView {
 
     public void displayWallet(String studentName, String studentWallet) {
         System.out.println("Student's name: " + studentName);

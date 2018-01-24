@@ -3,10 +3,16 @@ package model;
 
 public class StudentModel extends UserModel {
 
-    String group = "default";
+    String group;
 
-    public StudentModel(String login, String password, String name, String lastName){
-        super(login, password, name, lastName);
+    public StudentModel(int id, String login, String password, String name,
+                        String lastName, String email, String group) {
+        super(id, login, password, name, lastName, email);
+        this.group = group;
+    }
+
+    public StudentModel(int id, String login, String password, String name, String lastName, String group){
+        super(id, login, password, name, lastName);
         this.group = group;
     }
     

@@ -3,16 +3,16 @@ package model;
 
 public abstract class UserModel {
 
-    protected String id;
+    protected int id;
     protected String login;
     protected String password;
     protected String name;
     protected String lastName;
     protected String email; 
 
-    protected UserModel(String id, String login, String password,
+    protected UserModel(int id, String login, String password,
                         String name, String lastName) {
-        this.id = id;
+        this.id = ++id;
         this.login = login;
         this.password = password;
         this.name = name;
@@ -21,7 +21,7 @@ public abstract class UserModel {
     }
 
 
-    protected UserModel(String id, String login, String password,
+    protected UserModel(int id, String login, String password,
                         String name, String lastName, String email) {
         this.id = id;
         this.login = login;
@@ -80,7 +80,7 @@ public abstract class UserModel {
         return String.format("%03d | %s | %s %s | %s", id, login, name, lastName, email);
     }
 
-    public String getId(){
+    public int getId(){
         return this.id;
     }
 }

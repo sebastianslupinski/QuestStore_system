@@ -1,5 +1,5 @@
-package src.dao;
+package dao;
 
-public class ItemDBImplement implements IteamDB {
+public class ItemDBImplement implements ItemDB {
   
 }
