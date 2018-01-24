@@ -25,16 +25,16 @@ public class LoginDBImplement implements LoginDB {
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
-        System.out.println("blleeeee");
+
         return connection;
     }
 
 
-    public void findUserIdAndRole(){
-        String sql = "SELECT user_id, role FROM logins WHERE login='admin' AND password='admin'";
+    public void findUserIdAndRole(String login, String password){
 
-        try (Connection connection = this.createConnection();
-             Statement statement = connection.createStatement();
+        String sql = "SELECT user_id, role FROM logins WHERE login='" + login + "' AND password='" + password + "';";
+
+        try (Statement statement = connection.createStatement();
              ResultSet rs = statement.executeQuery(sql)) {
 
             while (rs.next()) {
@@ -43,8 +43,8 @@ public class LoginDBImplement implements LoginDB {
                 String login_id = rs.getString("user_id");
                 String role = rs.getString("role");
 
-                System.out.println( "FIRST NAME = " + login_id);
-                System.out.println( "ROLE = " + role+"\n");
+                System.out.println("LOGIN_ID = " + login_id);
+                System.out.println("ROLE = " + role+"\n");
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());

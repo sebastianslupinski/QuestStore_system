@@ -4,6 +4,6 @@ import java.sql.Connection;
 
 public interface LoginDB {
     public Connection createConnection();
-    public void findUserIdAndRole();
+    public void findUserIdAndRole(String login, String password);
 
 }

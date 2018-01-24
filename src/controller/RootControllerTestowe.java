@@ -4,6 +4,7 @@ import dao.LoginDBImplement;
 import view.RootView;
 
 import java.sql.Connection;
+import java.sql.SQLException;
 
 
 public class RootControllerTestowe {
@@ -19,7 +20,7 @@ public class RootControllerTestowe {
         rootView.displayMenu();
         Connection c = loginDB.createConnection();
         System.out.println("AKUKU");
-        loginDB.findUserIdAndRole();
+        loginDB.findUserIdAndRole("admin", "admin");
         System.out.println("Mamy tabelkę");
 
 
