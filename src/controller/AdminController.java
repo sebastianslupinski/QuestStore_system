@@ -33,7 +33,7 @@ public class AdminController {
                     this.createMentor(admin, loginDAO);
                     break;
                 case 3:
-                    // this.assignMentorToGroup();
+                    this.editMentor(admin);
                     break;
                 case 4:
                     // this.editMentor();
@@ -125,57 +125,57 @@ public class AdminController {
 //     return model.getGroups().get(groupIndex);
 // }
 
-// public MentorModel getMentor(){
-//   boolean mentorNotChosen = true;
-//   Integer mentorIndex = 0;
-//   while(mentorNotChosen){
-//       view.displayMentors(model.getMentors());
-//       mentorIndex = AdminView.getNumber("Please enter a mentor number");
-//       if (mentorIndex < model.getMentors().size()){
-//           mentorNotChosen = false;
-//       }
-//       else {
-//         view.displayText("Wrong number");
-//       }
-//   }
-//   return model.getMentors().get(Integer.valueOf(mentorIndex));
-// }
+     public MentorModel getMentor(AdminModel admin){
+       boolean mentorNotChosen = true;
+       Integer mentorIndex = 0;
+       while(mentorNotChosen){
+           view.displayMentors(admin.getMentors());
+           mentorIndex = InputController.getNumber("Please enter a mentor number");
+           if (mentorIndex < admin.getMentors().size()){
+               mentorNotChosen = false;
+           }
+           else {
+             view.displayText("Wrong number");
+           }
+       }
+       return admin.getMentors().get(Integer.valueOf(mentorIndex));
+     }
 
-// public void editMentor() {
-//   boolean optionChosen = false;
-//   while(!optionChosen) {
-//     MentorModel mentorToEdit = getMentor();
-//     AdminView.chooseAtributeToEdit();
-//     Integer option = MentorView.getNumber("Enter your option");
-//     switch (option) {
-//       case 1:
-//         String newLogin = AdminView.getInput("Enter new login");
-//         mentorToEdit.setLogin(newLogin);
-//         optionChosen = true;
-//         break;
-//       case 2:
-//         String newPassword = AdminView.getInput("Enter new login");
-//         mentorToEdit.setPassword(newPassword);
-//         optionChosen = true;
-//         break;
-//       case 3:
-//         String newName = AdminView.getInput("Enter new name");
-//         mentorToEdit.setName(newName);
-//         optionChosen = true;
-//         break;
-//       case 4:
-//         String newLastName = AdminView.getInput("Enter new lastname");
-//         mentorToEdit.setLastName(newLastName);
-//         optionChosen = true;
-//         break;
-//       case 5:
-//         String newEmail = AdminView.getInput("Enter new email");
-//         mentorToEdit.setEmail(newEmail);
-//         optionChosen = true;
-//         break;
-//     }
-//   }
-// }
+     public void editMentor(AdminModel admin) {
+       boolean optionChosen = false;
+       while(!optionChosen) {
+         MentorModel mentorToEdit = getMentor(admin);
+         AdminView.displayAttributesEditMenu();
+         Integer option = InputController.getNumber("Enter your option");
+         switch (option) {
+           case 1:
+             String newLogin = InputController.getString("Enter new login");
+             mentorToEdit.setLogin(newLogin);
+             optionChosen = true;
+             break;
+           case 2:
+             String newPassword = InputController.getString("Enter new login");
+             mentorToEdit.setPassword(newPassword);
+             optionChosen = true;
+             break;
+           case 3:
+             String newName = InputController.getString("Enter new name");
+             mentorToEdit.setName(newName);
+             optionChosen = true;
+             break;
+           case 4:
+             String newLastName = InputController.getString("Enter new lastname");
+             mentorToEdit.setLastName(newLastName);
+             optionChosen = true;
+             break;
+           case 5:
+             String newEmail = InputController.getString("Enter new email");
+             mentorToEdit.setEmail(newEmail);
+             optionChosen = true;
+             break;
+         }
+       }
+     }
 
 // public void assignMentorToGroup(){
 //   MentorModel mentorToAssign = getMentor();
