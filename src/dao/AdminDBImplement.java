@@ -8,8 +8,8 @@ public class AdminDBImplement implements AdminDB {
     private Statement statement = null;
 
     public AdminDBImplement (){
-        this.connection=createConnection();
-        try {
+        try{
+            this.connection=createConnection();
             this.statement = connection.createStatement();
         } catch (SQLException e) {
             e.printStackTrace();
