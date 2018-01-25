@@ -65,26 +65,19 @@ public class LoginDBImplement implements LoginDB {
     }
 
     public ArrayList<String[]> getExistingIdsLoginAndPasswords(int roleToFind) {
-        System.out.println("dupa w DB");
         String sql = "SELECT * FROM logins WHERE role = "+roleToFind;
         int idColumn = 0;
         int loginColumn = 1;
         int passwordColumn = 2;
         String[] idLoginAndPassword = new String[3];
         ArrayList<String[]> allIdsLoginsAndPasswords = new ArrayList<>();
-        System.out.println("dupa w DB2");
 
         try {
-            System.out.println("dupsko1");
             Statement statement = connection.createStatement();
-            System.out.println("dupsko2");
             ResultSet rs = statement.executeQuery(sql);
-            System.out.println("dupsko3");
 
             while (rs.next()) {
-                System.out.println("dupsko4");
                 idLoginAndPassword[idColumn] = rs.getString("user_id");
-                System.out.println("dupsko5");
                 idLoginAndPassword[loginColumn] = rs.getString("login");
                 idLoginAndPassword[passwordColumn] = rs.getString("password");
                 allIdsLoginsAndPasswords.add(idLoginAndPassword);
@@ -94,7 +87,6 @@ public class LoginDBImplement implements LoginDB {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
             System.exit(0);
         }
-        System.out.println("dupa w DB4");
         return allIdsLoginsAndPasswords;
     }
 

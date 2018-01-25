@@ -45,15 +45,12 @@ public class AdminController {
     }
 
     public AdminModel loadAdmin(LoginDB database, String id) {
-        System.out.println("dupa1");
         ArrayList<String[]> IdsLoginsAndPasswords = database.getExistingIdsLoginAndPasswords(1);
-        System.out.println("dupa2");
         ArrayList<String[]> namesLastnamesEmails = database.getExistingNamesLastnamesAndEmails("admins");
         AdminModel admin = null;
         for (String[] userInfo : IdsLoginsAndPasswords) {
             if (userInfo[0].equals(id)) {
                 String newId = userInfo[0];
-                System.out.println("dupa");
                 String login = userInfo[1];
                 String password = userInfo[2];
                 for(String[] usersNames : namesLastnamesEmails){
