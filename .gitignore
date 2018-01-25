@@ -1,6 +1,9 @@
 # Compiled class file
 *.class
 
+#database files
+*.db
+
 # Log file
 *.log
 
@@ -24,9 +27,16 @@
 *.iws
 *.xml
 
+<<<<<<< HEAD
 # Database files #
 sqlDataBase/
 *.sql
+=======
+#Database file#
+sqlDataBase/
+*.sql
+*.csv
+>>>>>>> 93595c2a723bb8ffa5309850817b0ae14d88661d
 *.db
 *.jar
 

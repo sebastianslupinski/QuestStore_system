@@ -2,9 +2,6 @@ package controller;
 
 import view.RootView;
 
-import java.util.ArrayList;
-import java.io.File;
-
 
 public class RootController{
 
@@ -16,15 +13,15 @@ public class RootController{
     public void startApplication(){
  
         rootView.displayMenu();
-        LoginController loginController = new LoginController();
+        LoginDBController loginController = new LoginDBController();
         String[] idAndRole = loginController.processValidation();
-        String id = idAndRole[0];
-        String role = idAndRole[1];
+        String id = String.valueOf(idAndRole[0]).toString();
+        String role = String.valueOf(idAndRole[1]).toString();
 
         String option = role;
 
         switch (option) {
-            case "A":
+            case "1":
                 adminController.run(id);
                 break;
             // case "M":
