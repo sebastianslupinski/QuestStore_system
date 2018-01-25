@@ -8,7 +8,6 @@ import view.MentorView;
 
 import java.util.ArrayList;
 
-
 public class AdminController {
 
     public UserDAOImplement newAdminDAO = new UserDAOImplement();
@@ -92,7 +91,7 @@ public class AdminController {
         }
     }
 
-    public static void createMentor(AdminModel admin, LoginDAOImplement dao) {
+    public static MentorModel createMentor(AdminModel admin, LoginDAOImplement dao) {
         String id = dao.getLastId();
         String login = InputController.getString("Please enter mentor login: ");
         String password = InputController.getString("Please enter mentor password: ");
@@ -102,6 +101,18 @@ public class AdminController {
         MentorModel newMentor = new MentorModel(id, login, password, name, lastName, group);
         admin.getMentors().add(newMentor);
         MentorView.displayText("Mentor created successfully");
+        return newMentor;
+    }
+
+    public static String[] prepareMentorToSave(MentorModel mentorToSave){
+        String[] mentorInfoToSave = null;
+        mentorInfoToSave[0] = mentorToSave.getId();
+        mentorInfoToSave[1] = mentorToSave.getLogin();
+        mentorInfoToSave[2] = mentorToSave.getPassword();
+        mentorInfoToSave[3] = mentorToSave.getName();
+        mentorInfoToSave[4] = mentorToSave.getLastName();
+        mentorInfoToSave[5] = mentorToSave.getEmail();
+        return mentorInfoToSave;
     }
 
     // public void createGroup() {
@@ -154,7 +165,7 @@ public class AdminController {
              optionChosen = true;
              break;
            case 2:
-             String newPassword = InputController.getString("Enter new login");
+             String newPassword = InputController.getString("Enter new password");
              mentorToEdit.setPassword(newPassword);
              optionChosen = true;
              break;
@@ -182,7 +193,6 @@ public class AdminController {
 //   groupToAssign.addMentor(mentorToAssign);
 //   view.displayText("Mentor assigned succesfully");
 // }
-
 
     public static ArrayList<String> getExistingGroups(AdminModel admin) {
         ArrayList<MentorModel> mentors = admin.getMentors();
