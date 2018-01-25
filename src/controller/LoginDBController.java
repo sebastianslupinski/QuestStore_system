@@ -42,7 +42,7 @@ public class LoginDBController {
 
         loginDB.insertAllLoginData(login, password, role);
     }
-    
+
     public void updateUserLoginData() {
 
         String login = userInput.getString("Please enter user's login");
@@ -51,4 +51,9 @@ public class LoginDBController {
 
         loginDB.updateUserLoginAndPassword(login, password, role);
     }
-}
+
+    public void deleteUserLoginData() {
+        int userId = userInput.getNumber("Please enter users ID number");
+        loginDB.deleteAllUserLoginData(userId);
+    }
+ }
