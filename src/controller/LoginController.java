@@ -38,7 +38,7 @@ public class LoginController {
         int roleColumn = 1;
         int counter = 3;
         int arrayCapacity = 2;
-        String[] idAndRole = new String[2];
+        String[] idAndRole = new String[arrayCapacity];
         Boolean process = true;
 
         while (process && (counter > 0)) {

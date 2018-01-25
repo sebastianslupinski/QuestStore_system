@@ -1,6 +1,9 @@
 # Compiled class file
 *.class
 
+#database files
+*.db
+
 # Log file
 *.log
 
@@ -24,6 +27,7 @@
 *.iws
 *.xml
 
+
 #Database file#
 sqlDataBase/
 *.sql
@@ -33,3 +37,6 @@ sqlDataBase/
 
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
+
+
+queststore.db-journal
