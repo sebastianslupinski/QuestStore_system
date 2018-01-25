@@ -8,7 +8,7 @@ public class LoginDBImplement implements LoginDB {
     Statement statement = null;
 
     public LoginDBImplement(){
-        this.connection=createConnection();
+        this.connection = createConnection();
         try {
             this.statement = connection.createStatement();
         } catch (SQLException e) {
@@ -25,7 +25,9 @@ public class LoginDBImplement implements LoginDB {
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
-
+        if (connection == null) {
+            System.out.println("NULL NULL");
+        }
         return connection;
     }
 

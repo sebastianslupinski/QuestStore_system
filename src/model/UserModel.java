@@ -79,7 +79,7 @@ public abstract class UserModel {
     }
 
     public String toString(){
-        return String.format("%03d | %s | %s %s | %s", id, login, name, lastName, email);
+        return String.format("%s | %s | %s %s | %s", id, login, name, lastName, email);
     }
 
     public String getId(){

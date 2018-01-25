@@ -17,6 +17,14 @@ public class MentorModel extends UserModel{
         super(id, login, password, name, lastName, email);
         this.group = group;
     }
+
+    public String getGroup(){
+        return this.group;
+    }
+
+//    public String toString() {
+//        return String.format("%03d | %s | %s %s | %s", id, login, name, lastName, email);
+//    }
 }
     // public void createStudent(String login, String password, String name, String lastName){
     //     boolean studentNotAdded = true;

@@ -42,8 +42,8 @@ public class LoginController {
         Boolean process = true;
 
         while (process && (counter > 0)) {
-            String login = userInput.getString("Please enter your login");
-            String password = userInput.getString("Please enter your password");
+            String login = InputController.getString("Please enter your login");
+            String password = InputController.getString("Please enter your password");
             idAndRole = this.validateLoginData(login, password);
 
             if (idAndRole[idColumn] == null || idAndRole[roleColumn] == null) {

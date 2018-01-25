@@ -12,8 +12,8 @@ public class AdminView extends AbstractView {
     int optionNumber = 1;
     System.out.println("======= HELLO-ADMIN =======\n");
     System.out.println("Please choose option: ");
-    final String[] OPTIONS = {"Create Mentor", "Create Group", "Assign mentor to the group",
-                              "Edit Mentor", "Exit"};
+    final String[] OPTIONS = {"Display existing mentors", "Create Mentor", "Edit mentor",
+                              "IN PROGRESS", "Exit"};
 
     for (String option : OPTIONS) {
         System.out.println(optionNumber + "--->" + option);
@@ -21,7 +21,7 @@ public class AdminView extends AbstractView {
         }
     }
 
-    public static void displayAttributsEditMenu() {
+    public static void displayAttributesEditMenu() {
         int optionNumber = 1;
         System.out.println("Choose what atribute you want to edit");
         final String[] OPTIONS = {"Login", "Password", "Name",
