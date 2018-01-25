@@ -27,18 +27,16 @@
 *.iws
 *.xml
 
-<<<<<<< HEAD
-# Database files #
-sqlDataBase/
-*.sql
-=======
+
 #Database file#
 sqlDataBase/
 *.sql
 *.csv
->>>>>>> 93595c2a723bb8ffa5309850817b0ae14d88661d
 *.db
 *.jar
 
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
+
+
+queststore.db-journal
