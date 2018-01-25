@@ -12,5 +12,4 @@ public interface LoginDB {
     public ArrayList<String[]> getExistingNamesLastnamesAndEmails(String tableToGetFrom);
     public ArrayList<String[]> getExistingIdsLoginAndPasswords(int roleToFind);
 
-
 }

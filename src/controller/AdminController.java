@@ -10,14 +10,15 @@ import java.util.ArrayList;
 
 public class AdminController {
 
-    public LoginDB DB = new LoginDBImplement();
+    public LoginDB loginDB = new LoginDBImplement();
+    public AdminDB adminDB = new AdminDBImplement();
     private LoginDAOImplement loginDAO = new LoginDAOImplement();
     private AdminView view = new AdminView();
     private InputController inputController = new InputController();
 
     public void run(String id) {
-        AdminModel admin = this.loadAdmin(DB, id);
-//        this.addExistingMentors(users, admin);
+        AdminModel admin = this.loadAdmin(loginDB, id);
+        this.addExistingMentors(adminDB, admin);
         boolean adminControllerRunning = true;
         while (adminControllerRunning) {
             view.displayAdminMenu();
@@ -66,32 +67,18 @@ public class AdminController {
         return admin;
     }
 
-    public void addExistingMentors(ArrayList<String[]> users, AdminModel admin) {
-        MentorModel mentorToAdd = null;
-        String role = null;
-
-        String id = null;
-        String name = null;
-        String lastName = null;
-        String email = null;
-        String group = null;
-        String login = null;
-        String password = null;
-
-        for (String[] userInfo : users) {
-            role = userInfo[4];
-            if (userInfo.length == 6 && role.equals("M")) {
-                id = userInfo[0];
-                name = userInfo[1];
-                lastName = userInfo[2];
-                email = userInfo[3];
-                group = userInfo[5];
-                String[] userLoginInfo = loginDAO.getLoginAndPassword(id);
-                login = userLoginInfo[0];
-                password = userLoginInfo[1];
-                mentorToAdd = new MentorModel(id, login, password, name, lastName, email, group);
-                admin.addMentor(mentorToAdd);
-            }
+    public void addExistingMentors(AdminDB database, AdminModel admin) {
+        ArrayList<String[]> loginsInfo = database.getMentorsDataFromDatabase(2);
+        for (String[] userInfo : loginsInfo) {
+            MentorModel mentorToAdd = null;
+            String id = userInfo[0];
+            String login = userInfo[1];
+            String password = userInfo[2];
+            String name = userInfo[3];
+            String lastName = userInfo[4];
+            String email = userInfo[5];
+            mentorToAdd = new MentorModel(id, login, password, name, lastName, email);
+            admin.addMentor(mentorToAdd);
         }
     }
 
@@ -101,8 +88,8 @@ public class AdminController {
         String password = InputController.getString("Please enter mentor password: ");
         String name = InputController.getString("Please enter mentor name: ");
         String lastName = InputController.getString("Please enter mentor lastName: ");
-        String group = setGroupForMentor(getExistingGroups(admin));
-        MentorModel newMentor = new MentorModel(id, login, password, name, lastName, group);
+//        String group = setGroupForMentor(getExistingGroups(admin));
+        MentorModel newMentor = new MentorModel(id, login, password, name, lastName);
         admin.getMentors().add(newMentor);
         MentorView.displayText("Mentor created successfully");
         return newMentor;
@@ -198,32 +185,32 @@ public class AdminController {
 //   view.displayText("Mentor assigned succesfully");
 // }
 
-    public static ArrayList<String> getExistingGroups(AdminModel admin) {
-        ArrayList<MentorModel> mentors = admin.getMentors();
-        ArrayList<String> existingGroups = new ArrayList<>();
-        for (MentorModel mentor : mentors) {
-            existingGroups.add(mentor.getGroup());
-        }
-        return existingGroups;
-    }
+//    public static ArrayList<String> getExistingGroups(AdminModel admin) {
+//        ArrayList<MentorModel> mentors = admin.getMentors();
+//        ArrayList<String> existingGroups = new ArrayList<>();
+//        for (MentorModel mentor : mentors) {
+//            existingGroups.add(mentor.getGroup());
+//        }
+//        return existingGroups;
+//    }
 
-    public static String setGroupForMentor(ArrayList<String> existingGroups) {
-        String group = null;
-        boolean groupNotChosen = true;
-        while (groupNotChosen) {
-            group = InputController.getString("Enter a group you want to assign mentor to");
-            if (!(existingGroups.contains(group))) {
-                AdminView.displayText("There is no group like this, do you want to create it ? Enter 'Y' if yes");
-                String answer = InputController.getString();
-                if (answer.equals("Y")) {
-                    groupNotChosen = false;
-                    return group;
-                }
-            }
-            else {
-                groupNotChosen = false;
-            }
-        }
-        return group;
-    }
+//    public static String setGroupForMentor(ArrayList<String> existingGroups) {
+//        String group = null;
+//        boolean groupNotChosen = true;
+//        while (groupNotChosen) {
+//            group = InputController.getString("Enter a group you want to assign mentor to");
+//            if (!(existingGroups.contains(group))) {
+//                AdminView.displayText("There is no group like this, do you want to create it ? Enter 'Y' if yes");
+//                String answer = InputController.getString();
+//                if (answer.equals("Y")) {
+//                    groupNotChosen = false;
+//                    return group;
+//                }
+//            }
+//            else {
+//                groupNotChosen = false;
+//            }
+//        }
+//        return group;
+//    }
 }

@@ -97,12 +97,12 @@ public class LoginDAOImplement implements LoginDAO {
     }
 
     public String getLastId(){
-        String lastId = null;
-        ArrayList<String[]> allLogins = readDataFromFile();
-        for (String[] usersInfo : allLogins){
-            int highestId = Integer.parseInt(usersInfo[0]);
-            lastId = Integer.valueOf(highestId).toString();
-        }
+        String lastId = "15";
+//        ArrayList<String[]> allLogins = readDataFromFile();
+//        for (String[] usersInfo : allLogins){
+//            int highestId = Integer.parseInt(usersInfo[0]);
+//            lastId = Integer.valueOf(highestId).toString();
+//        }
         return lastId;
     }
 }
