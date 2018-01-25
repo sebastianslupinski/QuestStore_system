@@ -1,5 +1,7 @@
 package controller;
 
+import dao.AdminDB;
+import dao.AdminDBImplement;
 import dao.LoginDBImplement;
 import view.RootView;
 
@@ -11,6 +13,7 @@ public class RootControllerTestowe {
 
     RootView rootView = new RootView();
     LoginDBImplement loginDB = new LoginDBImplement();
+    AdminDBImplement adminDB = new AdminDBImplement();
     //AdminController adminController = new AdminController();
     //MentorController mentorController = new MentorController();
     //StudentController studentController = new StudentController();
@@ -18,26 +21,32 @@ public class RootControllerTestowe {
     public void startApplication(){
  
         rootView.displayMenu();
-//        Connection c = loginDB.createConnection();
+//        System.out.println("AKUKU METODA FIND"+"\n");
+//        loginDB.findUserIdAndRole("Ania", "anana");
+//        System.out.println("Mamy tabelkę");
+//        System.out.println("\n");
+//
+//        System.out.println("AKUKU METODA UPDATE");
+//        loginDB.insertAllLoginData("Ania","anana", "2");
+//        System.out.println("Mamy tabelkę");
+//        System.out.println("\n");
+//
+//        System.out.println("AKUKU METODA DELETE");
+//        loginDB.deleteAllUserLoginData(12);
+//        System.out.println("Mamy tabelkę");
+//        System.out.println("\n");
+//
+//        System.out.println("AKUKU METODA INSERT");
+//        loginDB.updateUserLoginAndPassword("Anna","A3mna",11);
+//        System.out.println("Mamy tabelkę");
+//        System.out.println("\n");
+
+
+
+        System.out.println("ADMIN PART"+"\n");
         System.out.println("AKUKU METODA FIND"+"\n");
-        loginDB.findUserIdAndRole("Ania", "anana");
-        System.out.println("Mamy tabelkę");
-        System.out.println("\n");
+        adminDB.findAllDataOfAdmin(1);
 
-        System.out.println("AKUKU METODA UPDATE"+"\n");
-        loginDB.insertAllLoginData("Ania","anana", "2");
-        System.out.println("Mamy tabelkę");
-        System.out.println("\n");
-
-        System.out.println("AKUKU METODA DELETE"+"\n");
-        loginDB.deleteAllUserLoginData(12);
-        System.out.println("Mamy tabelkę");
-        System.out.println("\n");
-
-        System.out.println("AKUKU METODA INSERT"+"\n");
-        loginDB.updateUserLoginAndPassword("Anna","A3mna",11);
-        System.out.println("Mamy tabelkę");
-        System.out.println("\n");
 
 
 

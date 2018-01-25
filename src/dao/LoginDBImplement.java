@@ -16,10 +16,10 @@ public class LoginDBImplement implements LoginDB {
         }
     }
 
+
     public Connection createConnection() {
 
         String url = "jdbc:sqlite:queststore.db";
-//        Connection conn = null;
         try {
             connection = DriverManager.getConnection(url);
         } catch (SQLException e) {
@@ -29,6 +29,13 @@ public class LoginDBImplement implements LoginDB {
         return connection;
     }
 
+    public void closeConnection() {
+        try {
+            connection.close();
+        } catch(Exception e) {
+            System.out.println(e.getStackTrace());
+        }
+    }
 
     public void findUserIdAndRole(String login, String password){
 
@@ -89,4 +96,6 @@ public class LoginDBImplement implements LoginDB {
             System.out.println(e.getMessage());
         }
     }
+
+
 }
