@@ -25,9 +25,6 @@ public class LoginDBImplement implements LoginDB {
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
-        if (connection == null) {
-            System.out.println("NULL NULL");
-        }
         return connection;
     }
 
