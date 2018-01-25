@@ -88,7 +88,9 @@ public class LoginDAOImplement implements LoginDAO {
         for (String[] userInfo : allLogins){
             if (userInfo[0].equals(id)){
                 loginAndPassword[0] = userInfo[1];
+                System.out.println(loginAndPassword[0]);
                 loginAndPassword[1] = userInfo[2];
+                System.out.println(loginAndPassword[1]);
             }
         }
         return loginAndPassword;

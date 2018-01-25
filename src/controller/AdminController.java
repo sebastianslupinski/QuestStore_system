@@ -10,15 +10,14 @@ import java.util.ArrayList;
 
 public class AdminController {
 
-    public UserDAOImplement newAdminDAO = new UserDAOImplement();
-    private ArrayList<String[]> users = newAdminDAO.readDataFromFile();
+    public LoginDB DB = new LoginDBImplement();
     private LoginDAOImplement loginDAO = new LoginDAOImplement();
     private AdminView view = new AdminView();
     private InputController inputController = new InputController();
 
     public void run(String id) {
-        AdminModel admin = this.createAdmin(users, id);
-        this.addExistingMentors(users, admin);
+        AdminModel admin = this.loadAdmin(DB, id);
+//        this.addExistingMentors(users, admin);
         boolean adminControllerRunning = true;
         while (adminControllerRunning) {
             view.displayAdminMenu();
@@ -45,18 +44,26 @@ public class AdminController {
         }
     }
 
-    public AdminModel createAdmin(ArrayList<String[]> users, String id) {
+    public AdminModel loadAdmin(LoginDB database, String id) {
+        System.out.println("dupa1");
+        ArrayList<String[]> IdsLoginsAndPasswords = database.getExistingIdsLoginAndPasswords(1);
+        System.out.println("dupa2");
+        ArrayList<String[]> namesLastnamesEmails = database.getExistingNamesLastnamesAndEmails("admins");
         AdminModel admin = null;
-        for (String[] userInfo : users) {
+        for (String[] userInfo : IdsLoginsAndPasswords) {
             if (userInfo[0].equals(id)) {
                 String newId = userInfo[0];
-                String[] userLoginInfo = loginDAO.getLoginAndPassword(id);
-                String login = userLoginInfo[0];
-                String password = userLoginInfo[1];
-                String name = userInfo[1];
-                String lastName = userInfo[2];
-                String email = userInfo[3];
-                admin = new AdminModel(newId, login, password, name, lastName, email);
+                System.out.println("dupa");
+                String login = userInfo[1];
+                String password = userInfo[2];
+                for(String[] usersNames : namesLastnamesEmails){
+                    if (usersNames[0].equals(id)){
+                        String name = usersNames[1];
+                        String lastName = usersNames[2];
+                        String email = usersNames[3];
+                        admin = new AdminModel(newId, login, password, name, lastName, email);
+                    }
+                }
             }
         }
         return admin;

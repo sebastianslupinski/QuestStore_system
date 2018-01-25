@@ -1,6 +1,7 @@
 package dao;
 
 import java.sql.*;
+import java.util.ArrayList;
 
 public class LoginDBImplement implements LoginDB {
 
@@ -56,11 +57,86 @@ public class LoginDBImplement implements LoginDB {
                 idAndRole[idColumn] = userId;
                 idAndRole[roleColumn] = userRole;
             }
+
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
         return idAndRole;
     }
+
+    public ArrayList<String[]> getExistingIdsLoginAndPasswords(int roleToFind) {
+        System.out.println("dupa w DB");
+        String sql = "SELECT * FROM logins WHERE role = "+roleToFind;
+        int idColumn = 0;
+        int loginColumn = 1;
+        int passwordColumn = 2;
+        String[] idLoginAndPassword = new String[3];
+        ArrayList<String[]> allIdsLoginsAndPasswords = new ArrayList<>();
+        System.out.println("dupa w DB2");
+
+        try {
+            System.out.println("dupsko1");
+            Statement statement = connection.createStatement();
+            System.out.println("dupsko2");
+            ResultSet rs = statement.executeQuery(sql);
+            System.out.println("dupsko3");
+
+            while (rs.next()) {
+                System.out.println("dupsko4");
+                idLoginAndPassword[idColumn] = rs.getString("user_id");
+                System.out.println("dupsko5");
+                idLoginAndPassword[loginColumn] = rs.getString("login");
+                idLoginAndPassword[passwordColumn] = rs.getString("password");
+                allIdsLoginsAndPasswords.add(idLoginAndPassword);
+            }
+        }
+        catch (Exception e) {
+            System.err.println(e.getClass().getName() + ": " + e.getMessage());
+            System.exit(0);
+        }
+        System.out.println("dupa w DB4");
+        return allIdsLoginsAndPasswords;
+    }
+
+    public ArrayList<String[]> getExistingNamesLastnamesAndEmails(String tableToGetFrom){
+        String sql = "SELECT * FROM "+tableToGetFrom;
+        int id = 0;
+        int name = 1;
+        int lastname = 2;
+        int email = 3;
+        String[] nameLastnameAndEmail = new String[4];
+        ArrayList<String[]> allNamesLastnamesAndEmails = new ArrayList<>();
+        String columnWithId = null;
+
+        if (tableToGetFrom.equals("admins")){
+            columnWithId = "admin_id";
+        }
+        else if (tableToGetFrom.equals("mentors")){
+            columnWithId = "mentor_id";
+        }
+        else if (tableToGetFrom.equals("students")){
+            columnWithId = "student_id";
+        }
+
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(sql);
+
+            while (rs.next()) {
+                nameLastnameAndEmail[id] = rs.getString(columnWithId);
+                nameLastnameAndEmail[name] = rs.getString("name");
+                nameLastnameAndEmail[lastname] = rs.getString("lastname");
+                nameLastnameAndEmail[email] = rs.getString("email");
+                allNamesLastnamesAndEmails.add(nameLastnameAndEmail);
+            }
+        }
+        catch (Exception e) {
+            System.err.println(e.getClass().getName() + ": " + e.getMessage());
+            System.exit(0);
+        }
+        return allNamesLastnamesAndEmails;
+    }
+
 
     public void insertAllLoginData(String login, String password, String role){
         String sql = "INSERT INTO logins(login, password, role) VALUES(?, ?, ?);";
@@ -100,6 +176,4 @@ public class LoginDBImplement implements LoginDB {
             System.out.println(e.getMessage());
         }
     }
-
-
 }
