@@ -10,6 +10,7 @@ import view.MentorView;
 public class MentorController {
     private LoginDB loginDB = new LoginDBImplement();
     private MentorDBImplement mentorDB = new MentorDBImplement();
+    private QuestController quest = new QuestController();
     private MentorView view = new MentorView();
     private String HEADER = "======= HELLO-MENTOR =======\n";
     private String HEADER2 = "Choose what atribute you want to edit";
@@ -40,7 +41,7 @@ public class MentorController {
                   break;
               case 3:
                   System.out.println("tutaj bedzie create new quest");
-                  break;
+                  quest.createQuest();
               case 4:
                   System.out.println("tutaj bedzie create new artifact");
                   break;

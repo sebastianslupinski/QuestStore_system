@@ -26,7 +26,7 @@ public class RootController{
              case "2":
                  mentorController.run(id);
                  break;
-            // case "S":
+            // case "3":
             //     studentController.run(id);
             //     break;
         }
