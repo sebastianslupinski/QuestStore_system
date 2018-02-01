@@ -1,42 +1,64 @@
 package controller;
 
-import model.MentorModel;
+import dao.LoginDB;
+import dao.LoginDBImplement;
+import src.dao.MentorDB;
+import src.dao.MentorDBImplement;
 import view.MentorView;
-import dao.UserDAOImplement;
+
 
 public class MentorController {
+    private LoginDB loginDB = new LoginDBImplement();
+    private MentorDBImplement mentorDB = new MentorDBImplement();
+    private QuestController quest = new QuestController();
+    private MentorView view = new MentorView();
+    private String HEADER = "======= HELLO-MENTOR =======\n";
+    private String HEADER2 = "Choose what atribute you want to edit";
+    private final String[] OPTIONS = {"Create Student",
+            "Edit Student", "Create new quest", "Create new artifact", "Edit information about quest",
+            "Edit information about artifact", "Exit"};
+//    private final String[] OPTIONS2 = {"Login", "Password", "Name",
+//            "Surname", "Email"};
 
-  // public MentorDAOImplement newMentorDAO = new MentorDAOImplement();
-  // private MentorModel model = newMentorDAO.readDataFromFile();
-  MentorView view = new MentorView();
-  QuestController quest = new QuestController();
 
-  // public MentorController() {
+    // public MentorController() {
   //   this.model = model;
   //   this.view = view;
   // }
 
   public void run(String id) {
-    view.displayText("Choose option:\n");
-    view.displayMentorMenu();
-  
-    String option = "2";
 
-    switch (option) {
-      case "1":
-        // createStudent();
-        break;
-      case "2":
-        System.out.println("Tutaj kolejna opcja");
-        System.out.println("Testowa opcja tworzenia questu");
-        quest.createQuest();
-        break;
-      case "3":
-        System.out.println("ETC.");
-        break;
-    }
+      boolean mentorControllerRunning = true;
+
+      while (mentorControllerRunning) {
+          view.displayMenu(HEADER, OPTIONS);
+          Integer option = InputController.getNumber("Choose option: ");
+          switch (option) {
+              case 1:
+                  System.out.println("tutaj bedzie create student");
+                  break;
+              case 2:
+                  System.out.println("tutaj bedzie edit student");
+                  break;
+              case 3:
+                  System.out.println("tutaj bedzie create new quest");
+                  quest.createQuest();
+              case 4:
+                  System.out.println("tutaj bedzie create new artifact");
+                  break;
+              case 5:
+                  System.out.println("tutaj bedzie edit quest");
+                  break;
+              case 6:
+                  System.out.println("tutaj bedzie edit artifact");
+                  break;
+              case 7:
+                  mentorControllerRunning = false;
+                  System.out.println("PAPA"); // to implement
+                  break;
+          }
+      }
   }
-}
 
 //   public createStudent(){
 //     boolean studentNotAdded = true;
@@ -86,4 +108,4 @@ public class MentorController {
 //   public void displayInfo() {
 //   }
 
-// }
+}
