@@ -11,5 +11,6 @@ public interface LoginDB {
     public void deleteAllUserLoginData(int user_id);
     public ArrayList<String[]> getExistingNamesLastnamesAndEmails(String tableToGetFrom);
     public ArrayList<String[]> getExistingIdsLoginAndPasswords(int roleToFind);
+    public String getLastId();
 
 }

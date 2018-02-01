@@ -12,7 +12,6 @@ public class AdminController {
 
     public LoginDB loginDB = new LoginDBImplement();
     public AdminDB adminDB = new AdminDBImplement();
-    private LoginDAOImplement loginDAO = new LoginDAOImplement();
     private AdminView view = new AdminView();
     private InputController inputController = new InputController();
 
@@ -29,7 +28,7 @@ public class AdminController {
                     view.displayMentors(admin.getMentors());
                     break;
                 case 2:
-                    this.createMentor(admin, loginDAO);
+                    this.createMentor(admin, loginDB);
                     break;
                 case 3:
                     this.editMentor(admin);
@@ -82,8 +81,8 @@ public class AdminController {
         }
     }
 
-    public static MentorModel createMentor(AdminModel admin, LoginDAOImplement dao) {
-        String id = dao.getLastId();
+    public static MentorModel createMentor(AdminModel admin, LoginDB loginDB) {
+        String id = loginDB.getLastId();
         String login = InputController.getString("Please enter mentor login: ");
         String password = InputController.getString("Please enter mentor password: ");
         String name = InputController.getString("Please enter mentor name: ");

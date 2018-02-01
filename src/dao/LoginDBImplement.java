@@ -77,14 +77,12 @@ public class LoginDBImplement implements LoginDB {
 
             while (rs.next()) {
                 idLoginAndPassword[idColumn] = rs.getString("user_id");
-                System.out.println(idLoginAndPassword[idColumn]);
                 idLoginAndPassword[loginColumn] = rs.getString("login");
-                System.out.println(idLoginAndPassword[loginColumn]);
                 idLoginAndPassword[passwordColumn] = rs.getString("password");
-                System.out.println(idLoginAndPassword[passwordColumn]);
                 allIdsLoginsAndPasswords.add(idLoginAndPassword);
             }
         }
+
         catch (Exception e) {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
             System.exit(0);
@@ -118,13 +116,9 @@ public class LoginDBImplement implements LoginDB {
 
             while (rs.next()) {
                 nameLastnameAndEmail[id] = rs.getString(columnWithId);
-                System.out.println(nameLastnameAndEmail[id]);
                 nameLastnameAndEmail[name] = rs.getString("name");
-                System.out.println(nameLastnameAndEmail[name]);
                 nameLastnameAndEmail[lastname] = rs.getString("lastname");
-                System.out.println(nameLastnameAndEmail[lastname]);
                 nameLastnameAndEmail[email] = rs.getString("email");
-                System.out.println(nameLastnameAndEmail[email]);
                 allNamesLastnamesAndEmails.add(nameLastnameAndEmail);
             }
         }
@@ -173,5 +167,26 @@ public class LoginDBImplement implements LoginDB {
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
+    }
+
+    public String getLastId() {
+        String sql = "SELECT user_id FROM logins ORDER BY user_id ASC;";
+        int idColumn = 0;
+        String lastId = null;
+
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(sql);
+
+            while (rs.next()) {
+                lastId = rs.getString("user_id");
+            }
+        }
+
+        catch (Exception e) {
+            System.err.println(e.getClass().getName() + ": " + e.getMessage());
+            System.exit(0);
+        }
+        return lastId;
     }
 }

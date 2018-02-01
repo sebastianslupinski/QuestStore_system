@@ -57,10 +57,8 @@ public class AdminDBImplement implements AdminDB {
 
             while (rs.next()) {
                 String[] idLoginAndPassword = new String[6];
-                idLoginAndPassword[idColumn] = rs.getString("user_id");
-                System.out.println(idLoginAndPassword[idColumn]);
+                idLoginAndPassword[idColumn] = rs.getString("user_id");;
                 idLoginAndPassword[loginColumn] = rs.getString("login");
-                System.out.println(idLoginAndPassword[loginColumn]);
                 idLoginAndPassword[passwordColumn] = rs.getString("password");
                 idLoginAndPassword[name] = rs.getString("name");
                 idLoginAndPassword[lastname] = rs.getString("lastname");
@@ -107,7 +105,4 @@ public class AdminDBImplement implements AdminDB {
                 System.out.println(e.getMessage());
             }
         }
-
-
-
 }
