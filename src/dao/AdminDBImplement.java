@@ -1,5 +1,9 @@
 package dao;
 
+import model.MentorModel;
+import model.StudentModel;
+import model.UserModel;
+
 import java.sql.*;
 import java.util.ArrayList;
 

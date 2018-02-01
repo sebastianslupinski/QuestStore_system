@@ -7,7 +7,6 @@ import java.util.*;
 
 public class AdminView extends AbstractView { 
 
-
     public void displayAdminMenu() {
     int optionNumber = 1;
     System.out.println("======= HELLO-ADMIN =======\n");

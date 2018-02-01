@@ -1,5 +1,9 @@
 package dao;
 
+import model.MentorModel;
+import model.StudentModel;
+import model.UserModel;
+
 import java.sql.*;
 import java.util.ArrayList;
 
@@ -141,6 +145,49 @@ public class LoginDBImplement implements LoginDB {
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
+    }
+
+    public void saveNewUserToDatabase(UserModel user){
+        String Id = user.getId();
+        String login = user.getLogin();
+        String password = user.getPassword();
+        String name = user.getName();
+        String lastName = user.getLastName();
+        String email = user.getEmail();
+        String role = null;
+        String sqlQuerry2 = null;
+
+        if (user instanceof MentorModel) {
+            role = "2";
+            sqlQuerry2 = "INSERT INTO mentors(mentor_id, name, lastname, email) VALUES(?, ?, ?, ?);";
+        }
+        else if (user instanceof StudentModel) {
+            role = "3";
+            sqlQuerry2 = "INSERT INTO students(student_id, name, lastname, email) VALUES(?, ?, ?, ?);";
+        }
+
+        String sqlQuerry1 = "INSERT INTO logins(user_id, login, password, role) VALUES(?, ?, ?, ?);";
+
+        try (PreparedStatement pstmt1 = connection.prepareStatement(sqlQuerry1)) {
+            pstmt1.setString(1, Id);
+            System.out.println("dupa1");
+            pstmt1.setString(2, login);
+            pstmt1.setString(3, password);
+            pstmt1.setString(4, role);
+            System.out.println("dupa2");
+            pstmt1.executeUpdate();
+            PreparedStatement pstmt2 = connection.prepareStatement(sqlQuerry2);
+            pstmt2.setString(1, Id);
+            System.out.println("dupa3");
+            pstmt2.setString(2, name);
+            pstmt2.setString(3, lastName);
+            pstmt2.setString(4, email);
+            System.out.println("dupa4");
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+
     }
 
     public void updateUserLoginAndPassword(String login, String password, int user_id) {

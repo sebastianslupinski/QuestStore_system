@@ -1,5 +1,7 @@
 package dao;
 
+import model.UserModel;
+
 import java.sql.Connection;
 import java.util.ArrayList;
 
@@ -12,5 +14,6 @@ public interface LoginDB {
     public ArrayList<String[]> getExistingNamesLastnamesAndEmails(String tableToGetFrom);
     public ArrayList<String[]> getExistingIdsLoginAndPasswords(int roleToFind);
     public String getLastId();
+    public void saveNewUserToDatabase(UserModel user);
 
 }
