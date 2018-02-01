@@ -9,6 +9,7 @@ public class MentorController {
   // public MentorDAOImplement newMentorDAO = new MentorDAOImplement();
   // private MentorModel model = newMentorDAO.readDataFromFile();
   MentorView view = new MentorView();
+  QuestController quest = new QuestController();
 
   // public MentorController() {
   //   this.model = model;
@@ -27,6 +28,8 @@ public class MentorController {
         break;
       case "2":
         System.out.println("Tutaj kolejna opcja");
+        System.out.println("Testowa opcja tworzenia questu");
+        quest.createQuest();
         break;
       case "3":
         System.out.println("ETC.");

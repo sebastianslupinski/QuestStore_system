@@ -7,8 +7,8 @@ public class RootController{
 
     RootView rootView = new RootView();
     AdminController adminController = new AdminController();
-    // MentorController mentorController = new MentorController();
-    //StudentController studentController = new StudentController();
+    MentorController mentorController = new MentorController();
+    StudentController studentController = new StudentController();
 
     public void startApplication(){
  
@@ -19,14 +19,13 @@ public class RootController{
         String role = String.valueOf(idAndRole[1]).toString();
 
         String option = role;
-
         switch (option) {
             case "1":
                 adminController.run(id);
                 break;
-            // case "M":
-            //     mentorController.run(id);
-            //     break;
+             case "2":
+                 mentorController.run(id);
+                 break;
             // case "S":
             //     studentController.run(id);
             //     break;

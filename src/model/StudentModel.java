@@ -3,7 +3,7 @@ package model;
 
 public class StudentModel extends UserModel {
 
-    String group;
+    private String group;
 
     public StudentModel(String id, String login, String password, String name,
                         String lastName, String email, String group) {

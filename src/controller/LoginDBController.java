@@ -23,7 +23,6 @@ public class LoginDBController {
             String login = userInput.getString("Please enter your login");
             String password = userInput.getString("Please enter your password");
             idAndRole = loginDB.findUserIdAndRole(login, password);
-            System.out.println(idAndRole[0] + idAndRole[1]);
             if (idAndRole[idColumn] == null || idAndRole[roleColumn] == null) {
                 counter--;
                 view.displayText("Login or password incorrect, try again!");
@@ -33,14 +32,27 @@ public class LoginDBController {
         }
         return idAndRole;
     }
-//    public void insertAllLoginData() {
-//        Boolean process = true;
-//
-//        while (process) {
-//            String login = userInput.getString("Please enter user's login");
-//            String password = userInput.getString("Please enter user's password");
-//            String role = userInput.getString("Please enter user's role");
-//            if (login.length() > 15 && )
-//        }
-//    }
-}
+
+    public void addUserLoginData() {
+
+        String login = userInput.getString("Please enter user's login");
+        String password = userInput.getString("Please enter user's password");
+        String role = userInput.getString("Please enter user's role");
+
+        loginDB.insertAllLoginData(login, password, role);
+    }
+
+    public void updateUserLoginData() {
+
+        String login = userInput.getString("Please enter user's login");
+        String password = userInput.getString("Please enter user's password");
+        int role = userInput.getNumber("Please enter user's role");
+
+        loginDB.updateUserLoginAndPassword(login, password, role);
+    }
+
+    public void deleteUserLoginData() {
+        int userId = userInput.getNumber("Please enter users ID number");
+        loginDB.deleteAllUserLoginData(userId);
+    }
+ }
