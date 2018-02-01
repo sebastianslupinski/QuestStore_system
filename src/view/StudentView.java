@@ -7,12 +7,4 @@ public class StudentView extends AbstractView {
         System.out.println(studentDataToString);
         System.out.println(walletToString);
     }
-
-    public void displayQuestBook(String questBook) {
-        System.out.println("QuestBook: " + questBook);
-    }
-
-    public void displayQuest(String questToDisplay) {
-        System.out.println("QuestModel: " + questToDisplay);
-    }
 }

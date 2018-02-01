@@ -9,8 +9,9 @@ import dao.StudentDBImplement;
 
 public class StudentController {
 
-    public LoginDB loginDB = new LoginDBImplement();
-    public StudentDB adminDB = new StudentDBImplement();
+    private LoginDB loginDB = new LoginDBImplement();
+    private StudentDB adminDB = new StudentDBImplement();
+    //private WalletModel wallet = new WalletModel();
     private StudentView view = new StudentView();
 
     public void run(String id) {
@@ -22,7 +23,7 @@ public class StudentController {
             Integer option = InputController.getNumber("Choose option: ");
             switch (option) {
                 case 1:
-                    view.displayStudentData();
+                    //view.displayStudentData(student.toString(), wallet.toString());
                     break;
                 case 2:
                     this.displayStudentItems();
