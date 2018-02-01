@@ -13,7 +13,6 @@ public class AdminController {
     public LoginDB loginDB = new LoginDBImplement();
     public AdminDB adminDB = new AdminDBImplement();
     private AdminView view = new AdminView();
-    private InputController inputController = new InputController();
 
     public void run(String id) {
         AdminModel admin = this.loadAdmin(loginDB, id);
