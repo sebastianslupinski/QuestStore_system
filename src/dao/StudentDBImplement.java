@@ -1,5 +1,3 @@
 package dao;
 
-public class StudentDBImplement implements StudentDB {
-
-}
+public class StudentDBImplement implements StudentDB {}
