@@ -170,24 +170,24 @@ public class LoginDBImplement implements LoginDB {
 
         try (PreparedStatement pstmt1 = connection.prepareStatement(sqlQuerry1)) {
             pstmt1.setString(1, Id);
-            System.out.println("dupa1");
             pstmt1.setString(2, login);
             pstmt1.setString(3, password);
             pstmt1.setString(4, role);
-            System.out.println("dupa2");
             pstmt1.executeUpdate();
-            PreparedStatement pstmt2 = connection.prepareStatement(sqlQuerry2);
-            pstmt2.setString(1, Id);
-            System.out.println("dupa3");
-            pstmt2.setString(2, name);
-            pstmt2.setString(3, lastName);
-            pstmt2.setString(4, email);
-            System.out.println("dupa4");
-
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
 
+        try (PreparedStatement pstmt2 = connection.prepareStatement(sqlQuerry2)) {
+            pstmt2.setString(1, Id);
+            pstmt2.setString(2, name);
+            pstmt2.setString(3, lastName);
+            pstmt2.setString(4, email);
+            pstmt2.executeUpdate();
+        }
+        catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     public void updateUserLoginAndPassword(String login, String password, int user_id) {
