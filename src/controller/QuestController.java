@@ -12,6 +12,7 @@ public class QuestController {
   private InputController view = new InputController();
 
   public QuestModel createQuest() {
+    String id = newQuestDAO.getLastId();
     String name = InputController.getString("Please enter name of QuestModel: ");
     String description = InputController.getString("Please enter description of QuestModel: ");
     int reward = view.getNumber("Please enter reward of QuestModel: ");
