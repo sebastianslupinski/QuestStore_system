@@ -10,21 +10,27 @@ import java.util.ArrayList;
 
 public class AdminController {
 
-    public LoginDB loginDB = new LoginDBImplement();
-    public AdminDB adminDB = new AdminDBImplement();
+    private LoginDB loginDB = new LoginDBImplement();
+    private AdminDB adminDB = new AdminDBImplement();
     private AdminView view = new AdminView();
+    private String HEADER = "======= HELLO-ADMIN =======\n";
+    private String HEADER2 = "Choose what atribute you want to edit";
+    private final String[] OPTIONS = {"Display existing mentors", "Create Mentor",
+                                      "Edit mentor", "IN PROGRESS", "Exit"};
+    private final String[] OPTIONS2 = {"Login", "Password", "Name",
+                                       "Surname", "Email"};
 
     public void run(String id) {
         AdminModel admin = this.loadAdmin(loginDB, id);
         this.addExistingMentors(adminDB, admin);
         boolean adminControllerRunning = true;
-        while (adminControllerRunning) {
-            view.displayAdminMenu();
 
+        while (adminControllerRunning) {
+            view.displayMenu(HEADER, OPTIONS);
             Integer option = InputController.getNumber("Choose option: ");
             switch (option) {
                 case 1:
-                    view.displayMentors(admin.getMentors());
+                    view.displayUsers(admin.getMentors());
                     break;
                 case 2:
                     this.createMentor(admin, loginDB);
@@ -130,7 +136,7 @@ public class AdminController {
        boolean mentorNotChosen = true;
        Integer mentorIndex = 0;
        while(mentorNotChosen){
-           view.displayMentors(admin.getMentors());
+           view.displayUsers(admin.getMentors());
            mentorIndex = InputController.getNumber("Please enter a mentor number");
            if (mentorIndex < admin.getMentors().size()){
                mentorNotChosen = false;
@@ -146,7 +152,7 @@ public class AdminController {
        boolean optionChosen = false;
        while(!optionChosen) {
          MentorModel mentorToEdit = getMentor(admin);
-         AdminView.displayAttributesEditMenu();
+         view.displayMenu(HEADER2, OPTIONS2);
          Integer option = InputController.getNumber("Enter your option");
          switch (option) {
            case 1:
