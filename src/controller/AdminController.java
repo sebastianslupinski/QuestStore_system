@@ -11,7 +11,9 @@ import java.util.ArrayList;
 
 public class AdminController {
 
+    private Connection connection;
     private LoginDB loginDB;
+    private OpenCloseConnectionWithDB connectionWithDB;
     private AdminDB adminDB;
     private AdminView view;
     private String HEADER = "======= HELLO-ADMIN =======\n";
@@ -23,6 +25,8 @@ public class AdminController {
 
     public AdminController(Connection newConnection) {
         this.loginDB = new LoginDBImplement(newConnection);
+        this.connectionWithDB = new OpenCloseConnectionWithDB();
+        this.connection = newConnection;
         this.adminDB = new AdminDBImplement();
         this.view = new AdminView();
 
@@ -31,11 +35,11 @@ public class AdminController {
     public void run(String id) {
         AdminModel admin = this.loadAdmin(loginDB, id);
         this.addExistingMentors(adminDB, admin);
-        boolean adminControllerRunning = true;
+        Integer option = 1;
 
-        while (adminControllerRunning) {
+        while (!(option == 0)) {
             view.displayMenu(HEADER, OPTIONS);
-            Integer option = InputController.getNumber("Choose option: ");
+            option = InputController.getNumber("Choose option: ");
             switch (option) {
                 case 1:
                     view.displayUsers(admin.getMentors());
@@ -49,9 +53,9 @@ public class AdminController {
                 case 4:
                     // this.editMentor();
                     break;
-                case 5:
-                    adminControllerRunning = false;
-                    System.out.println("PAPA"); // to implement
+                case 0:
+                    connectionWithDB.closeConnection(connection);
+                    AdminView.displayText("Good bye");
                     break;
             }
         }

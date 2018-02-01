@@ -1,17 +1,16 @@
 package controller;
 
+import dao.*;
 import view.StudentView;
 import model.StudentModel;
-import dao.LoginDB;
-import dao.LoginDBImplement;
-import dao.StudentDB;
-import dao.StudentDBImplement;
 
 import java.sql.Connection;
 
 public class StudentController {
 
+    private Connection connection;
     private LoginDB loginDB;
+    private OpenCloseConnectionWithDB connectionWithDB;
     private StudentDB adminDB;
     // private WalletModel wallet;
     private StudentView view;
@@ -20,6 +19,8 @@ public class StudentController {
 
     public StudentController(Connection newConnection) {
         this.loginDB = new LoginDBImplement(newConnection);
+        this.connectionWithDB = new OpenCloseConnectionWithDB();
+        this.connection = newConnection;
         this.adminDB = new StudentDBImplement();
         // this.wallet = new WalletModel();
         this.view = new StudentView();
@@ -27,7 +28,7 @@ public class StudentController {
 
     public void run(String id) {
         //StudentModel student = this.loadStudent(loginDB, id);
-        Integer option = null;
+        Integer option = 1;
         while (!(option == 0)) {
             view.displayMenu(HEADER, OPTIONS);
             option = InputController.getNumber("Choose option: ");
@@ -44,7 +45,8 @@ public class StudentController {
                 case 4:
                     break;
                 case 0:
-                    view.displayText("Good bye");
+                    connectionWithDB.closeConnection(connection);
+                    StudentView.displayText("Good bye");
                     break;
             }
         }

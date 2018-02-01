@@ -34,9 +34,6 @@ public class RootController{
 //                StudentController studentController = new StudentController(newConnection);
 //                studentController.run(id);
                 break;
-            case "0":
-                connectionWithDB.closeConnection(newConnection);
-                break;
         }
     }
 }
