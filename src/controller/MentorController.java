@@ -27,9 +27,7 @@ public class MentorController {
   // }
 
   public void run(String id) {
-
       boolean mentorControllerRunning = true;
-
       while (mentorControllerRunning) {
           view.displayMenu(HEADER, OPTIONS);
           Integer option = InputController.getNumber("Choose option: ");
@@ -41,7 +39,6 @@ public class MentorController {
                   System.out.println("tutaj bedzie edit student");
                   break;
               case 3:
-                  System.out.println("tutaj bedzie create new quest");
                   quest.createQuest();
               case 4:
                   System.out.println("tutaj bedzie create new artifact");

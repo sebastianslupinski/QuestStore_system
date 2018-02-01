@@ -10,15 +10,16 @@ public class QuestModel {
     public QuestView view = new QuestView();
     public String name;
     public String description;
-    public int reward;
+    public int price;
     public boolean mark;
     public String label;
+    private String id;
 
-    public QuestModel(String name, String description, int reward, String label){
+    public QuestModel(String id, String name, String description, int price, String label){
 
         this.name = name;
         this.description = description;
-        this.reward = reward;
+        this.price = price;
         this.mark = false;
         this.label = label;
     }
@@ -27,7 +28,7 @@ public class QuestModel {
 
     public String getDescription(){ return this.description;}
 
-    public int getReward(){ return this.reward; }
+    public int getPrice(){ return this.price; }
 
     public boolean getMark() { return this.mark; }
 
@@ -37,17 +38,15 @@ public class QuestModel {
 
     public void setDescription(String newDescription) { this.description = description;}
 
-    public void setReward(int newReward) { this.reward = newReward;}
+    public void setPrice(int newPrice) { this.price = newPrice;}
 
     public void setLabel(String newLabel) { this.label = newLabel;}
 
     public String toString(){
-      return "{name:"+this.name+" description:"+this.description+" reward:"+this.reward+" label:"+this.label+"}";
+      return "{name:"+this.name+" description:"+this.description+" price:"+this.price+" label:"+this.label+"}";
     }
 
-    public ArrayList<QuestModel> getQuests(){
-      return quests;
-    }
+    public ArrayList<QuestModel> getQuests(){ return quests; }
 
     // public QuestModel getQuest(){
     //     boolean questNotChosen = true;
@@ -71,4 +70,11 @@ public class QuestModel {
             this.mark = true;
         }
     }
+
+    public String getId() {
+        return this.id;
+    }
+
+
+
 }

@@ -1,5 +1,7 @@
 package dao;
 
+import model.QuestModel;
+
 import java.sql.*;
 
 import static java.lang.String.*;
@@ -71,5 +73,41 @@ public class QuestDBImplement implements QuestBD {
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
+    }
+
+
+    public void saveNewQuestToDatabase(QuestModel quest){
+        String id = quest.getId();
+        String name = quest.getName();
+        String description = quest.getDescription();
+        int price = quest.getPrice();
+        String sqlQuerry2 = null;
+
+//        if (quest instanceof QuestModel) {
+//           role = "2";
+//            sqlQuerry2 = "INSERT INTO quests(id, name, description, price) VALUES(?, ?, ?, ?);";
+//        }
+        String sqlQuerry1 = "INSERT INTO quests(id, name, description, price) VALUES(?, ?, ?, ?);";
+
+        try (PreparedStatement pstmt1 = connection.prepareStatement(sqlQuerry1)) {
+            pstmt1.setString(1, id);
+            pstmt1.setString(2, name);
+            pstmt1.setString(3, description);
+            pstmt1.setInt(4, price);
+            pstmt1.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+
+//        try (PreparedStatement pstmt2 = connection.prepareStatement(sqlQuerry2)) {
+//            pstmt2.setString(1, id);
+//            pstmt2.setString(2, name);
+//            pstmt2.setString(3, description);
+//            pstmt2.setInt(4, price);
+//            pstmt2.executeUpdate();
+//        }
+//        catch (SQLException e) {
+//            System.out.println(e.getMessage());
+//        }
     }
 }
