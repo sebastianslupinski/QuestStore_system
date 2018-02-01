@@ -14,15 +14,14 @@ public class AdminController {
     public AdminDB adminDB = new AdminDBImplement();
     private LoginDAOImplement loginDAO = new LoginDAOImplement();
     private AdminView view = new AdminView();
-    private InputController inputController = new InputController();
 
     public void run(String id) {
         AdminModel admin = this.loadAdmin(loginDB, id);
         this.addExistingMentors(adminDB, admin);
         boolean adminControllerRunning = true;
         while (adminControllerRunning) {
-            view.displayAdminMenu();
 
+            view.displayAdminMenu();
             Integer option = InputController.getNumber("Choose option: ");
             switch (option) {
                 case 1:

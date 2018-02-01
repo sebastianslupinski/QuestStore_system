@@ -3,9 +3,9 @@ package view;
 
 public class StudentView extends AbstractView {
 
-    public void displayWallet(String studentName, String studentWallet) {
-        System.out.println("Student's name: " + studentName);
-        System.out.println("Wallet: " + studentWallet);
+    public void displayStudentData(String studentDataToString, String walletToString) {
+        System.out.println(studentDataToString);
+        System.out.println(walletToString);
     }
 
     public void displayQuestBook(String questBook) {

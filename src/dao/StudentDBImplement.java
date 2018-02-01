@@ -1,5 +1,5 @@
-package src.dao;
+package dao;
 
-public class StudentDBImplement implements MentorDB {
+public class StudentDBImplement implements StudentDB {
 
 }

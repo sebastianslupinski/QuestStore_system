@@ -77,11 +77,8 @@ public class LoginDBImplement implements LoginDB {
 
             while (rs.next()) {
                 idLoginAndPassword[idColumn] = rs.getString("user_id");
-                System.out.println(idLoginAndPassword[idColumn]);
                 idLoginAndPassword[loginColumn] = rs.getString("login");
-                System.out.println(idLoginAndPassword[loginColumn]);
                 idLoginAndPassword[passwordColumn] = rs.getString("password");
-                System.out.println(idLoginAndPassword[passwordColumn]);
                 allIdsLoginsAndPasswords.add(idLoginAndPassword);
             }
         }
@@ -118,13 +115,9 @@ public class LoginDBImplement implements LoginDB {
 
             while (rs.next()) {
                 nameLastnameAndEmail[id] = rs.getString(columnWithId);
-                System.out.println(nameLastnameAndEmail[id]);
                 nameLastnameAndEmail[name] = rs.getString("name");
-                System.out.println(nameLastnameAndEmail[name]);
                 nameLastnameAndEmail[lastname] = rs.getString("lastname");
-                System.out.println(nameLastnameAndEmail[lastname]);
                 nameLastnameAndEmail[email] = rs.getString("email");
-                System.out.println(nameLastnameAndEmail[email]);
                 allNamesLastnamesAndEmails.add(nameLastnameAndEmail);
             }
         }
