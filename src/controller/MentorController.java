@@ -1,19 +1,31 @@
 package controller;
 
+import dao.LoginDB;
+import dao.LoginDBImplement;
+import dao.StudentDB;
+import dao.StudentDBImplement;
+import dao.MentorDB;
 import model.MentorModel;
 import view.MentorView;
-import dao.UserDAOImplement;
+import dao.MentorDBImplement;
+
+import java.sql.Connection;
 
 public class MentorController {
 
-  // public MentorDAOImplement newMentorDAO = new MentorDAOImplement();
-  // private MentorModel model = newMentorDAO.readDataFromFile();
-  MentorView view = new MentorView();
+  private LoginDB loginDB;
+  private MentorDB mentorDB;
+  // private WalletModel wallet;
+  private MentorView view;
+  private final String HEADER = "======= HELLO-MENTOR =======\n";
+  private final String[] OPTIONS = {"Display my profile", "Display students", "Display quests"};
 
-  // public MentorController() {
-  //   this.model = model;
-  //   this.view = view;
-  // }
+  public MentorController(Connection newConnection) {
+    this.loginDB = new LoginDBImplement(newConnection);
+    this.mentorDB = new MentorDBImplement();
+    // this.wallet = new WalletModel();
+    this.view = new MentorView();
+  }
 
   public void run(String id) {
     view.displayText("Choose option:\n");

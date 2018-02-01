@@ -22,10 +22,12 @@
 *.rar
 
 # IntelliJ setup files #
+queststore-mswia.iml
 .idea/
 *.iml
 *.iws
 *.xml
+
 
 
 #Database file#

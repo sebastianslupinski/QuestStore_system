@@ -6,19 +6,27 @@ import model.MentorModel;
 import dao.*;
 import view.MentorView;
 
+import java.sql.Connection;
 import java.util.ArrayList;
 
 public class AdminController {
 
-    private LoginDB loginDB = new LoginDBImplement();
-    private AdminDB adminDB = new AdminDBImplement();
-    private AdminView view = new AdminView();
+    private LoginDB loginDB;
+    private AdminDB adminDB;
+    private AdminView view;
     private String HEADER = "======= HELLO-ADMIN =======\n";
     private String HEADER2 = "Choose what atribute you want to edit";
     private final String[] OPTIONS = {"Display existing mentors", "Create Mentor",
                                       "Edit mentor", "IN PROGRESS", "Exit"};
     private final String[] OPTIONS2 = {"Login", "Password", "Name",
                                        "Surname", "Email"};
+
+    public AdminController(Connection newConnection) {
+        this.loginDB = new LoginDBImplement(newConnection);
+        this.adminDB = new AdminDBImplement();
+        this.view = new AdminView();
+
+    }
 
     public void run(String id) {
         AdminModel admin = this.loadAdmin(loginDB, id);

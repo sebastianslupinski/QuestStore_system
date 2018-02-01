@@ -4,7 +4,7 @@ import java.sql.Connection;
 import java.util.ArrayList;
 
 public interface LoginDB {
-    public Connection createConnection();
+
     public String[] findUserIdAndRole(String login, String password);
     public void insertAllLoginData(String login, String password, String role);
     public void updateUserLoginAndPassword(String login, String password, int user_id);

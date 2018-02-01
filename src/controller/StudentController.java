@@ -7,14 +7,23 @@ import dao.LoginDBImplement;
 import dao.StudentDB;
 import dao.StudentDBImplement;
 
+import java.sql.Connection;
+
 public class StudentController {
 
-    private LoginDB loginDB = new LoginDBImplement();
-    private StudentDB adminDB = new StudentDBImplement();
-    // private WalletModel wallet = new WalletModel();
-    private StudentView view = new StudentView();
+    private LoginDB loginDB;
+    private StudentDB adminDB;
+    // private WalletModel wallet;
+    private StudentView view;
     private final String HEADER = "======= HELLO-STUDENT =======\n";
     private final String[] OPTIONS = {"Display my profile", "Display my items", "Display quests"};
+
+    public StudentController(Connection newConnection) {
+        this.loginDB = new LoginDBImplement(newConnection);
+        this.adminDB = new StudentDBImplement();
+        // this.wallet = new WalletModel();
+        this.view = new StudentView();
+    }
 
     public void run(String id) {
         //StudentModel student = this.loadStudent(loginDB, id);

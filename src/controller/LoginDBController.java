@@ -3,13 +3,19 @@ package controller;
 import dao.LoginDBImplement;
 import view.LoginView;
 
+import java.sql.Connection;
 
 
 public class LoginDBController {
 
-    LoginDBImplement loginDB = new LoginDBImplement();
-    LoginView view = new LoginView();
-    InputController userInput = new InputController();
+    LoginDBImplement loginDB;
+    LoginView view;
+
+    public LoginDBController(Connection newConnection) {
+        this.loginDB = new LoginDBImplement(newConnection);
+        this.view = new LoginView();
+    }
+
 
     public String[] processValidation() {
 
@@ -21,8 +27,8 @@ public class LoginDBController {
         Boolean process = true;
 
         while (process && (counter > 0)) {
-            String login = userInput.getString("Please enter your login");
-            String password = userInput.getString("Please enter your password");
+            String login = InputController.getString("Please enter your login");
+            String password = InputController.getString("Please enter your password");
             idAndRole = loginDB.findUserIdAndRole(login, password);
             if (idAndRole[idColumn] == null || idAndRole[roleColumn] == null) {
                 counter--;
@@ -36,24 +42,24 @@ public class LoginDBController {
 
     public void addUserLoginData() {
 
-        String login = userInput.getString("Please enter user's login");
-        String password = userInput.getString("Please enter user's password");
-        String role = userInput.getString("Please enter user's role");
+        String login = InputController.getString("Please enter user's login");
+        String password = InputController.getString("Please enter user's password");
+        String role = InputController.getString("Please enter user's role");
 
         loginDB.insertAllLoginData(login, password, role);
     }
 
     public void updateUserLoginData() {
 
-        String login = userInput.getString("Please enter user's login");
-        String password = userInput.getString("Please enter user's password");
-        int role = userInput.getNumber("Please enter user's role");
+        String login = InputController.getString("Please enter user's login");
+        String password = InputController.getString("Please enter user's password");
+        int role = InputController.getNumber("Please enter user's role");
 
         loginDB.updateUserLoginAndPassword(login, password, role);
     }
 
     public void deleteUserLoginData() {
-        int userId = userInput.getNumber("Please enter users ID number");
+        int userId = InputController.getNumber("Please enter users ID number");
         loginDB.deleteAllUserLoginData(userId);
     }
  }
