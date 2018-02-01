@@ -1,6 +1,7 @@
 package controller;
 
 import model.QuestModel;
+import view.QuestView;
 import dao.*;
 import java.util.ArrayList;
 
@@ -16,10 +17,12 @@ public class QuestController {
     int reward = view.getNumber("Please enter reward of QuestModel: ");
     String label = InputController.getString("Please enter labal of QuestModel: ");
     QuestModel newQuestModel = new QuestModel(name, description, reward, label);
-    // questCollection.getQuest().add(newQuestModel);
-    // QuestView.pressEnterToContinue("QuestModel created successfully, press enter to continue");
+//    admin.getMentors().add(newMentor);
+    QuestView.displayText("QuestModel created successfully, press enter to continue");
     return newQuestModel;
+
+    }
   }
 
 
-}
+

@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 public class AdminController {
 
-    public UserDAOImplement newAdminDAO = new UserDAOImplement();
+    private UserDAOImplement newAdminDAO = new UserDAOImplement();
     private ArrayList<String[]> users = newAdminDAO.readDataFromFile();
     private LoginDAOImplement loginDAO = new LoginDAOImplement();
     private AdminView view = new AdminView();
