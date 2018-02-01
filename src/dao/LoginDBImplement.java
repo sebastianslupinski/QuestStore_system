@@ -82,6 +82,7 @@ public class LoginDBImplement implements LoginDB {
                 allIdsLoginsAndPasswords.add(idLoginAndPassword);
             }
         }
+
         catch (Exception e) {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
             System.exit(0);
@@ -166,5 +167,26 @@ public class LoginDBImplement implements LoginDB {
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
+    }
+
+    public String getLastId() {
+        String sql = "SELECT user_id FROM logins ORDER BY user_id ASC;";
+        int idColumn = 0;
+        String lastId = null;
+
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(sql);
+
+            while (rs.next()) {
+                lastId = rs.getString("user_id");
+            }
+        }
+
+        catch (Exception e) {
+            System.err.println(e.getClass().getName() + ": " + e.getMessage());
+            System.exit(0);
+        }
+        return lastId;
     }
 }
