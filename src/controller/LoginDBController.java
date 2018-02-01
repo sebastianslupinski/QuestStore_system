@@ -19,7 +19,6 @@ public class LoginDBController {
         int arrayCapacity = 2;
         String[] idAndRole = new String[arrayCapacity];
         Boolean process = true;
-
         while (process && (counter > 0)) {
             String login = userInput.getString("Please enter your login");
             String password = userInput.getString("Please enter your password");

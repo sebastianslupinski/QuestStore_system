@@ -21,11 +21,6 @@ public class MentorController {
 //            "Surname", "Email"};
 
 
-    // public MentorController() {
-  //   this.model = model;
-  //   this.view = view;
-  // }
-
   public void run(String id) {
       boolean mentorControllerRunning = true;
 
@@ -57,7 +52,7 @@ public class MentorController {
                   break;
           }
       }
-  }
+
 
 //   public createStudent(){
 //     boolean studentNotAdded = true;

@@ -10,8 +10,14 @@ import java.util.ArrayList;
 
 public class AdminController {
 
+//<<<<<<< HEAD
+//    private UserDAOImplement newAdminDAO = new UserDAOImplement();
+//    private ArrayList<String[]> users = newAdminDAO.readDataFromFile();
+//    private LoginDAOImplement loginDAO = new LoginDAOImplement();
+//=======
     private LoginDB loginDB = new LoginDBImplement();
     private AdminDB adminDB = new AdminDBImplement();
+
     private AdminView view = new AdminView();
     private String HEADER = "======= HELLO-ADMIN =======\n";
     private String HEADER2 = "Choose what atribute you want to edit";

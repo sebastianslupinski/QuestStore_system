@@ -10,6 +10,7 @@ public class RootController{
     private MentorController mentorController = new MentorController();
 //    StudentController studentController = new StudentController();
 
+
     public void startApplication(){
  
         rootView.displayMenu();
@@ -26,6 +27,7 @@ public class RootController{
              case "2":
                  mentorController.run(id);
                  break;
+
             // case "3":
             //     studentController.run(id);
             //     break;
