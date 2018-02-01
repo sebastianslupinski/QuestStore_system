@@ -40,6 +40,27 @@ public class QuestDBImplement implements QuestBD {
         }
     }
 
+    public String getLastId() {
+        String sql = "SELECT id FROM quests ORDER BY id ASC;";
+        int idColumn = 0;
+        String lastId = null;
+
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(sql);
+
+            while (rs.next()) {
+                lastId = rs.getString("id");
+            }
+        }
+
+        catch (Exception e) {
+            System.err.println(e.getClass().getName() + ": " + e.getMessage());
+            System.exit(0);
+        }
+        return lastId;
+    }
+
     public void insertQuestData(String description, int price){
         String sql = "INSERT INTO quests(description, price) VALUES(?, ?);";
 
