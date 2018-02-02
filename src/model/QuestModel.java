@@ -42,25 +42,15 @@ public class QuestModel {
 
     public void setLabel(String newLabel) { this.label = newLabel;}
 
+    public void addQuest(QuestModel quest) {quests.add(quest);}
+
     public String toString(){
       return "{name:"+this.name+" description:"+this.description+" price:"+this.price+" label:"+this.label+"}";
     }
 
     public ArrayList<QuestModel> getQuests(){ return quests; }
 
-    // public QuestModel getQuest(){
-    //     boolean questNotChosen = true;
-    //     Integer questIndex = 0;
-    //     while(questNotChosen){
-    //         view.displayQuest(getQuests());
-    //         String userInput = view.getInput("Choose quest number");
-    //         questIndex = Integer.parseInt(userInput);
-    //         if (questIndex < quests.size()) {
-    //             questNotChosen = false;
-    //         }
-    //     }
-    //     return quests.get(questIndex);
-    // }
+
 
     public void changeMark(){
         if (this.mark){

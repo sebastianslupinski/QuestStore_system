@@ -3,8 +3,7 @@ package dao;
 import model.QuestModel;
 
 import java.sql.*;
-
-import static java.lang.String.*;
+import java.util.ArrayList;
 
 public class QuestDBImplement implements QuestBD {
 
@@ -75,6 +74,33 @@ public class QuestDBImplement implements QuestBD {
         }
     }
 
+    public ArrayList<String[]> getAllQuests(){
+
+        String sql = "SELECT * FROM quests;";
+        ArrayList<String[]> allQuests = new ArrayList<>();
+
+        try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
+//            pstmt.setInt(1, admin_id);
+            ResultSet rs = pstmt.executeQuery();
+
+            while (rs.next()) {
+                String[] questInformation = new String[4];
+                questInformation[0]= rs.getString("id");
+                questInformation[1]= rs.getString("name");
+                questInformation[2]= rs.getString("description");
+                questInformation[3]= rs.getString("price");
+
+//                System.out.println("QUEST ID: " + rs.getString("id") + "\t" + "NAME: " +
+//                        rs.getString("name") + "\t" + "DESCRIPTION: " + rs.getString("description") +
+//                        "\t" + "PRICE: " + rs.getInt("price"));
+                allQuests.add(questInformation);
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+
+        return allQuests;
+    }
 
     public void saveNewQuestToDatabase(QuestModel quest){
         String id = quest.getId();

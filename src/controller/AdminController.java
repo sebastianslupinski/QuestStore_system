@@ -36,6 +36,7 @@ public class AdminController {
             Integer option = InputController.getNumber("Choose option: ");
             switch (option) {
                 case 1:
+//                    System.out.println(this.loadAdmin(loginDB, "1"));
                     view.displayUsers(admin.getMentors());
                     break;
                 case 2:
