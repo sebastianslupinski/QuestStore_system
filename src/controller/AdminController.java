@@ -160,6 +160,7 @@ public class AdminController {
            case 2:
              String newPassword = InputController.getString("Enter new password");
              mentorToEdit.setPassword(newPassword);
+             database.updateUserPassword(newPassword, mentorId);
              optionChosen = true;
              break;
            case 3:

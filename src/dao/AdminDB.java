@@ -8,6 +8,7 @@ public interface AdminDB {
     public void insertAdminData(String name, String lastname, String email);
     public ArrayList<String[]> getMentorsDataFromDatabase(int roleToFind);
     public void updateUserLogin(String login, String user_id);
+    public void updateUserPassword(String newPassword, String user_id);
 
   
 }
