@@ -97,6 +97,19 @@ public class AdminDBImplement implements AdminDB {
         }
     }
 
+    public void updateUserLogin(String login, String user_id) {
+
+        String sql = "UPDATE logins SET login=? WHERE user_id=?;";
+
+        try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
+            pstmt.setString(1, login);
+            pstmt.setString(2, user_id);
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
         public void insertAdminData(String name, String lastname, String email){
             String sql = "INSERT INTO admins(name, lastname, email) VALUES(?, ?, ?);";
 

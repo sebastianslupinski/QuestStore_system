@@ -7,7 +7,7 @@ public class RootController{
 
     private RootView rootView = new RootView();
     private AdminController adminController = new AdminController();
-    private MentorController mentorController = new MentorController();
+//    private MentorController mentorController = new MentorController();
 //    StudentController studentController = new StudentController();
 
 
@@ -25,7 +25,7 @@ public class RootController{
                 adminController.run(id);
                 break;
              case "2":
-                 mentorController.run(id);
+//                 mentorController.run(id);
                  break;
 
             // case "3":

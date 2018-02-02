@@ -10,7 +10,6 @@ import java.util.ArrayList;
 
 public class AdminController {
 
-//<<<<<<< HEAD
 //    private UserDAOImplement newAdminDAO = new UserDAOImplement();
 //    private ArrayList<String[]> users = newAdminDAO.readDataFromFile();
 //    private LoginDAOImplement loginDAO = new LoginDAOImplement();
@@ -42,7 +41,7 @@ public class AdminController {
                     this.createMentor(admin, loginDB);
                     break;
                 case 3:
-                    this.editMentor(admin);
+                    this.editMentor(admin, adminDB);
                     break;
                 case 4:
                     // this.editMentor();
@@ -106,16 +105,6 @@ public class AdminController {
         return newMentor;
     }
 
-    public static String[] prepareMentorToSave(MentorModel mentorToSave){
-        String[] mentorInfoToSave = null;
-        mentorInfoToSave[0] = mentorToSave.getId();
-        mentorInfoToSave[1] = mentorToSave.getLogin();
-        mentorInfoToSave[2] = mentorToSave.getPassword();
-        mentorInfoToSave[3] = mentorToSave.getName();
-        mentorInfoToSave[4] = mentorToSave.getLastName();
-        mentorInfoToSave[5] = mentorToSave.getEmail();
-        return mentorInfoToSave;
-    }
 
     // public void createGroup() {
     //   String name = view.getString("Please enter group name: ");
@@ -154,16 +143,18 @@ public class AdminController {
        return admin.getMentors().get(Integer.valueOf(mentorIndex));
      }
 
-     public void editMentor(AdminModel admin) {
+     public void editMentor(AdminModel admin, AdminDB database) {
        boolean optionChosen = false;
        while(!optionChosen) {
          MentorModel mentorToEdit = getMentor(admin);
+         String mentorId = mentorToEdit.getId();
          view.displayMenu(HEADER2, OPTIONS2);
          Integer option = InputController.getNumber("Enter your option");
          switch (option) {
            case 1:
              String newLogin = InputController.getString("Enter new login");
              mentorToEdit.setLogin(newLogin);
+             database.updateUserLogin(newLogin, mentorId);
              optionChosen = true;
              break;
            case 2:
