@@ -55,6 +55,7 @@ public class MentorController {
                     break;
                 case 6:
                     System.out.println("tutaj bedzie edit quest");
+                    quest.selectOneQuest();
                     break;
                 case 7:
                     System.out.println("tutaj bedzie edit artifact");

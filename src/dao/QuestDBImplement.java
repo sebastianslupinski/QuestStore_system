@@ -74,6 +74,23 @@ public class QuestDBImplement implements QuestBD {
         }
     }
 
+    public void getOneQuestbyID(int id){
+        String sql = "SELECT * FROM quests WHERE id = ?;";
+
+        try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
+            pstmt.setInt(1, id);
+            ResultSet rs = pstmt.executeQuery();
+
+            while (rs.next()) {
+                System.out.println("ID: " + rs.getInt("id") + "\t" + "NAME: " +
+                        rs.getString("name") + "\t" + "DISCRIPTION: " + rs.getString("description") +
+                        "\t" + "PRICE: " + rs.getInt("price"));
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
     public ArrayList<String[]> getAllQuests(){
 
         String sql = "SELECT * FROM quests;";
