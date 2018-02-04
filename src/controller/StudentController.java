@@ -45,6 +45,7 @@ public class StudentController {
             switch (option) {
                 case 1:
                     view.displayStudentData(student.toString());
+                    InputController.getString();
                     break;
                 case 2:
                     //this.displayStudentItems();
