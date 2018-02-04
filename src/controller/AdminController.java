@@ -17,7 +17,7 @@ public class AdminController {
     private AdminDB adminDB;
     private AdminView view;
     private String HEADER = "======= HELLO-ADMIN =======\n";
-    private String HEADER2 = "Choose what atribute you want to edit";
+    private String HEADER2 = "Choose what attribute you want to edit";
     private final String[] OPTIONS = {"Display existing mentors", "Create Mentor",
                                       "Edit mentor", "IN PROGRESS", "Exit"};
     private final String[] OPTIONS2 = {"Login", "Password", "Name",
