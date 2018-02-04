@@ -31,8 +31,8 @@ public class RootController{
 //                mentorController.run(id);
                 break;
             case "3":
-//                StudentController studentController = new StudentController(newConnection);
-//                studentController.run(id);
+                StudentController studentController = new StudentController(newConnection);
+                studentController.run(id);
                 break;
         }
     }

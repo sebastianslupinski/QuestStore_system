@@ -3,8 +3,8 @@ package view;
 
 public class StudentView extends AbstractView {
 
-    public void displayStudentData(String studentDataToString, String walletToString) {
+    public void displayStudentData(String studentDataToString) {
         System.out.println(studentDataToString);
-        System.out.println(walletToString);
+        //System.out.println(walletToString);
     }
 }
