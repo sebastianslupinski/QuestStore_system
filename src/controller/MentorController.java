@@ -3,14 +3,17 @@ package controller;
 import java.util.ArrayList;
 import dao.LoginDB;
 import dao.LoginDBImplement;
-import dao.QuestDBImplement;
+import dao.OpenCloseConnectionWithDB;
+import dao.StudentDB;
+import dao.StudentDBImplement;
+import dao.MentorDB;
 import model.MentorModel;
-import src.dao.MentorDB;
-import src.dao.MentorDBImplement;
-import view.AbstractView;
+import view.AdminView;
 import view.MentorView;
+import dao.MentorDBImplement;
 import view.QuestView;
 
+import java.sql.Connection;
 
 public class MentorController {
 
@@ -27,68 +30,46 @@ public class MentorController {
 //    private final String[] OPTIONS2 = {"Login", "Password", "Name",
 //            "Surname", "Email"};
 
+    private Connection connection;
+//    private LoginDB loginDB;
+    private OpenCloseConnectionWithDB connectionWithDB;
+//    private MentorDB mentorDB;
+    // private WalletModel wallet;
+//    private MentorView view;
+//    private final String HEADER = "======= HELLO-MENTOR =======\n";
+//    private final String[] OPTIONS = {"Display my profile", "Display students", "Display quests"};
 
+    public MentorController(Connection newConnection) {
+        this.loginDB = new LoginDBImplement(newConnection);
+        this.connectionWithDB = new OpenCloseConnectionWithDB();
+        this.connection = newConnection;
+        this.mentorDB = new MentorDBImplement();
+        // this.wallet = new WalletModel();
+        this.view = new MentorView();
+    }
+
+//  public void run(String id) {
+//      boolean mentorControllerRunning = true;
     public void run(String id) {
-        boolean mentorControllerRunning = true;
-        while (mentorControllerRunning) {
-            view.displayMenu(HEADER, OPTIONS);
-            Integer option = InputController.getNumber("Choose option: ");
+        view.displayMentorMenu();
+        Integer option = 1;
+
+        while (!(option == 0)) {
+            InputController.getNumber("Choose option: ");
+
             switch (option) {
-                case 1:
-                    System.out.println("tutaj bedzie create student");
-                    break;
-                case 2:
-                    System.out.println("tutaj bedzie edit student");
-                    break;
-                case 3:
-                    quest.createQuest();
-                    break;
-                case 4:
-                    System.out.println("tutaj bedzie create new artifact");
-                    break;
-                case 5:
-                    System.out.println("tutaj bedzie display all quest");
-                    quest.getInformationAboutAllQuests();
-//                    QuestDBImplement questDB = new QuestDBImplement();
-//                    ArrayList<String []> allQuests = questDB.getAllQuests();
-//                    System.out.println(allQuests);
-                    break;
-                case 6:
-                    System.out.println("tutaj bedzie edit quest");
-                    quest.selectOneQuest();
-                    break;
-                case 7:
-                    System.out.println("tutaj bedzie edit artifact");
-                    break;
-                case 8:
-                    mentorControllerRunning = false;
-                    System.out.println("PAPA"); // to implement
-                    break;
+            case 1:
+                break;
+            case 2:
+                break;
+            case 0:
+                connectionWithDB.closeConnection(connection);
+                MentorView.displayText("Good bye");
+                break;
             }
         }
     }
-//
-//    public MentorModel loadMentor(LoginDB database, String id) {
-//        ArrayList<String[]> IdsLoginsAndPasswords = database.getExistingIdsLoginAndPasswords(2);
-//        ArrayList<String[]> namesLastnamesEmails = database.getExistingNamesLastnamesAndEmails("mentors");
-//        MentorModel mentor = null;
-//        for (String[] userInfo : IdsLoginsAndPasswords) {
-//            if (userInfo[0].equals(id)) {
-//                String newId = userInfo[0];
-//                String login = userInfo[1];
-//                String password = userInfo[2];
-//                for (String[] usersNames : namesLastnamesEmails) {
-//                    if (usersNames[0].equals(id)) {
-//                        String name = usersNames[1];
-//                        String lastName = usersNames[2];
-//                        String email = usersNames[3];
-//                        mentor = new MentorModel(newId, login, password, name, lastName, email);
-//                    }
-//                }
-//            }
-//        }
-//        return mentor;
-    }
+}
 
 //   public createStudent(){
 //     boolean studentNotAdded = true;
@@ -138,4 +119,4 @@ public class MentorController {
 //   public void displayInfo() {
 //   }
 
-
+// }

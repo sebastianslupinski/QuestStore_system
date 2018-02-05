@@ -1,4 +1,4 @@
-package src.dao;
+package dao;
 
 public interface MentorDB {
   

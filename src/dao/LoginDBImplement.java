@@ -12,8 +12,8 @@ public class LoginDBImplement implements LoginDB {
     Connection connection = null;
     Statement statement = null;
 
-    public LoginDBImplement(){
-        this.connection = createConnection();
+    public LoginDBImplement(Connection newConnection) {
+        this.connection = newConnection;
         try {
             this.statement = connection.createStatement();
         } catch (SQLException e) {
@@ -21,24 +21,8 @@ public class LoginDBImplement implements LoginDB {
         }
     }
 
+    public LoginDBImplement() {
 
-    public Connection createConnection() {
-
-        String url = "jdbc:sqlite:queststore.db";
-        try {
-            connection = DriverManager.getConnection(url);
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
-        return connection;
-    }
-
-    public void closeConnection() {
-        try {
-            connection.close();
-        } catch(Exception e) {
-            System.out.println(e.getStackTrace());
-        }
     }
 
     public String[] findUserIdAndRole(String login, String password) {
