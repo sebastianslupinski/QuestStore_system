@@ -58,6 +58,7 @@ public class MentorController {
                 break;
             case 3:
                 System.out.println("/////Create new quest/////");
+                quest.createQuest();
                 break;
             case 4:
                 System.out.println("/////Create new artifact/////");
