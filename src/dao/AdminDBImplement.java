@@ -1,5 +1,6 @@
 package dao;
 
+import model.AdminModel;
 import model.MentorModel;
 import model.StudentModel;
 import model.UserModel;
@@ -9,16 +10,54 @@ import java.util.ArrayList;
 
 public class AdminDBImplement implements AdminDB {
 
-    private Connection connection = null;
+    private Connection connection = this.createConnection();
     private Statement statement = null;
+    private String idColumnName;
+    private String tableName;
+    QueriesGenerator generator;
 
     public AdminDBImplement (){
-        try{
-            this.connection=createConnection();
-            this.statement = connection.createStatement();
-        } catch (SQLException e) {
-            e.printStackTrace();
+        this.tableName = "admins";
+        this.idColumnName = "admin_id";
+        this.generator = new QueriesGenerator();
+    }
+
+    public AdminModel loadAdmin(Connection connection, int id) {
+        PreparedStatement statement = generator.getFullDataOfUser(connection, tableName, idColumnName, id);
+        ResultSet resultSet = null;
+        AdminModel admin = null;
+
+        try {
+            resultSet = statement.executeQuery();
+            admin = this.getAdmin(resultSet);
+        } catch (Exception e) {
+            System.err.println(e.getClass().getName() + ": " + e.getMessage());
+            System.exit(0);
         }
+        return admin;
+    }
+
+    public AdminModel getAdmin(ResultSet resultSet) {
+
+        AdminModel admin = null;
+
+        try {
+            while (resultSet.next()) {
+                int id = resultSet.getInt("user_id");
+                String login = resultSet.getString("login");
+                String password = resultSet.getString("password");
+                String name = resultSet.getString("name");
+                String lastname = resultSet.getString("lastname");
+                String email = resultSet.getString("email");
+
+                admin = new AdminModel(String.valueOf(id), login, password, name, lastname, email);
+            }
+        }
+        catch (Exception e) {
+            System.err.println(e.getClass().getName() + ": " + e.getMessage());
+            System.exit(0);
+        }
+        return admin;
     }
 
     public Connection createConnection() {
@@ -32,6 +71,7 @@ public class AdminDBImplement implements AdminDB {
 
         return connection;
     }
+
 
     public ArrayList<String[]> getMentorsDataFromDatabase(int roleToFind) {
 
@@ -122,6 +162,8 @@ public class AdminDBImplement implements AdminDB {
             System.out.println(e.getMessage());
         }
     }
+
+    
 
         public void insertAdminData(String name, String lastname, String email){
             String sql = "INSERT INTO admins(name, lastname, email) VALUES(?, ?, ?);";
