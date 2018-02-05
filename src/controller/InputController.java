@@ -41,7 +41,7 @@ public class InputController{
         return output;
     }
     public static Boolean validateInput(String input) {
-        Pattern pattern = Pattern.compile("[{(,;'-=+!#$%^&*:|/?><~`)}]", Pattern.CASE_INSENSITIVE);
+        Pattern pattern = Pattern.compile("[!#$%&'()*+/:,;=?^_`{|}~]");
         Matcher match = pattern.matcher(input);
         Boolean result = match.find();
         if (result) {

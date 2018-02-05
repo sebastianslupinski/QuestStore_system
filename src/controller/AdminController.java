@@ -6,34 +6,40 @@ import model.MentorModel;
 import dao.*;
 import view.MentorView;
 
+import java.sql.Connection;
 import java.util.ArrayList;
 
 public class AdminController {
 
-//<<<<<<< HEAD
-//    private UserDAOImplement newAdminDAO = new UserDAOImplement();
-//    private ArrayList<String[]> users = newAdminDAO.readDataFromFile();
-//    private LoginDAOImplement loginDAO = new LoginDAOImplement();
-//=======
-    private LoginDB loginDB = new LoginDBImplement();
-    private AdminDB adminDB = new AdminDBImplement();
-
-    private AdminView view = new AdminView();
+    private Connection connection;
+    private LoginDB loginDB;
+    private OpenCloseConnectionWithDB connectionWithDB;
+    private AdminDB adminDB;
+    private AdminView view;
     private String HEADER = "======= HELLO-ADMIN =======\n";
-    private String HEADER2 = "Choose what atribute you want to edit";
+    private String HEADER2 = "Choose what attribute you want to edit";
     private final String[] OPTIONS = {"Display existing mentors", "Create Mentor",
                                       "Edit mentor", "IN PROGRESS", "Exit"};
     private final String[] OPTIONS2 = {"Login", "Password", "Name",
                                        "Surname", "Email"};
 
+    public AdminController(Connection newConnection) {
+        this.loginDB = new LoginDBImplement(newConnection);
+        this.connectionWithDB = new OpenCloseConnectionWithDB();
+        this.connection = newConnection;
+        this.adminDB = new AdminDBImplement();
+        this.view = new AdminView();
+
+    }
+
     public void run(String id) {
         AdminModel admin = this.loadAdmin(loginDB, id);
         this.addExistingMentors(adminDB, admin);
-        boolean adminControllerRunning = true;
+        Integer option = 1;
 
-        while (adminControllerRunning) {
+        while (!(option == 0)) {
             view.displayMenu(HEADER, OPTIONS);
-            Integer option = InputController.getNumber("Choose option: ");
+            option = InputController.getNumber("Choose option: ");
             switch (option) {
                 case 1:
                     view.displayUsers(admin.getMentors());
@@ -47,9 +53,9 @@ public class AdminController {
                 case 4:
                     // this.editMentor();
                     break;
-                case 5:
-                    adminControllerRunning = false;
-                    System.out.println("PAPA"); // to implement
+                case 0:
+                    connectionWithDB.closeConnection(connection);
+                    AdminView.displayText("Good bye");
                     break;
             }
         }
@@ -102,7 +108,6 @@ public class AdminController {
         MentorModel newMentor = new MentorModel(id, login, password, name, lastName);
         admin.getMentors().add(newMentor);
         MentorView.displayText("Mentor created successfully");
-        loginDB.saveNewUserToDatabase(newMentor);
         return newMentor;
     }
 
