@@ -150,6 +150,43 @@ public class AdminDBImplement implements AdminDB {
         }
     }
 
+    public void updateMentorsName(String newName, String user_id){
+        String sql = "UPDATE mentors SET name=? WHERE mentor_id=?";
+
+        try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
+            pstmt.setString(1, newName);
+            pstmt.setString(2, user_id);
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public void updateMentorsLastName(String newLastName, String user_id){
+        String sql = "UPDATE mentors SET lastname=? WHERE mentor_id=?";
+
+        try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
+            pstmt.setString(1, newLastName);
+            pstmt.setString(2, user_id);
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public void updateMentorsEmail(String newEmail, String user_id){
+        String sql = "UPDATE mentors SET email=? WHERE mentor_id=?";
+
+        try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
+            pstmt.setString(1, newEmail);
+            pstmt.setString(2, user_id);
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+
     public void updateUserPassword(String newPassword, String user_id) {
 
         String sql = "UPDATE logins SET password=? WHERE user_id=?;";
@@ -162,8 +199,6 @@ public class AdminDBImplement implements AdminDB {
             System.out.println(e.getMessage());
         }
     }
-
-    
 
         public void insertAdminData(String name, String lastname, String email){
             String sql = "INSERT INTO admins(name, lastname, email) VALUES(?, ?, ?);";

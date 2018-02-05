@@ -176,16 +176,19 @@ public class AdminController {
            case 3:
              String newName = InputController.getString("Enter new name");
              mentorToEdit.setName(newName);
+             database.updateMentorsName(newName, mentorId);
              optionChosen = true;
              break;
            case 4:
              String newLastName = InputController.getString("Enter new lastname");
              mentorToEdit.setLastName(newLastName);
+             database.updateMentorsLastName(newLastName, mentorId);
              optionChosen = true;
              break;
            case 5:
              String newEmail = InputController.getString("Enter new email");
              mentorToEdit.setEmail(newEmail);
+             database.updateMentorsEmail(newEmail, mentorId);
              optionChosen = true;
              break;
          }
