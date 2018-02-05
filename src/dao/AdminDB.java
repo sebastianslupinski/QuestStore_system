@@ -4,6 +4,7 @@ import model.AdminModel;
 
 import java.sql.Connection;
 import java.util.ArrayList;
+import java.util.Set;
 
 public interface AdminDB {
 
@@ -16,5 +17,6 @@ public interface AdminDB {
     public void updateMentorsLastName(String newLastName, String user_id);
     public void updateMentorsEmail(String newEmail, String user_id);
     public AdminModel loadAdmin(Connection connection, int id);
-  
+    public Set<String> getExistingGroups();
+
 }

@@ -7,6 +7,8 @@ import model.UserModel;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Set;
+import java.util.TreeSet;
 
 public class AdminDBImplement implements AdminDB {
 
@@ -16,7 +18,7 @@ public class AdminDBImplement implements AdminDB {
     private String tableName;
     QueriesGenerator generator;
 
-    public AdminDBImplement (){
+    public AdminDBImplement() {
         this.tableName = "admins";
         this.idColumnName = "admin_id";
         this.generator = new QueriesGenerator();
@@ -52,8 +54,7 @@ public class AdminDBImplement implements AdminDB {
 
                 admin = new AdminModel(String.valueOf(id), login, password, name, lastname, email);
             }
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
             System.exit(0);
         }
@@ -76,13 +77,11 @@ public class AdminDBImplement implements AdminDB {
     public ArrayList<String[]> getMentorsDataFromDatabase(int roleToFind) {
 
         String tableToGetFrom = null;
-        if (roleToFind == 1){
+        if (roleToFind == 1) {
             tableToGetFrom = "admins";
-        }
-        else if (roleToFind == 2){
+        } else if (roleToFind == 2) {
             tableToGetFrom = "mentors";
-        }
-        else if (roleToFind == 3){
+        } else if (roleToFind == 3) {
             tableToGetFrom = "students";
         }
 
@@ -101,7 +100,8 @@ public class AdminDBImplement implements AdminDB {
 
             while (rs.next()) {
                 String[] idLoginAndPassword = new String[6];
-                idLoginAndPassword[idColumn] = rs.getString("user_id");;
+                idLoginAndPassword[idColumn] = rs.getString("user_id");
+                ;
                 idLoginAndPassword[loginColumn] = rs.getString("login");
                 idLoginAndPassword[passwordColumn] = rs.getString("password");
                 idLoginAndPassword[name] = rs.getString("name");
@@ -110,8 +110,7 @@ public class AdminDBImplement implements AdminDB {
 
                 allIdsLoginsAndPasswords.add(idLoginAndPassword);
             }
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
             System.exit(0);
         }
@@ -150,7 +149,7 @@ public class AdminDBImplement implements AdminDB {
         }
     }
 
-    public void updateMentorsName(String newName, String user_id){
+    public void updateMentorsName(String newName, String user_id) {
         String sql = "UPDATE mentors SET name=? WHERE mentor_id=?";
 
         try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
@@ -162,7 +161,7 @@ public class AdminDBImplement implements AdminDB {
         }
     }
 
-    public void updateMentorsLastName(String newLastName, String user_id){
+    public void updateMentorsLastName(String newLastName, String user_id) {
         String sql = "UPDATE mentors SET lastname=? WHERE mentor_id=?";
 
         try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
@@ -174,7 +173,7 @@ public class AdminDBImplement implements AdminDB {
         }
     }
 
-    public void updateMentorsEmail(String newEmail, String user_id){
+    public void updateMentorsEmail(String newEmail, String user_id) {
         String sql = "UPDATE mentors SET email=? WHERE mentor_id=?";
 
         try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
@@ -200,16 +199,81 @@ public class AdminDBImplement implements AdminDB {
         }
     }
 
-        public void insertAdminData(String name, String lastname, String email){
-            String sql = "INSERT INTO admins(name, lastname, email) VALUES(?, ?, ?);";
+    public void insertAdminData(String name, String lastname, String email) {
+        String sql = "INSERT INTO admins(name, lastname, email) VALUES(?, ?, ?);";
 
-            try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
-                pstmt.setString(1, name);
-                pstmt.setString(2, lastname);
-                pstmt.setString(3, email);
-                pstmt.executeUpdate();
-            } catch (SQLException e) {
-                System.out.println(e.getMessage());
-            }
+        try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
+            pstmt.setString(1, name);
+            pstmt.setString(2, lastname);
+            pstmt.setString(3, email);
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
         }
+    }
+
+    public Set<String> getExistingGroups() {
+        String sql = "SELECT signature FROM group_names";
+        Set<String> existingGroups = new TreeSet<>();
+
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(sql);
+
+            while (rs.next()) {
+                existingGroups.add(rs.getString("signature"));
+            }
+        } catch (Exception e) {
+            System.err.println(e.getClass().getName() + ": " + e.getMessage());
+            System.exit(0);
+        }
+        return existingGroups;
+    }
+
+    public void insertNewGroup(String mentorId, String newGroup){
+
+    }
+
+    public void saveNewUserToDatabase(UserModel user){
+        String Id = user.getId();
+        String login = user.getLogin();
+        String password = user.getPassword();
+        String name = user.getName();
+        String lastName = user.getLastName();
+        String email = user.getEmail();
+        String role = null;
+        String sqlQuerry2 = null;
+
+        if (user instanceof MentorModel) {
+            role = "2";
+            sqlQuerry2 = "INSERT INTO mentors(mentor_id, name, lastname, email) VALUES(?, ?, ?, ?);";
+        }
+        else if (user instanceof StudentModel) {
+            role = "3";
+            sqlQuerry2 = "INSERT INTO students(student_id, name, lastname, email) VALUES(?, ?, ?, ?);";
+        }
+
+        String sqlQuerry1 = "INSERT INTO logins(user_id, login, password, role) VALUES(?, ?, ?, ?);";
+
+        try (PreparedStatement pstmt1 = connection.prepareStatement(sqlQuerry1)) {
+            pstmt1.setString(1, Id);
+            pstmt1.setString(2, login);
+            pstmt1.setString(3, password);
+            pstmt1.setString(4, role);
+            pstmt1.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+
+        try (PreparedStatement pstmt2 = connection.prepareStatement(sqlQuerry2)) {
+            pstmt2.setString(1, Id);
+            pstmt2.setString(2, name);
+            pstmt2.setString(3, lastName);
+            pstmt2.setString(4, email);
+            pstmt2.executeUpdate();
+        }
+        catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
 }

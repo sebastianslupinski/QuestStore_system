@@ -8,6 +8,7 @@ import view.MentorView;
 
 import java.sql.Connection;
 import java.util.ArrayList;
+import java.util.Set;
 
 public class AdminController {
 
@@ -195,11 +196,12 @@ public class AdminController {
        }
      }
 
-// public void assignMentorToGroup(){
-//   MentorModel mentorToAssign = getMentor();
-//   groupToAssign.addMentor(mentorToAssign);
-//   view.displayText("Mentor assigned succesfully");
-// }
+ public void assignMentorToGroup(AdminModel admin, AdminDB database){
+   MentorModel mentorToAssign = getMentor(admin);
+   String mentorId = mentorToAssign.getId();
+   String newGroup = this.setGroupForMentor(database.getExistingGroups());
+   view.displayText("Mentor assigned succesfully");
+ }
 
 //    public static ArrayList<String> getExistingGroups(AdminModel admin) {
 //        ArrayList<MentorModel> mentors = admin.getMentors();
@@ -210,23 +212,18 @@ public class AdminController {
 //        return existingGroups;
 //    }
 
-//    public static String setGroupForMentor(ArrayList<String> existingGroups) {
-//        String group = null;
-//        boolean groupNotChosen = true;
-//        while (groupNotChosen) {
-//            group = InputController.getString("Enter a group you want to assign mentor to");
-//            if (!(existingGroups.contains(group))) {
-//                AdminView.displayText("There is no group like this, do you want to create it ? Enter 'Y' if yes");
-//                String answer = InputController.getString();
-//                if (answer.equals("Y")) {
-//                    groupNotChosen = false;
-//                    return group;
-//                }
-//            }
-//            else {
-//                groupNotChosen = false;
-//            }
-//        }
-//        return group;
-//    }
+    public static String setGroupForMentor(Set<String> existingGroups) {
+        String group = null;
+        boolean groupNotChosen = true;
+        while (groupNotChosen) {
+            group = InputController.getString("Enter a group you want to create");
+            if (existingGroups.contains(group)) {
+                AdminView.displayText("There is already group like this, create new group");
+                }
+                else {
+                groupNotChosen = false;
+            }
+        }
+        return group;
+    }
 }
