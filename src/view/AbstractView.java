@@ -27,13 +27,6 @@ public abstract class AbstractView<T> {
             index++;
         }
     }
-  public void displayUsers(ArrayList<T> users) {
-    int index = 0;
-    for (T user : users){
-      AdminView.displayText(index + "--->" + user.toString());
-      index++;
-    }
-  }
 
   public void displayQuest(ArrayList<T> quests){
     int index = 0;

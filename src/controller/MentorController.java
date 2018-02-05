@@ -17,6 +17,8 @@ import java.sql.Connection;
 
 public class MentorController {
 
+    private Connection connection;
+    private OpenCloseConnectionWithDB connectionWithDB;
     private LoginDB loginDB = new LoginDBImplement();
     private MentorDBImplement mentorDB = new MentorDBImplement();
     private QuestController quest = new QuestController();
@@ -27,17 +29,9 @@ public class MentorController {
     private final String[] OPTIONS = {"Create Student",
             "Edit Student", "Create new quest", "Create new artifact", "Display all quests", "Edit information about quest",
             "Display all artifacts", "Edit information about artifact", "Exit"};
-//    private final String[] OPTIONS2 = {"Login", "Password", "Name",
-//            "Surname", "Email"};
+    private final String[] OPTIONS2 = {"Login", "Password", "Name",
+            "Surname", "Email"};
 
-    private Connection connection;
-//    private LoginDB loginDB;
-    private OpenCloseConnectionWithDB connectionWithDB;
-//    private MentorDB mentorDB;
-    // private WalletModel wallet;
-//    private MentorView view;
-//    private final String HEADER = "======= HELLO-MENTOR =======\n";
-//    private final String[] OPTIONS = {"Display my profile", "Display students", "Display quests"};
 
     public MentorController(Connection newConnection) {
         this.loginDB = new LoginDBImplement(newConnection);
@@ -48,21 +42,39 @@ public class MentorController {
         this.view = new MentorView();
     }
 
-//  public void run(String id) {
-//      boolean mentorControllerRunning = true;
+
     public void run(String id) {
-        view.displayMentorMenu();
         Integer option = 1;
 
         while (!(option == 0)) {
-            InputController.getNumber("Choose option: ");
-
+            view.displayMenu(HEADER, OPTIONS);
+            option = InputController.getNumber("Choose option: ");
             switch (option) {
             case 1:
+                System.out.println("/////create student/////");
                 break;
             case 2:
+                System.out.println("/////Edit Student/////");
                 break;
-            case 0:
+            case 3:
+                System.out.println("/////Create new quest/////");
+                break;
+            case 4:
+                System.out.println("/////Create new artifact/////");
+                break;
+            case 5:
+                System.out.println("/////Display all quests/////");
+                break;
+            case 6:
+                System.out.println("/////Edit information about ques/////");
+                break;
+            case 7:
+                System.out.println("/////Display all artifact/////");
+                break;
+            case 8:
+                System.out.println("/////Edit information about artifact/////");
+                break;
+                case 0:
                 connectionWithDB.closeConnection(connection);
                 MentorView.displayText("Good bye");
                 break;
