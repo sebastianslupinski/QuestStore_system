@@ -27,13 +27,13 @@ public class MentorController {
 //            "Surname", "Email"};
 
     private Connection connection;
-    private LoginDB loginDB;
+//    private LoginDB loginDB;
     private OpenCloseConnectionWithDB connectionWithDB;
-    private MentorDB mentorDB;
+//    private MentorDB mentorDB;
     // private WalletModel wallet;
-    private MentorView view;
-    private final String HEADER = "======= HELLO-MENTOR =======\n";
-    private final String[] OPTIONS = {"Display my profile", "Display students", "Display quests"};
+//    private MentorView view;
+//    private final String HEADER = "======= HELLO-MENTOR =======\n";
+//    private final String[] OPTIONS = {"Display my profile", "Display students", "Display quests"};
 
     public MentorController(Connection newConnection) {
         this.loginDB = new LoginDBImplement(newConnection);
@@ -44,8 +44,8 @@ public class MentorController {
         this.view = new MentorView();
     }
 
-  public void run(String id) {
-      boolean mentorControllerRunning = true;
+//  public void run(String id) {
+//      boolean mentorControllerRunning = true;
     public void run(String id) {
         view.displayMentorMenu();
         Integer option = 1;
