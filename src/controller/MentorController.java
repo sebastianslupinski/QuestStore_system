@@ -46,6 +46,7 @@ public class MentorController {
             InputController.getNumber("Choose option: ");
             switch (option) {
                 case 1:
+                    this.createStudent();
                     break;
                 case 2:
                     break;
@@ -58,7 +59,7 @@ public class MentorController {
     }
 
 
-    public StudentModel createStudent() {
+    public void createStudent() {
         String id = loginDB.getLastId();
         String login = InputController.getString("Please enter mentor login: ");
         String password = InputController.getString("Please enter mentor password: ");
@@ -66,8 +67,8 @@ public class MentorController {
         String lastName = InputController.getString("Please enter mentor lastName: ");
 //        String group = setGroupForMentor(getExistingGroups(admin));
         StudentModel newStudent = new StudentModel(id, login, password, name, lastName);
+        loginDB.saveNewUserToDatabase(newStudent);
         MentorView.displayText("Mentor created successfully");
-        return newStudent;
     }
 }
 

@@ -110,6 +110,7 @@ public class AdminController {
 //        String group = setGroupForMentor(getExistingGroups(admin));
         MentorModel newMentor = new MentorModel(id, login, password, name, lastName);
         admin.getMentors().add(newMentor);
+        loginDB.saveNewUserToDatabase(newMentor);
         MentorView.displayText("Mentor created successfully");
         return newMentor;
     }
