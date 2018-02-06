@@ -21,6 +21,10 @@ public class LoginDBImplement implements LoginDB {
         }
     }
 
+    public LoginDBImplement() {
+
+    }
+
     public String[] findUserIdAndRole(String login, String password) {
 
         String sql = "SELECT user_id, role FROM logins WHERE login=? AND password=?;";

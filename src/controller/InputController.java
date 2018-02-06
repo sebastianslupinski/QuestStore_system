@@ -40,7 +40,8 @@ public class InputController{
         }
         return output;
     }
-    public static Boolean validateInput(String input) {
+
+    private static Boolean validateInput(String input) {
         Pattern pattern = Pattern.compile("[!#$%&'()*+/:,;=?^_`{|}~]");
         Matcher match = pattern.matcher(input);
         Boolean result = match.find();

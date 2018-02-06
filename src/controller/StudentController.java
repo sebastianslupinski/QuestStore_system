@@ -54,7 +54,11 @@ public class StudentController {
                     //this.displayQuests();
                     break;
                 case 4:
+                    System.out.println("test1");
                     this.editProfile(student);
+                    System.out.println("test2");
+                    studentDB.exportStudent(connection, student);
+                    System.out.println("test3");
                     break;
                 case 5:
                     break;
@@ -88,17 +92,17 @@ public class StudentController {
                 case 3:
                     StudentView.displayText(student.getName());
                     String newName = InputController.getString("Type new Name");
-                    student.setPassword(newName);
+                    student.setName(newName);
                     break;
                 case 4:
                     StudentView.displayText(student.getLastName());
                     String newLastName = InputController.getString("Type new Last name");
-                    student.setPassword(newLastName);
+                    student.setLastName(newLastName);
                     break;
                 case 5:
                     StudentView.displayText(student.getEmail());
                     String newEmail = InputController.getString("Type new Email");
-                    student.setPassword(newEmail);
+                    student.setEmail(newEmail);
                     break;
             }
         }

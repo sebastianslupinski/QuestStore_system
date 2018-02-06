@@ -111,7 +111,6 @@ public class AdminController {
         MentorModel newMentor = new MentorModel(id, login, password, name, lastName);
         admin.getMentors().add(newMentor);
         MentorView.displayText("Mentor created successfully");
-        loginDB.saveNewUserToDatabase(newMentor);
         return newMentor;
     }
 
