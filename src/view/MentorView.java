@@ -6,10 +6,9 @@ public class MentorView extends AbstractView {
     public void displayMentorMenu() {
         int optionNumber = 1;
         System.out.println("Hello Mentor");
-        final String[] OPTIONS = {"1. Create student"};
+        final String[] OPTIONS = {"1. Create student","2."};
 
-    for (String option : OPTIONS)
-      {
+    for (String option : OPTIONS) {
         System.out.println(optionNumber + "--->" + option);
         //  optionNumber ++;
       }

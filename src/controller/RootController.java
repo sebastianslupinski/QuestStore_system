@@ -27,8 +27,8 @@ public class RootController{
                 adminController.run(id);
                 break;
             case "2":
-//                MentorController mentorController = new MentorController(newConnection);
-//                mentorController.run(id);
+                MentorController mentorController = new MentorController(newConnection);
+                mentorController.run(id);
                 break;
             case "3":
                 StudentController studentController = new StudentController(newConnection);
