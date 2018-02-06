@@ -23,9 +23,6 @@ public class LoginDBImplement implements LoginDB {
         }
     }
 
-    public LoginDBImplement() {
-
-    }
 
     public String[] findUserIdAndRole(String login, String password) {
 

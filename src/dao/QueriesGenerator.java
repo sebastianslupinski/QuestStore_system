@@ -23,6 +23,24 @@ public class QueriesGenerator {
         return statement;
     }
 
+    public PreparedStatement getFullDataOfAllUsers(Connection newConnection, String tableName,
+                                               String idColumnName, int role) {
+        PreparedStatement statement = null;
+
+        try {
+            statement = newConnection.prepareStatement("SELECT user_id, login, password, name, lastname, email "
+                    + "FROM logins "
+                    + "INNER JOIN " + tableName +" ON user_id="
+                    + idColumnName
+                    + " WHERE role=?;");
+            statement.setInt(1, role);
+        } catch (Exception e) {
+            System.err.println(e.getClass().getName() + ": " + e.getMessage());
+            System.exit(0);
+        }
+        return statement;
+    }
+
     public PreparedStatement updateLoginDataOfUser(Connection newConnection, String newLogin,
                                                    String newPassword, int newId) {
         PreparedStatement statement = null;
