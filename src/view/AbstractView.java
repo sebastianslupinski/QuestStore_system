@@ -23,7 +23,7 @@ public abstract class AbstractView<T> {
         int index = 0;
 
         for (T user : users) {
-            AdminView.displayText(index + "--->" + user.toString());
+            AdminView.displayText(String.format("%d--->%s\n", index, user.toString()));
             index++;
         }
     }
@@ -31,10 +31,7 @@ public abstract class AbstractView<T> {
   public void displayQuests(ArrayList<T> quests){
     int index = 0;
     for (T quest : quests){
-//        AbstractView.displayText(index + "--->" + Arrays.toString((Object[]) quest));
-        AbstractView.displayText(index + "--->" + quest.toString());
-
-
+        AbstractView.displayText(String.format("%d--->%s\n", index, quest.toString()));
         index++;
     }
   }

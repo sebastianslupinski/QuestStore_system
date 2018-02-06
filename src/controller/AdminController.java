@@ -37,7 +37,6 @@ public class AdminController {
 
     public void run(String id) {
         AdminModel admin = adminDB.loadAdmin(connection, Integer.valueOf(id));
-        System.out.println(admin.getName());
         this.addExistingMentors(adminDB, admin);
         Integer option = 1;
 
@@ -46,8 +45,8 @@ public class AdminController {
             option = InputController.getNumber("Choose option: ");
             switch (option) {
                 case 1:
-//                    System.out.println(this.loadAdmin(loginDB, "1"));
                     view.displayUsers(admin.getMentors());
+                    InputController.getString();
                     break;
                 case 2:
                     this.createMentor(admin, loginDB);
@@ -66,32 +65,31 @@ public class AdminController {
         }
     }
 
-    public AdminModel loadAdmin(LoginDB database, String id) {
-        ArrayList<String[]> IdsLoginsAndPasswords = database.getExistingIdsLoginAndPasswords(1);
-        ArrayList<String[]> namesLastnamesEmails = database.getExistingNamesLastnamesAndEmails("admins");
-        AdminModel admin = null;
-        for (String[] userInfo : IdsLoginsAndPasswords) {
-            if (userInfo[0].equals(id)) {
-                String newId = userInfo[0];
-                String login = userInfo[1];
-                String password = userInfo[2];
-                for(String[] usersNames : namesLastnamesEmails){
-                    if (usersNames[0].equals(id)){
-                        String name = usersNames[1];
-                        String lastName = usersNames[2];
-                        String email = usersNames[3];
-                        admin = new AdminModel(newId, login, password, name, lastName, email);
-                    }
-                }
-            }
-        }
-        return admin;
-    }
+//    public AdminModel loadAdmin(LoginDB database, String id) {
+//        ArrayList<String[]> IdsLoginsAndPasswords = database.getExistingIdsLoginAndPasswords(1);
+//        ArrayList<String[]> namesLastnamesEmails = database.getExistingNamesLastnamesAndEmails("admins");
+//        AdminModel admin = null;
+//        for (String[] userInfo : IdsLoginsAndPasswords) {
+//            if (userInfo[0].equals(id)) {
+//                String newId = userInfo[0];
+//                String login = userInfo[1];
+//                String password = userInfo[2];
+//                for(String[] usersNames : namesLastnamesEmails){
+//                    if (usersNames[0].equals(id)){
+//                        String name = usersNames[1];
+//                        String lastName = usersNames[2];
+//                        String email = usersNames[3];
+//                        admin = new AdminModel(newId, login, password, name, lastName, email);
+//                    }
+//                }
+//            }
+//        }
+//        return admin;
+//    }
 
     public void addExistingMentors(AdminDB database, AdminModel admin) {
-        System.out.println("dupa");
-        ArrayList<String[]> loginsInfo = database.getMentorsDataFromDatabase(2);
-        System.out.println("dupa2");
+        int roleToFind = 2;
+        ArrayList<String[]> loginsInfo = database.getMentorsDataFromDatabase(roleToFind);
         for (String[] userInfo : loginsInfo) {
             MentorModel mentorToAdd = null;
             String id = userInfo[0];
