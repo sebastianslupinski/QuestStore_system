@@ -1,5 +1,6 @@
 package controller;
 
+import java.util.ArrayList;
 import dao.LoginDB;
 import dao.LoginDBImplement;
 import dao.OpenCloseConnectionWithDB;
@@ -10,33 +11,32 @@ import model.MentorModel;
 import view.AdminView;
 import view.MentorView;
 import dao.MentorDBImplement;
+import view.QuestView;
 
 import java.sql.Connection;
 
 public class MentorController {
-    private LoginDB loginDB = new LoginDBImplement();
-    private MentorDBImplement mentorDB = new MentorDBImplement();
-    private QuestController quest = new QuestController();
-    private MentorView view = new MentorView();
-    private String HEADER = "======= HELLO-MENTOR =======\n";
-    private String HEADER2 = "Choose what atribute you want to edit";
-    private final String[] OPTIONS = {"Create Student",
-            "Edit Student", "Create new quest", "Create new artifact", "Edit information about quest",
-            "Edit information about artifact", "Exit"};
-//    private final String[] OPTIONS2 = {"Login", "Password", "Name",
-//            "Surname", "Email"};
 
     private Connection connection;
-//    private LoginDB loginDB;
     private OpenCloseConnectionWithDB connectionWithDB;
-//    private MentorDB mentorDB;
-    // private WalletModel wallet;
-//    private MentorView view;
-//    private final String HEADER = "======= HELLO-MENTOR =======\n";
-//    private final String[] OPTIONS = {"Display my profile", "Display students", "Display quests"};
+    private LoginDB loginDB;
+    private MentorDBImplement mentorDB;
+    private QuestController quest;
+    private MentorView view;
+    private String HEADER = "======= HELLO-MENTOR =======\n";
+    private String HEADER2 = "Choose what atribute you want to edit";
+    private final String[] OPTIONS = {  "Create Student",
+                                        "Edit Student",
+                                        "Option for quest",
+                                        "Option for artifacts",
+                                        "Exit"};
+    private final String[] OPTIONS2 = {"Login", "Password", "Name",
+                                        "Surname", "Email"};
+
 
     public MentorController(Connection newConnection) {
         this.loginDB = new LoginDBImplement(newConnection);
+        this.quest = new QuestController(newConnection);
         this.connectionWithDB = new OpenCloseConnectionWithDB();
         this.connection = newConnection;
         this.mentorDB = new MentorDBImplement();
@@ -44,21 +44,28 @@ public class MentorController {
         this.view = new MentorView();
     }
 
-//  public void run(String id) {
-//      boolean mentorControllerRunning = true;
+
     public void run(String id) {
-        view.displayMentorMenu();
         Integer option = 1;
 
         while (!(option == 0)) {
-            InputController.getNumber("Choose option: ");
-
+            view.displayMenu(HEADER, OPTIONS);
+            option = InputController.getNumber("Choose option: ");
             switch (option) {
             case 1:
+                System.out.println("/////create student/////");
                 break;
             case 2:
+                System.out.println("/////Edit Student/////");
                 break;
-            case 0:
+            case 3:
+                System.out.println("/////Quest Option/////");
+                quest.questOption();
+                break;
+            case 4:
+                System.out.println("/////Artifact Option/////");
+                break;
+                case 0:
                 connectionWithDB.closeConnection(connection);
                 MentorView.displayText("Good bye");
                 break;

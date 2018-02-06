@@ -2,6 +2,8 @@ package dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class QueriesGenerator {
 
@@ -69,4 +71,37 @@ public class QueriesGenerator {
         }
         return statement;
     }
+
+    public PreparedStatement getAllQuests(Connection newConnection, String tableName) {
+
+        PreparedStatement statement = null;
+        try {
+            statement = newConnection.prepareStatement("SELECT * FROM " + tableName + ";");
+        } catch (Exception e) {
+            System.err.println(e.getClass().getName() + ": " + e.getMessage());
+            System.exit(0);
+        }
+        return statement;
+    }
+
+    public PreparedStatement insertItem(Connection newConnection, String tableName,
+                                        int id, String name, String description, int price) {
+
+        PreparedStatement statement = null;
+
+        try {
+            statement = newConnection.prepareStatement("INSERT INTO "
+                + tableName
+                + " (id, name, description, price) VALUES(?, ?, ?, ?);");
+
+            statement.setInt(1, id);
+            statement.setString(2, name);
+            statement.setString(3, description);
+            statement.setInt(4, price);
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return statement;
+    }
+
 }

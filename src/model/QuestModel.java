@@ -6,69 +6,68 @@ import view.QuestView;
 
 public class QuestModel {
 
-    private ArrayList<QuestModel> quests = new ArrayList();
+
+
+    private static ArrayList<QuestModel> quests = new ArrayList();
     public QuestView view = new QuestView();
     public String name;
     public String description;
-    public int reward;
-    public boolean mark;
-    public String label;
+    public int price;
+    private String id;
 
-    public QuestModel(String name, String description, int reward, String label){
 
+    public QuestModel(String id, String name, String description, int price){
+
+        this.id = id;
         this.name = name;
         this.description = description;
-        this.reward = reward;
-        this.mark = false;
-        this.label = label;
+        this.price = price;
+
+        quests.add(this);
     }
 
     public String getName(){ return this.name; }
 
     public String getDescription(){ return this.description;}
 
-    public int getReward(){ return this.reward; }
+    public int getPrice(){ return this.price; }
 
-    public boolean getMark() { return this.mark; }
-
-    public String getLabel() { return this.label; }
+    public static ArrayList<QuestModel> getQuests() {
+        return quests;
+    }
 
     public void setName(String newName) { this.name = newName; }
 
     public void setDescription(String newDescription) { this.description = description;}
 
-    public void setReward(int newReward) { this.reward = newReward;}
+    public void setPrice(int newPrice) { this.price = newPrice;}
 
-    public void setLabel(String newLabel) { this.label = newLabel;}
+
+    public void addQuest(QuestModel quest) {quests.add(quest);}
+
 
     public String toString(){
-      return "{name:"+this.name+" description:"+this.description+" reward:"+this.reward+" label:"+this.label+"}";
+        return String.format("Id.: %s\nName: %s\nDescription: %s\nPrice: %s\n",
+                id, name, description, price);
     }
 
-    public ArrayList<QuestModel> getQuests(){
-      return quests;
+//    public ArrayList<QuestModel> getQuests(){ return quests; }
+
+
+//
+//    public void changeMark(){
+//        if (this.mark){
+//            this.mark = false;
+//        }
+//        else {
+//            this.mark = true;
+//        }
+//    }
+
+    public int getId() {
+        return Integer.valueOf(this.id);
     }
 
-    // public QuestModel getQuest(){
-    //     boolean questNotChosen = true;
-    //     Integer questIndex = 0;
-    //     while(questNotChosen){
-    //         view.displayQuest(getQuests());
-    //         String userInput = view.getInput("Choose quest number");
-    //         questIndex = Integer.parseInt(userInput);
-    //         if (questIndex < quests.size()) {
-    //             questNotChosen = false;
-    //         }
-    //     }
-    //     return quests.get(questIndex);
-    // }
 
-    public void changeMark(){
-        if (this.mark){
-            this.mark = false;
-        }
-        else {
-            this.mark = true;
-        }
-    }
+
 }

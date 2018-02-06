@@ -1,6 +1,7 @@
 package view;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public abstract class AbstractView<T> {
 
@@ -26,4 +27,18 @@ public abstract class AbstractView<T> {
             index++;
         }
     }
+
+  public void displayQuests(ArrayList<T> quests){
+    int index = 0;
+    for (T quest : quests){
+//        AbstractView.displayText(index + "--->" + Arrays.toString((Object[]) quest));
+        AbstractView.displayText(index + "--->" + quest.toString());
+
+
+        index++;
+    }
+  }
+
+
 }
+
