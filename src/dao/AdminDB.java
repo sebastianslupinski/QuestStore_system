@@ -18,5 +18,5 @@ public interface AdminDB {
     public void updateMentorsEmail(String newEmail, String user_id);
     public AdminModel loadAdmin(Connection connection, int id);
     public Set<String> getExistingGroups();
-
+    public void createNewGroupAndAssignMentorToIt(String newGroup, String mentorId);
 }

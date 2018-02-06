@@ -230,9 +230,18 @@ public class AdminDBImplement implements AdminDB {
         return existingGroups;
     }
 
-    public void insertNewGroup(String mentorId, String newGroup){
+    public void createNewGroupAndAssignMentorToIt(String newGroup, String mentorId){
+        String sqlQuerry1 = "INSERT INTO group_names(signature, mentor_id) VALUES(?, ?);";
 
+        try (PreparedStatement pstmt1 = connection.prepareStatement(sqlQuerry1)) {
+            pstmt1.setString(1, newGroup);
+            pstmt1.setString(2, mentorId);
+            pstmt1.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
     }
+
 
     public void saveNewUserToDatabase(UserModel user){
         String Id = user.getId();

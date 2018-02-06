@@ -20,7 +20,8 @@ public class AdminController {
     private String HEADER = "======= HELLO-ADMIN =======\n";
     private String HEADER2 = "Choose what attribute you want to edit";
     private final String[] OPTIONS = {"Display existing mentors", "Create Mentor",
-                                      "Edit mentor", "IN PROGRESS", "Exit"};
+                                      "Edit mentor", "Create new group and assign mentor to it",
+                                        "Exit"};
     private final String[] OPTIONS2 = {"Login", "Password", "Name",
                                        "Surname", "Email"};
 
@@ -53,7 +54,7 @@ public class AdminController {
                     this.editMentor(admin, adminDB);
                     break;
                 case 4:
-                    // this.editMentor();
+                    this.assignMentorToGroup(admin, adminDB);
                     break;
                 case 0:
                     connectionWithDB.closeConnection(connection);
@@ -200,6 +201,7 @@ public class AdminController {
    MentorModel mentorToAssign = getMentor(admin);
    String mentorId = mentorToAssign.getId();
    String newGroup = this.setGroupForMentor(database.getExistingGroups());
+   database.createNewGroupAndAssignMentorToIt(newGroup, mentorId);
    view.displayText("Mentor assigned succesfully");
  }
 
