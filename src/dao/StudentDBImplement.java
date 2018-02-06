@@ -1,8 +1,6 @@
 package dao;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
+import java.sql.*;
 import java.util.ArrayList;
 
 import model.StudentModel;
@@ -101,4 +99,25 @@ public class StudentDBImplement implements StudentDB {
         return existingStudents;
     }
 
-}
+    public ArrayList<String> getIdsOfStudentsAssignedToGroupsAlready(Connection connection){
+        ArrayList<String> idsOfStudentsInGroups = new ArrayList<>();
+
+        String sql = "SELECT student_id FROM groups";
+
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(sql);
+
+            while (rs.next()) {
+                String id = rs.getString("student_id");
+
+                idsOfStudentsInGroups.add(id);
+            }
+        } catch (Exception e) {
+            System.err.println(e.getClass().getName() + ": " + e.getMessage());
+            System.exit(0);
+        }
+        return idsOfStudentsInGroups;
+    }
+    }
+
