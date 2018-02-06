@@ -6,6 +6,8 @@ import view.QuestView;
 
 public class QuestModel {
 
+
+
     private static ArrayList<QuestModel> quests = new ArrayList();
     public QuestView view = new QuestView();
     public String name;
@@ -23,8 +25,6 @@ public class QuestModel {
 
         quests.add(this);
     }
-
-
 
     public String getName(){ return this.name; }
 
@@ -64,8 +64,8 @@ public class QuestModel {
 //        }
 //    }
 
-    public String getId() {
-        return this.id;
+    public int getId() {
+        return Integer.valueOf(this.id);
     }
 
 

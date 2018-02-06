@@ -37,5 +37,24 @@ public class QueriesGenerator {
         return statement;
     }
 
+    public PreparedStatement insertItem(Connection newConnection, String tableName,
+                                        int id, String name, String description, int price) {
+
+        PreparedStatement statement = null;
+
+        try {
+            statement = newConnection.prepareStatement("INSERT INTO "
+                + tableName
+                + " (id, name, description, price) VALUES(?, ?, ?, ?);");
+
+            statement.setInt(1, id);
+            statement.setString(2, name);
+            statement.setString(3, description);
+            statement.setInt(4, price);
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return statement;
+    }
 
 }

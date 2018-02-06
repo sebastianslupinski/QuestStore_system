@@ -17,17 +17,16 @@ public class QuestDBImplement implements QuestBD {
         this.generator = new QueriesGenerator();
     }
 
-    public String getLastId() {
+    public Integer getLastId() {
         String sql = "SELECT id FROM quests ORDER BY id ASC;";
-        int idColumn = 0;
-        String lastId = null;
+        Integer lastId = null;
 
         try {
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery(sql);
 
             while (rs.next()) {
-                lastId = rs.getString("id");
+                lastId = rs.getInt("id");
             }
         } catch (Exception e) {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
@@ -105,37 +104,14 @@ public class QuestDBImplement implements QuestBD {
     }
 
     public void saveNewQuestToDatabase(QuestModel quest) {
-        String id = quest.getId();
-        String name = quest.getName();
-        String description = quest.getDescription();
-        int price = quest.getPrice();
-        String sqlQuerry2 = null;
+        PreparedStatement statement = generator.insertItem(connection, tableName,
+                quest.getId(), quest.getName(), quest.getDescription(), quest.getPrice());
 
-//        if (quest instanceof QuestModel) {
-//           role = "2";
-//            sqlQuerry2 = "INSERT INTO quests(id, name, description, price) VALUES(?, ?, ?, ?);";
-//        }
-        String sqlQuerry1 = "INSERT INTO quests(id, name, description, price) VALUES(?, ?, ?, ?);";
-
-        try (PreparedStatement pstmt1 = connection.prepareStatement(sqlQuerry1)) {
-            pstmt1.setString(1, id);
-            pstmt1.setString(2, name);
-            pstmt1.setString(3, description);
-            pstmt1.setInt(4, price);
-            pstmt1.executeUpdate();
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
+        try {
+            statement.executeUpdate();
+        } catch (Exception e) {
+            System.err.println(e.getClass().getName() + ": " + e.getMessage());
+            System.exit(0);
         }
     }
-//        try (PreparedStatement pstmt2 = connection.prepareStatement(sqlQuerry2)) {
-//            pstmt2.setString(1, id);
-//            pstmt2.setString(2, name);
-//            pstmt2.setString(3, description);
-//            pstmt2.setInt(4, price);
-//            pstmt2.executeUpdate();
-//        }
-//        catch (SQLException e) {
-//            System.out.println(e.getMessage());
-//        }
-
 }

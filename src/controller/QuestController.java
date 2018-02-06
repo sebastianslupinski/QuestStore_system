@@ -36,14 +36,16 @@ public class QuestController {
             option = InputController.getNumber("Choose option: ");
             switch (option){
                 case 1:
-                    System.out.println("crate quest");
+                    QuestModel newQuest = this.createQuest();
+                    questDB.saveNewQuestToDatabase(newQuest);
+                    viewQuest.displayQuests(quests.getQuests());
                     break;
                 case 2:
-                    System.out.println("display all quest");
                     viewQuest.displayQuests(quests.getQuests());
                     break;
                 case 3:
                     System.out.println("edit quest");
+
                     break;
             }
         }
@@ -51,18 +53,20 @@ public class QuestController {
     }
 
     public QuestModel createQuest() {
-        String id = questDB.getLastId();
+        Integer lastID = questDB.getLastId();
+        String id = String.valueOf(lastID + 1);
+
         System.out.println("last id" + id);
         String name = InputController.getString("Please enter name of QuestModel: ");
         String description = InputController.getString("Please enter description of QuestModel: ");
         int price = InputController.getNumber("Please enter price of QuestModel: ");
-        String label = InputController.getString("Please enter labal of QuestModel: ");
         QuestModel newQuestModel = new QuestModel(id, name, description, price);
         QuestView.displayText("QuestModel created successfully, press enter to continue");
-        questDB.saveNewQuestToDatabase(newQuestModel);
 
         return newQuestModel;
     }
+
+
 
 
 }

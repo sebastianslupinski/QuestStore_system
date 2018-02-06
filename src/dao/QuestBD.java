@@ -7,8 +7,9 @@ import java.util.ArrayList;
 
 public interface QuestBD {
 
-    String getLastId();
+    Integer getLastId();
     void saveNewQuestToDatabase(QuestModel quest);
     QuestModel getAllQuests();
+
 
 }
