@@ -8,6 +8,7 @@ import view.MentorView;
 
 import java.sql.Connection;
 import java.util.ArrayList;
+import java.util.Set;
 
 public class AdminController {
 
@@ -19,7 +20,8 @@ public class AdminController {
     private String HEADER = "======= HELLO-ADMIN =======\n";
     private String HEADER2 = "Choose what attribute you want to edit";
     private final String[] OPTIONS = {"Display existing mentors", "Create Mentor",
-                                      "Edit mentor", "IN PROGRESS", "Exit"};
+                                      "Edit mentor", "Create new group and assign mentor to it",
+                                        "Exit"};
     private final String[] OPTIONS2 = {"Login", "Password", "Name",
                                        "Surname", "Email"};
 
@@ -52,7 +54,7 @@ public class AdminController {
                     this.editMentor(admin, adminDB);
                     break;
                 case 4:
-                    // this.editMentor();
+                    this.assignMentorToGroup(admin, adminDB);
                     break;
                 case 0:
                     connectionWithDB.closeConnection(connection);
@@ -175,27 +177,32 @@ public class AdminController {
            case 3:
              String newName = InputController.getString("Enter new name");
              mentorToEdit.setName(newName);
+             database.updateMentorsName(newName, mentorId);
              optionChosen = true;
              break;
            case 4:
              String newLastName = InputController.getString("Enter new lastname");
              mentorToEdit.setLastName(newLastName);
+             database.updateMentorsLastName(newLastName, mentorId);
              optionChosen = true;
              break;
            case 5:
              String newEmail = InputController.getString("Enter new email");
              mentorToEdit.setEmail(newEmail);
+             database.updateMentorsEmail(newEmail, mentorId);
              optionChosen = true;
              break;
          }
        }
      }
 
-// public void assignMentorToGroup(){
-//   MentorModel mentorToAssign = getMentor();
-//   groupToAssign.addMentor(mentorToAssign);
-//   view.displayText("Mentor assigned succesfully");
-// }
+ public void assignMentorToGroup(AdminModel admin, AdminDB database){
+   MentorModel mentorToAssign = getMentor(admin);
+   String mentorId = mentorToAssign.getId();
+   String newGroup = this.setGroupForMentor(database.getExistingGroups());
+   database.createNewGroupAndAssignMentorToIt(newGroup, mentorId);
+   view.displayText("Mentor assigned succesfully");
+ }
 
 //    public static ArrayList<String> getExistingGroups(AdminModel admin) {
 //        ArrayList<MentorModel> mentors = admin.getMentors();
@@ -206,23 +213,18 @@ public class AdminController {
 //        return existingGroups;
 //    }
 
-//    public static String setGroupForMentor(ArrayList<String> existingGroups) {
-//        String group = null;
-//        boolean groupNotChosen = true;
-//        while (groupNotChosen) {
-//            group = InputController.getString("Enter a group you want to assign mentor to");
-//            if (!(existingGroups.contains(group))) {
-//                AdminView.displayText("There is no group like this, do you want to create it ? Enter 'Y' if yes");
-//                String answer = InputController.getString();
-//                if (answer.equals("Y")) {
-//                    groupNotChosen = false;
-//                    return group;
-//                }
-//            }
-//            else {
-//                groupNotChosen = false;
-//            }
-//        }
-//        return group;
-//    }
+    public static String setGroupForMentor(Set<String> existingGroups) {
+        String group = null;
+        boolean groupNotChosen = true;
+        while (groupNotChosen) {
+            group = InputController.getString("Enter a group you want to create");
+            if (existingGroups.contains(group)) {
+                AdminView.displayText("There is already group like this, create new group");
+                }
+                else {
+                groupNotChosen = false;
+            }
+        }
+        return group;
+    }
 }
