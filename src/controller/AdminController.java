@@ -54,7 +54,7 @@ public class AdminController {
                     this.editMentor(admin, adminDB);
                     break;
                 case 4:
-                    this.assignMentorToGroup(admin, adminDB);
+                    this.assignMentorToGroup(admin,loginDB, adminDB);
                     break;
                 case 0:
                     connectionWithDB.closeConnection(connection);
@@ -87,9 +87,7 @@ public class AdminController {
     }
 
     public void addExistingMentors(AdminDB database, AdminModel admin) {
-        System.out.println("dupa");
         ArrayList<String[]> loginsInfo = database.getMentorsDataFromDatabase(2);
-        System.out.println("dupa2");
         for (String[] userInfo : loginsInfo) {
             MentorModel mentorToAdd = null;
             String id = userInfo[0];
@@ -196,11 +194,11 @@ public class AdminController {
        }
      }
 
- public void assignMentorToGroup(AdminModel admin, AdminDB database){
+ public void assignMentorToGroup(AdminModel admin, LoginDB database, AdminDB adminDatabase){
    MentorModel mentorToAssign = getMentor(admin);
    String mentorId = mentorToAssign.getId();
    String newGroup = this.setGroupForMentor(database.getExistingGroups());
-   database.createNewGroupAndAssignMentorToIt(newGroup, mentorId);
+   adminDatabase.createNewGroupAndAssignMentorToIt(newGroup, mentorId);
    view.displayText("Mentor assigned succesfully");
  }
 
