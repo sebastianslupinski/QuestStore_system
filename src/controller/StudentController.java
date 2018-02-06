@@ -54,11 +54,8 @@ public class StudentController {
                     //this.displayQuests();
                     break;
                 case 4:
-                    System.out.println("test1");
                     this.editProfile(student);
-                    System.out.println("test2");
                     studentDB.exportStudent(connection, student);
-                    System.out.println("test3");
                     break;
                 case 5:
                     break;
