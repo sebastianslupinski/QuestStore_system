@@ -22,4 +22,51 @@ public class QueriesGenerator {
         }
         return statement;
     }
+
+    public PreparedStatement updateLoginDataOfUser(Connection newConnection, String newLogin,
+                                                   String newPassword, int newId) {
+        PreparedStatement statement = null;
+
+        try {
+            statement = newConnection.prepareStatement(
+                    "UPDATE logins"
+                    + " SET login=?"
+                    + ", password=?"
+                    + " WHERE user_id=?;");
+            statement.setString(1, newLogin);
+            statement.setString(2, newPassword);
+            statement.setInt(3, newId);
+        } catch (Exception e) {
+            System.err.println(e.getClass().getName() + ": " + e.getMessage());
+            System.exit(0);
+        }
+        return statement;
+    }
+
+    public PreparedStatement updatePersonalDataOfUser(Connection newConnection, String tableName,
+                                                      String columnName, String newName, String newLastname,
+                                                      String newEmail, int newId) {
+        PreparedStatement statement = null;
+
+        try {
+            statement = newConnection.prepareStatement(
+                                "UPDATE "
+                                     + tableName
+                                     + " SET name=?"
+                                     + ", lastname=?"
+                                     + ", email=?"
+                                     + " WHERE "
+                                     + columnName
+                                     + "=?;");
+//            statement.setString(1, tableName);
+            statement.setString(1, newName);
+            statement.setString(2, newLastname);
+            statement.setString(3, newEmail);
+            statement.setInt(4, newId);
+        } catch (Exception e) {
+            System.err.println(e.getClass().getName() + ": " + e.getMessage());
+            System.exit(0);
+        }
+        return statement;
+    }
 }
