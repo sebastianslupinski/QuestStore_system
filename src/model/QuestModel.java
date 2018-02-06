@@ -6,23 +6,25 @@ import view.QuestView;
 
 public class QuestModel {
 
-    private ArrayList<QuestModel> quests = new ArrayList();
+    private static ArrayList<QuestModel> quests = new ArrayList();
     public QuestView view = new QuestView();
     public String name;
     public String description;
     public int price;
-    public boolean mark;
-    public String label;
     private String id;
 
-    public QuestModel(String id, String name, String description, int price, String label){
 
+    public QuestModel(String id, String name, String description, int price){
+
+        this.id = id;
         this.name = name;
         this.description = description;
         this.price = price;
-        this.mark = false;
-        this.label = label;
+
+        quests.add(this);
     }
+
+
 
     public String getName(){ return this.name; }
 
@@ -30,9 +32,9 @@ public class QuestModel {
 
     public int getPrice(){ return this.price; }
 
-    public boolean getMark() { return this.mark; }
-
-    public String getLabel() { return this.label; }
+    public static ArrayList<QuestModel> getQuests() {
+        return quests;
+    }
 
     public void setName(String newName) { this.name = newName; }
 
@@ -40,26 +42,27 @@ public class QuestModel {
 
     public void setPrice(int newPrice) { this.price = newPrice;}
 
-    public void setLabel(String newLabel) { this.label = newLabel;}
 
     public void addQuest(QuestModel quest) {quests.add(quest);}
 
+
     public String toString(){
-      return "{name:"+this.name+" description:"+this.description+" price:"+this.price+" label:"+this.label+"}";
+        return String.format("Id.: %s\nName: %s\nDescription: %s\nPrice: %s\n",
+                id, name, description, price);
     }
 
-    public ArrayList<QuestModel> getQuests(){ return quests; }
+//    public ArrayList<QuestModel> getQuests(){ return quests; }
 
 
-
-    public void changeMark(){
-        if (this.mark){
-            this.mark = false;
-        }
-        else {
-            this.mark = true;
-        }
-    }
+//
+//    public void changeMark(){
+//        if (this.mark){
+//            this.mark = false;
+//        }
+//        else {
+//            this.mark = true;
+//        }
+//    }
 
     public String getId() {
         return this.id;

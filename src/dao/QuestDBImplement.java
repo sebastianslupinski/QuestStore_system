@@ -8,37 +8,13 @@ import java.util.ArrayList;
 public class QuestDBImplement implements QuestBD {
 
     private Connection connection;
-    private Statement statement;
+    private QueriesGenerator generator;
+    private String tableName;
 
-    public QuestDBImplement(){
-        this.connection = createConnection();
-        try {
-            this.statement = connection.createStatement();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public Connection createConnection() {
-
-        String url = "jdbc:sqlite:queststore.db";
-        try {
-            connection = DriverManager.getConnection(url);
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
-        if (connection == null) {
-            System.out.println("NULL NULL");
-        }
-        return connection;
-    }
-
-    public void closeConnection() {
-        try {
-            connection.close();
-        } catch(Exception e) {
-            System.out.println(e.getStackTrace());
-        }
+    public QuestDBImplement(Connection connection) {
+        this.tableName = "quests";
+        this.connection = connection;
+        this.generator = new QueriesGenerator();
     }
 
     public String getLastId() {
@@ -53,73 +29,82 @@ public class QuestDBImplement implements QuestBD {
             while (rs.next()) {
                 lastId = rs.getString("id");
             }
-        }
-
-        catch (Exception e) {
+        } catch (Exception e) {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
             System.exit(0);
         }
         return lastId;
     }
 
-    public void insertQuestData(String description, int price){
-        String sql = "INSERT INTO quests(description, price) VALUES(?, ?);";
+//    public void insertQuestData(String description, int price){
+//        String sql = "INSERT INTO quests(description, price) VALUES(?, ?);";
+//
+//        try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
+//            pstmt.setString(1, description);
+//            pstmt.setInt(2, price);
+//            pstmt.executeUpdate();
+//        } catch (SQLException e) {
+//            System.out.println(e.getMessage());
+//        }
+//    }
 
-        try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
-            pstmt.setString(1, description);
-            pstmt.setInt(2, price);
-            pstmt.executeUpdate();
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
-    }
-
-    public void getOneQuestbyID(int id){
-        String sql = "SELECT * FROM quests WHERE id = ?;";
-
-        try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
-            pstmt.setInt(1, id);
-            ResultSet rs = pstmt.executeQuery();
-
-            while (rs.next()) {
-                System.out.println("ID: " + rs.getInt("id") + "\t" + "NAME: " +
-                        rs.getString("name") + "\t" + "DISCRIPTION: " + rs.getString("description") +
-                        "\t" + "PRICE: " + rs.getInt("price"));
-            }
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
-    }
-
-    public ArrayList<String[]> getAllQuests(){
-
-        String sql = "SELECT * FROM quests;";
-        ArrayList<String[]> allQuests = new ArrayList<>();
-
-        try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
-//            pstmt.setInt(1, admin_id);
-            ResultSet rs = pstmt.executeQuery();
-
-            while (rs.next()) {
-                String[] questInformation = new String[4];
-                questInformation[0]= rs.getString("id");
-                questInformation[1]= rs.getString("name");
-                questInformation[2]= rs.getString("description");
-                questInformation[3]= rs.getString("price");
-
-//                System.out.println("QUEST ID: " + rs.getString("id") + "\t" + "NAME: " +
-//                        rs.getString("name") + "\t" + "DESCRIPTION: " + rs.getString("description") +
+//    public void getOneQuestbyID(int id){
+//        String sql = "SELECT * FROM quests WHERE id = ?;";
+//
+//        try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
+//            pstmt.setInt(1, id);
+//            ResultSet rs = pstmt.executeQuery();
+//
+//            while (rs.next()) {
+//                System.out.println("ID: " + rs.getInt("id") + "\t" + "NAME: " +
+//                        rs.getString("name") + "\t" + "DISCRIPTION: " + rs.getString("description") +
 //                        "\t" + "PRICE: " + rs.getInt("price"));
-                allQuests.add(questInformation);
+//            }
+//        } catch (SQLException e) {
+//            System.out.println(e.getMessage());
+//        }
+//    }
+//
+//    public QuestModel getQuest(ResultSet resultSet) {
+//        QuestModel quest = null;
+//
+//        try {
+//            while (resultSet.next()) {
+//                int id = resultSet.getInt("id");
+//                String name = resultSet.getString("name");
+//                String description = resultSet.getString("description");
+//                int price = resultSet.getInt("price");
+//
+//                quest = new QuestModel(String.valueOf(id), name, description, price)
+//            }
+//        } catch (SQLException e) {
+//            System.err.println(e.getClass().getName() + ": " + e.getMessage());
+//            System.exit(0);
+//        } return quest;
+//    }
+
+    public QuestModel getAllQuests() {
+
+        PreparedStatement statement = generator.getAllQuests(connection, tableName);
+        QuestModel quest = null;
+
+        try {
+            ResultSet resultSet = statement.executeQuery();
+
+            while (resultSet.next()) {
+                int id = resultSet.getInt("id");
+                String name = resultSet.getString("name");
+                String description = resultSet.getString("description");
+                int price = resultSet.getInt("price");
+                quest = new QuestModel(String.valueOf(id), name, description, price);
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
-
-        return allQuests;
+        return quest;
     }
 
-    public void saveNewQuestToDatabase(QuestModel quest){
+    public void saveNewQuestToDatabase(QuestModel quest) {
         String id = quest.getId();
         String name = quest.getName();
         String description = quest.getDescription();
@@ -141,7 +126,7 @@ public class QuestDBImplement implements QuestBD {
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
-
+    }
 //        try (PreparedStatement pstmt2 = connection.prepareStatement(sqlQuerry2)) {
 //            pstmt2.setString(1, id);
 //            pstmt2.setString(2, name);
@@ -152,5 +137,5 @@ public class QuestDBImplement implements QuestBD {
 //        catch (SQLException e) {
 //            System.out.println(e.getMessage());
 //        }
-    }
+
 }

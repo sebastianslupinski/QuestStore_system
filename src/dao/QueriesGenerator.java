@@ -2,6 +2,8 @@ package dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class QueriesGenerator {
 
@@ -22,4 +24,18 @@ public class QueriesGenerator {
         }
         return statement;
     }
+
+    public PreparedStatement getAllQuests(Connection newConnection, String tableName) {
+
+        PreparedStatement statement = null;
+        try {
+            statement = newConnection.prepareStatement("SELECT * FROM " + tableName + ";");
+        } catch (Exception e) {
+            System.err.println(e.getClass().getName() + ": " + e.getMessage());
+            System.exit(0);
+        }
+        return statement;
+    }
+
+
 }
