@@ -20,6 +20,10 @@
 *.zip
 *.tar.gz
 *.rar
+.idea/
+*.iml
+*.iws
+
 
 # IntelliJ setup files #
 queststore-mswia.iml
