@@ -2,10 +2,12 @@ package controller;
 
 import dao.*;
 import model.MentorModel;
+import model.StudentModel;
 import view.AdminView;
 import view.MentorView;
 
 import java.sql.Connection;
+import java.util.Set;
 
 public class MentorController {
     private Connection connection;
@@ -34,7 +36,7 @@ public class MentorController {
         this.mentorView = new MentorView();
     }
 
-//  public void run(String id) {
+    //  public void run(String id) {
 //      boolean mentorControllerRunning = true;
     public void run(String id) {
         mentorView.displayMenu(HEADER, OPTIONS);
@@ -43,36 +45,31 @@ public class MentorController {
         while (!(option == 0)) {
             InputController.getNumber("Choose option: ");
             switch (option) {
-            case 1:
-                break;
-            case 2:
-                break;
-            case 0:
-                connectionWithDB.closeConnection(connection);
-                MentorView.displayText("Good bye");
-                break;
+                case 1:
+                    break;
+                case 2:
+                    break;
+                case 0:
+                    connectionWithDB.closeConnection(connection);
+                    MentorView.displayText("Good bye");
+                    break;
             }
         }
     }
-}
 
-   public createStudent(){
-     boolean studentNotAdded = true;
-     while(studentNotAdded){
-         String groupName = MentorView.getInput("Please enter name of group to add student")
-         for (Group group : guidedGroups){
-             if (group.name == groupName){
-                 group = group.name;
-                 studentNotAdded = false;
-             }
-             else{
-                 MentorView.displayText("There is no group like this.");
-             }
-         }
-     StudentModel newStudent = new StudentModel(login, password, name, lastName, group);
-     group.addStudent(newStudent);
-     MentorView.displayText("Student added succesfully.");
- }
+
+    public StudentModel createStudent() {
+        String id = loginDB.getLastId();
+        String login = InputController.getString("Please enter mentor login: ");
+        String password = InputController.getString("Please enter mentor password: ");
+        String name = InputController.getString("Please enter mentor name: ");
+        String lastName = InputController.getString("Please enter mentor lastName: ");
+//        String group = setGroupForMentor(getExistingGroups(admin));
+        StudentModel newStudent = new StudentModel(id, login, password, name, lastName);
+        MentorView.displayText("Mentor created successfully");
+        return newStudent;
+    }
+}
 
 //   public void changeGroup() {
 //   }
@@ -103,5 +100,3 @@ public class MentorController {
 
 //   public void displayInfo() {
 //   }
-
-// }
