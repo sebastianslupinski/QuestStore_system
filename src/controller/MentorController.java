@@ -1,39 +1,29 @@
 package controller;
 
-import dao.LoginDB;
-import dao.LoginDBImplement;
-import dao.OpenCloseConnectionWithDB;
-import dao.StudentDB;
-import dao.StudentDBImplement;
-import dao.MentorDB;
+import dao.*;
 import model.MentorModel;
 import view.AdminView;
 import view.MentorView;
-import dao.MentorDBImplement;
 
 import java.sql.Connection;
 
 public class MentorController {
-    private LoginDB loginDB = new LoginDBImplement();
-    private MentorDBImplement mentorDB = new MentorDBImplement();
+    private Connection connection;
+    private LoginDB loginDB;
+    private OpenCloseConnectionWithDB connectionWithDB;
+    private MentorDB mentorDB;
     private QuestController quest = new QuestController();
-    private MentorView view = new MentorView();
+    private MentorView mentorView;
     private String HEADER = "======= HELLO-MENTOR =======\n";
     private String HEADER2 = "Choose what atribute you want to edit";
     private final String[] OPTIONS = {"Create Student",
             "Edit Student", "Create new quest", "Create new artifact", "Edit information about quest",
             "Edit information about artifact", "Exit"};
-//    private final String[] OPTIONS2 = {"Login", "Password", "Name",
-//            "Surname", "Email"};
+    private final String[] OPTIONS2 = {"Login", "Password", "Name",
+            "Surname", "Email"};
 
-    private Connection connection;
-//    private LoginDB loginDB;
-    private OpenCloseConnectionWithDB connectionWithDB;
-//    private MentorDB mentorDB;
     // private WalletModel wallet;
 //    private MentorView view;
-//    private final String HEADER = "======= HELLO-MENTOR =======\n";
-//    private final String[] OPTIONS = {"Display my profile", "Display students", "Display quests"};
 
     public MentorController(Connection newConnection) {
         this.loginDB = new LoginDBImplement(newConnection);
@@ -41,18 +31,17 @@ public class MentorController {
         this.connection = newConnection;
         this.mentorDB = new MentorDBImplement();
         // this.wallet = new WalletModel();
-        this.view = new MentorView();
+        this.mentorView = new MentorView();
     }
 
 //  public void run(String id) {
 //      boolean mentorControllerRunning = true;
     public void run(String id) {
-        view.displayMentorMenu();
+        mentorView.displayMenu(HEADER, OPTIONS);
         Integer option = 1;
 
         while (!(option == 0)) {
             InputController.getNumber("Choose option: ");
-
             switch (option) {
             case 1:
                 break;
