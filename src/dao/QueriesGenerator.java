@@ -27,10 +27,10 @@ public class QueriesGenerator {
         PreparedStatement statement = null;
 
         try {
-            statement = newConnection.prepareStatement("SELECT signature, groups.group_name_id" +
+            statement = newConnection.prepareStatement("SELECT signature, groups.group_name_id " +
                     "FROM group_names " +
                     "JOIN groups " +
-                    "ON groups.group_name_id = group_names.group_name_id" +
+                    "ON groups.group_name_id = group_names.group_name_id " +
                     "WHERE mentor_id = ?;");
             statement.setInt(1, mentor_id);
         } catch (Exception e) {

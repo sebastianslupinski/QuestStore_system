@@ -24,7 +24,7 @@ public class MentorController {
             "Edit Student"};
     private final String[] OPTIONS2 = {"Login", "Password", "Name",
             "Surname", "Email"};
-    private ArrayList<StudentModel> existingStudents = new ArrayList<>();
+    private ArrayList<StudentModel> existingStudents;
 
     // private WalletModel wallet;
 //    private MentorView view;
@@ -44,7 +44,7 @@ public class MentorController {
     public void run(String id) {
         GroupModel mentorGroup = studentDB.getMentorGroupByMentorID(connection, id);
         Integer option = 1;
-
+        mentorView.displayUsers(mentorGroup.getStudents());
         while (!(option == 0)) {
             mentorView.displayMenu(HEADER, OPTIONS);
             option = InputController.getNumber("Choose option: ");

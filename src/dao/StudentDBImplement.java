@@ -109,7 +109,6 @@ public class StudentDBImplement implements StudentDB {
         ResultSet resultSet2;
 
         PreparedStatement statement1 = generator.getMentorGroup(connection, Integer.valueOf(mentorId));
-        PreparedStatement statement2 = generator.getStudentsIdsFromExactGroup(connection, Integer.valueOf(mentorId));
 
         try {
             resultSet1 = statement1.executeQuery();
@@ -121,6 +120,8 @@ public class StudentDBImplement implements StudentDB {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
             System.exit(0);
         }
+
+        PreparedStatement statement2 = generator.getStudentsIdsFromExactGroup(connection, groupId);
         try {
             resultSet2 = statement2.executeQuery();
             while (resultSet2.next()){
