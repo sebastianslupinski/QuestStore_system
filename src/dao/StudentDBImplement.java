@@ -99,10 +99,13 @@ public class StudentDBImplement implements StudentDB {
         return existingStudents;
     }
 
-    public ArrayList<String> getIdsOfStudentsAssignedToGroupsAlready(Connection connection){
-        ArrayList<String> idsOfStudentsInGroups = new ArrayList<>();
+    public ArrayList<String> getMentorGroupByMentorID(Connection connection, String mentorId){
+        ArrayList<StudentModel> studentsInGroup = new ArrayList<>();
+        ArrayList<Integer> idsOfStudents = new ArrayList<>();
 
-        String sql = "SELECT student_id FROM groups";
+
+        PreparedStatement statement1 = generator.getMentorGroup(connection, Integer.valueOf(mentorId));
+        PreparedStatement statement2 = generator.getStudentsIdsFromExactGroup(connection, Integer.valueOf(mentorId));
 
         try {
             Statement statement = connection.createStatement();

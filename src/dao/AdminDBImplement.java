@@ -224,49 +224,26 @@ public class AdminDBImplement implements AdminDB {
             System.out.println(e.getMessage());
         }
     }
+
+    public ArrayList<String> getIdsOfMentorsHavingGroupsAlready(Connection connection){
+        ArrayList<String> idsOfMentorsInGroups = new ArrayList<>();
+
+        String sql = "SELECT mentor_id FROM group_names";
+
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(sql);
+
+            while (rs.next()) {
+                String id = rs.getString("mentor_id");
+
+                idsOfMentorsInGroups.add(String.valueOf(id));
+            }
+        } catch (Exception e) {
+            System.err.println(e.getClass().getName() + ": " + e.getMessage());
+            System.exit(0);
+        }
+        return idsOfMentorsInGroups;
+    }
 }
 
-
-//    public void saveNewUserToDatabase(UserModel user){
-//        String Id = user.getId();
-//        String login = user.getLogin();
-//        String password = user.getPassword();
-//        String name = user.getName();
-//        String lastName = user.getLastName();
-//        String email = user.getEmail();
-//        String role = null;
-//        String sqlQuerry2 = null;
-//
-//        if (user instanceof MentorModel) {
-//            role = "2";
-//            sqlQuerry2 = "INSERT INTO mentors(mentor_id, name, lastname, email) VALUES(?, ?, ?, ?);";
-//        }
-//        else if (user instanceof StudentModel) {
-//            role = "3";
-//            sqlQuerry2 = "INSERT INTO students(student_id, name, lastname, email) VALUES(?, ?, ?, ?);";
-//        }
-//
-//        String sqlQuerry1 = "INSERT INTO logins(user_id, login, password, role) VALUES(?, ?, ?, ?);";
-//
-//        try (PreparedStatement pstmt1 = connection.prepareStatement(sqlQuerry1)) {
-//            pstmt1.setString(1, Id);
-//            pstmt1.setString(2, login);
-//            pstmt1.setString(3, password);
-//            pstmt1.setString(4, role);
-//            pstmt1.executeUpdate();
-//        } catch (SQLException e) {
-//            System.out.println(e.getMessage());
-//        }
-//
-//        try (PreparedStatement pstmt2 = connection.prepareStatement(sqlQuerry2)) {
-//            pstmt2.setString(1, Id);
-//            pstmt2.setString(2, name);
-//            pstmt2.setString(3, lastName);
-//            pstmt2.setString(4, email);
-//            pstmt2.executeUpdate();
-//        }
-//        catch (SQLException e) {
-//            System.out.println(e.getMessage());
-//        }
-//    }
-//}

@@ -54,7 +54,7 @@ public class AdminController {
                     this.editMentor(admin, adminDB);
                     break;
                 case 4:
-                    this.assignMentorToGroup(admin,loginDB, adminDB);
+                    this.assignMentorToGroup(admin,loginDB, adminDB, connection);
                     break;
                 case 0:
                     connectionWithDB.closeConnection(connection);
@@ -195,12 +195,24 @@ public class AdminController {
        }
      }
 
- public void assignMentorToGroup(AdminModel admin, LoginDB database, AdminDB adminDatabase){
-   MentorModel mentorToAssign = getMentor(admin);
-   String mentorId = mentorToAssign.getId();
-   String newGroup = this.setGroupForMentor(database.getExistingGroups());
-   adminDatabase.createNewGroupAndAssignMentorToIt(newGroup, mentorId);
-   view.displayText("Mentor assigned succesfully");
+ public void assignMentorToGroup(AdminModel admin, LoginDB database,
+                                 AdminDB adminDatabase, Connection connection){
+        boolean mentorNotChosen = true;
+        String mentorId = null;
+        ArrayList<String> mentorsIdsWithGroups = adminDatabase.getIdsOfMentorsHavingGroupsAlready(connection);
+        while (mentorNotChosen) {
+            MentorModel mentorToAssign = getMentor(admin);
+            mentorId = mentorToAssign.getId();
+            if(mentorsIdsWithGroups.contains(mentorId)){
+                view.displayText("This Mentor have group already, " +
+                        "please choose another one or create new one");
+            }
+            else
+                {mentorNotChosen = false;}
+        }
+           String newGroup = this.setGroupForMentor(database.getExistingGroups());
+           adminDatabase.createNewGroupAndAssignMentorToIt(newGroup, mentorId);
+           view.displayText("Mentor assigned succesfully");
  }
 
 //    public static ArrayList<String> getExistingGroups(AdminModel admin) {
