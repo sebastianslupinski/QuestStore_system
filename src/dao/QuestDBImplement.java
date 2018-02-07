@@ -116,14 +116,27 @@ public class QuestDBImplement implements QuestBD {
     }
 
     public void updateEditedQuestInDatabase(QuestModel quest) {
-        PreparedStatement statement = generator.updateItem(connection,tableName, quest.getId(), quest.getName(),
+        PreparedStatement statement = generator.updateItem(connection, tableName, quest.getId(), quest.getName(),
                 quest.getDescription(), quest.getPrice());
 
-        try{
+        try {
             statement.executeUpdate();
-        } catch (Exception e){
+        } catch (Exception e) {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
             System.exit(0);
         }
     }
+
+    public void deleteQuestByID (QuestModel quest){
+        PreparedStatement statement = generator.deleteItem(connection, tableName, quest.getId());
+
+        try {
+            statement.executeUpdate();
+        } catch (Exception e) {
+            System.err.println(e.getClass().getName() + ": " + e.getMessage());
+            System.exit(0);
+            }
+        }
+
+
 }

@@ -28,6 +28,11 @@ public class QuestModel {
         quests.add(this);
     }
 
+    public void updateQuestsCollection (QuestModel questToDelete){
+        quests.remove(questToDelete);
+//        return quests;
+    }
+
     public String getName(){ return this.name; }
 
     public String getDescription(){ return this.description;}
@@ -58,5 +63,6 @@ public class QuestModel {
     }
 
 
-
+//    public void updateQuestsCollection() {
+//    }
 }

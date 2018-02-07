@@ -16,6 +16,7 @@ public class QuestController {
     private final String[] OPTIONS = {"Create new Quest",
                                      "Display all quest",
                                      "Edit quest",
+                                     "Delete quest",
                                      "Go back"};
 
 
@@ -32,7 +33,7 @@ public class QuestController {
 
         int option = 1;
 
-        while(!(option == 4)) {
+        while(!(option == 5)) {
             viewQuest.displayMenu(HEADER, OPTIONS);
             option = InputController.getNumber("Choose option: ");
             switch (option){
@@ -54,7 +55,18 @@ public class QuestController {
                     viewQuest.displayQuests(quests.getQuests());
                     break;
                 case 4:
+//                    System.out.println("//////delete quest///////5");
+                    QuestModel questToDelete = this.getQuest(quests);
+//                    System.out.println(questToDelete);
+                    questDB.deleteQuestByID(questToDelete);
+                    quests.updateQuestsCollection(questToDelete);
+//                    System.out.println("AKUKUKUKUK");
+                    viewQuest.displayQuests(quests.getQuests());
+
                     break;
+                case 5:
+                    break;
+
             }
         }
 
@@ -87,8 +99,7 @@ public class QuestController {
                 QuestView.displayText("Wrong number");
             }
         }
-//        System.out.println("Akuku   "+quest.getQuests().get(Integer.valueOf(questIndex)));
-        return quest.getQuests().get(Integer.valueOf(questIndex));
+        return QuestModel.getQuests().get(Integer.valueOf(questIndex));
     }
 
 
@@ -122,7 +133,6 @@ public class QuestController {
                     break;
             }
         }
-//        return questToEdit;
     }
 
 

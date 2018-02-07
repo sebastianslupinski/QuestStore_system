@@ -78,4 +78,20 @@ public class QueriesGenerator {
         return statement;
     }
 
+
+    public PreparedStatement deleteItem(Connection newConnection, String tableName, int id) {
+
+        PreparedStatement statement = null;
+
+        try {
+            statement = newConnection.prepareStatement("DELETE FROM "
+                                                            + tableName
+                                                            + " WHERE id = ?;");
+            statement.setInt(1, id);
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return statement;
+    }
+
 }
