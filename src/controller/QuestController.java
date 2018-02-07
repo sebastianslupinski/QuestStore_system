@@ -74,13 +74,13 @@ public class QuestController {
 
     public QuestModel createQuest() {
         Integer lastID = questDB.getLastId();
-        String id = String.valueOf(lastID + 1);
+        String quest_id = String.valueOf(lastID + 1);
 
-        System.out.println("last id" + id);
+        System.out.println("last id" + quest_id);
         String name = InputController.getString("Please enter name of QuestModel: ");
         String description = InputController.getString("Please enter description of QuestModel: ");
         int price = InputController.getNumber("Please enter price of QuestModel: ");
-        QuestModel newQuestModel = new QuestModel(id, name, description, price);
+        QuestModel newQuestModel = new QuestModel(quest_id, name, description, price);
         QuestView.displayText("QuestModel created successfully, press enter to continue");
 
         return newQuestModel;

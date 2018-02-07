@@ -18,7 +18,7 @@ public class QuestDBImplement implements QuestBD {
     }
 
     public Integer getLastId() {
-        String sql = "SELECT id FROM quests ORDER BY id ASC;";
+        String sql = "SELECT quest_id FROM quests ORDER BY quest_id ASC;";
         Integer lastId = null;
 
         try {
@@ -26,7 +26,7 @@ public class QuestDBImplement implements QuestBD {
             ResultSet rs = statement.executeQuery(sql);
 
             while (rs.next()) {
-                lastId = rs.getInt("id");
+                lastId = rs.getInt("quest_id");
             }
         } catch (Exception e) {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
@@ -91,7 +91,7 @@ public class QuestDBImplement implements QuestBD {
             ResultSet resultSet = statement.executeQuery();
 
             while (resultSet.next()) {
-                int id = resultSet.getInt("id");
+                int id = resultSet.getInt("quest_id");
                 String name = resultSet.getString("name");
                 String description = resultSet.getString("description");
                 int price = resultSet.getInt("price");

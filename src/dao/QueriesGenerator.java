@@ -38,16 +38,16 @@ public class QueriesGenerator {
     }
 
     public PreparedStatement insertItem(Connection newConnection, String tableName,
-                                        int id, String name, String description, int price) {
+                                        int quest_id, String name, String description, int price) {
 
         PreparedStatement statement = null;
 
         try {
             statement = newConnection.prepareStatement("INSERT INTO "
                 + tableName
-                + " (id, name, description, price) VALUES(?, ?, ?, ?);");
+                + " (quest_id, name, description, price) VALUES(?, ?, ?, ?);");
 
-            statement.setInt(1, id);
+            statement.setInt(1, quest_id);
             statement.setString(2, name);
             statement.setString(3, description);
             statement.setInt(4, price);
@@ -59,18 +59,18 @@ public class QueriesGenerator {
 
 
 
-    public PreparedStatement updateItem(Connection newConnection, String tableName, int id,
+    public PreparedStatement updateItem(Connection newConnection, String tableName, int quest_id,
                                         String name, String description, int price) {
         PreparedStatement statement = null;
 
         try {
             statement = newConnection.prepareStatement("UPDATE "
                 + tableName
-                + " SET name = ?, description = ?, price = ? WHERE id = ?;") ;
+                + " SET name = ?, description = ?, price = ? WHERE quest_id = ?;") ;
             statement.setString(1, name);
             statement.setString(2, description);
             statement.setInt(3, price);
-            statement.setInt(4, id);
+            statement.setInt(4, quest_id);
 
         } catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -79,15 +79,15 @@ public class QueriesGenerator {
     }
 
 
-    public PreparedStatement deleteItem(Connection newConnection, String tableName, int id) {
+    public PreparedStatement deleteItem(Connection newConnection, String tableName, int quest_id) {
 
         PreparedStatement statement = null;
 
         try {
             statement = newConnection.prepareStatement("DELETE FROM "
                                                             + tableName
-                                                            + " WHERE id = ?;");
-            statement.setInt(1, id);
+                                                            + " WHERE quest_id = ?;");
+            statement.setInt(1, quest_id);
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
