@@ -17,12 +17,12 @@ public class WalletModel {
         this.artefacts = artefacts;
     }
 
-    public WalletModel(int lastStudentId) {
-        this.studentId = ++lastStudentId;
-        this.balance = 0;
-        this.totalEarned = 0;
-        this.artefacts = new ArrayList<>();
-    }
+//    public WalletModel(int lastStudentId) {
+//        this.studentId = ++lastStudentId;
+//        this.balance = 0;
+//        this.totalEarned = 0;
+//        this.artefacts = new ArrayList<>();
+//    }
 
     public int getStudentId() {
         return studentId;
@@ -46,6 +46,10 @@ public class WalletModel {
 
     public void setTotalEarned(int totalEarned) {
         this.totalEarned = totalEarned;
+    }
+
+    public ArrayList<ArtefactModel> getArtefacts() {
+        return artefacts;
     }
 
     @Override

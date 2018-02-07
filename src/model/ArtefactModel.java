@@ -6,20 +6,23 @@ public class ArtefactModel {
     private String description;
     private int price;
     private int id;
-    //private static int lastID = 0; // powinno wczytywac z pliku!
+    private int status;
+    // private static int lastID = 0; // powinno wczytywac z pliku!
 
     public ArtefactModel(String name, String description, int price) {
         this.name = name;
         this.description = description;
         this.price = price;
         //this.id = lastID++;
+        this.status = 1;
     }
 
-    public ArtefactModel(String name, String description, int price, int id) {
+    public ArtefactModel(String name, String description, int price, int id, int status) {
         this.name = name;
         this.description = description;
         this.price = price;
         this.id = id;
+        this.status = status;
     }
 
     public String getName() {
@@ -48,6 +51,6 @@ public class ArtefactModel {
 
     @Override
     public String toString() {
-        return String.format("User Artefacts: %s,\ndescription: %s,\nprice: %d", name, description, price);
+        return String.format("Artefact name: %s.\nDescription: %s.\nPrice: %d.", name, description, price);
     }
 }

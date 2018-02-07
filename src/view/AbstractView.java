@@ -28,17 +28,12 @@ public abstract class AbstractView<T> {
         }
     }
 
-  public void displayQuests(ArrayList<T> quests){
-    int index = 0;
-    for (T quest : quests){
-//        AbstractView.displayText(index + "--->" + Arrays.toString((Object[]) quest));
-        AbstractView.displayText(index + "--->" + quest.toString());
-
-
-        index++;
+    public void displayListOfObject(ArrayList<T> objects){
+        int index = 0;
+        for (T object : objects) {
+            AbstractView.displayText(index + "--->" + object.toString());
+            index++;
+        }
     }
-  }
-
-
 }
 
