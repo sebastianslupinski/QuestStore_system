@@ -48,7 +48,7 @@ public class MentorController {
     public void run(String id) {
         Integer option = 1;
 
-        while (!(option == 0)) {
+        while (!(option == 5)) {
             view.displayMenu(HEADER, OPTIONS);
             option = InputController.getNumber("Choose option: ");
             switch (option) {
@@ -65,7 +65,7 @@ public class MentorController {
             case 4:
                 System.out.println("/////Artifact Option/////");
                 break;
-                case 0:
+            case 5:
                 connectionWithDB.closeConnection(connection);
                 MentorView.displayText("Good bye");
                 break;

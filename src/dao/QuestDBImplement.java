@@ -114,4 +114,16 @@ public class QuestDBImplement implements QuestBD {
             System.exit(0);
         }
     }
+
+    public void updateEditedQuestInDatabase(QuestModel quest) {
+        PreparedStatement statement = generator.updateItem(connection,tableName, quest.getId(), quest.getName(),
+                quest.getDescription(), quest.getPrice());
+
+        try{
+            statement.executeUpdate();
+        } catch (Exception e){
+            System.err.println(e.getClass().getName() + ": " + e.getMessage());
+            System.exit(0);
+        }
+    }
 }

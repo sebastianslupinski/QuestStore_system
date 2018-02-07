@@ -9,6 +9,7 @@ public interface QuestBD {
 
     Integer getLastId();
     void saveNewQuestToDatabase(QuestModel quest);
+    void updateEditedQuestInDatabase(QuestModel quest);
     QuestModel getAllQuests();
 
 

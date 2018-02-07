@@ -8,6 +8,10 @@ public abstract class AbstractView<T> {
     public static void displayText(String text) {
     System.out.println(text);
   }
+    public static void displayInteger(int text) {
+        System.out.println(text);
+    }
+
 
     public void displayMenu(String header, String[] options) {
         int optionNumber = 1;
@@ -31,10 +35,7 @@ public abstract class AbstractView<T> {
   public void displayQuests(ArrayList<T> quests){
     int index = 0;
     for (T quest : quests){
-//        AbstractView.displayText(index + "--->" + Arrays.toString((Object[]) quest));
         AbstractView.displayText(index + "--->" + quest.toString());
-
-
         index++;
     }
   }

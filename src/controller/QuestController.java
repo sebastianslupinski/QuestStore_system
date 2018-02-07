@@ -15,7 +15,8 @@ public class QuestController {
     private final String HEADER = "======= QUEST OPTION =======\n";
     private final String[] OPTIONS = {"Create new Quest",
                                      "Display all quest",
-                                     "Edit quest"};
+                                     "Edit quest",
+                                     "Go back"};
 
 
     public QuestController(Connection connection) {
@@ -44,8 +45,15 @@ public class QuestController {
                     viewQuest.displayQuests(quests.getQuests());
                     break;
                 case 3:
-                    System.out.println("edit quest");
-
+//                    viewQuest.displayQuests(quests.getQuests());
+//                    this.editQuest(quests);
+//                    questDB.updateEditedQuestInDatabase(quests);
+                    QuestModel questToEdit = this.getQuest(quests);
+                    this.editQuest(questToEdit);
+                    questDB.updateEditedQuestInDatabase(questToEdit);
+                    viewQuest.displayQuests(quests.getQuests());
+                    break;
+                case 4:
                     break;
             }
         }
@@ -66,7 +74,56 @@ public class QuestController {
         return newQuestModel;
     }
 
+    public QuestModel getQuest(QuestModel quest){
+        boolean questNotChosen = true;
+        Integer questIndex = 0;
+        while(questNotChosen){
+            viewQuest.displayQuests(quest.getQuests());
+            questIndex = InputController.getNumber("Please enter a quest number");
+            if (questIndex <quest.getQuests().size()){
+                questNotChosen = false;
+            }
+            else {
+                QuestView.displayText("Wrong number");
+            }
+        }
+//        System.out.println("Akuku   "+quest.getQuests().get(Integer.valueOf(questIndex)));
+        return quest.getQuests().get(Integer.valueOf(questIndex));
+    }
 
+
+    public void editQuest(QuestModel quest) {
+        String[] options = {"Name", "Description", "Price", "Go back"};
+        String header = "Edit:";
+        int option = 1;
+//        QuestModel questToEdit = getQuest(quest);
+
+
+        while (!(option == 4)) {
+            viewQuest.displayMenu(header, options);
+            option = InputController.getNumber("Choose option: ");
+            switch (option) {
+                case 1:
+                    QuestView.displayText(quest.getName());
+                    String newName = InputController.getString("Type new name");
+                    quest.setName(newName);
+                    break;
+                case 2:
+                    QuestView.displayText(quest.getDescription());
+                    String newDescription = InputController.getString("Type new description");
+                    quest.setDescription(newDescription);
+                    break;
+                case 3:
+                    QuestView.displayInteger(quest.getPrice());
+                    String newPrice = InputController.getString("Type new price");
+                    quest.setPrice(Integer.parseInt(newPrice));
+                    break;
+                case 4:
+                    break;
+            }
+        }
+//        return questToEdit;
+    }
 
 
 }

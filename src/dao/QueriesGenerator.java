@@ -57,4 +57,25 @@ public class QueriesGenerator {
         return statement;
     }
 
+
+
+    public PreparedStatement updateItem(Connection newConnection, String tableName, int id,
+                                        String name, String description, int price) {
+        PreparedStatement statement = null;
+
+        try {
+            statement = newConnection.prepareStatement("UPDATE "
+                + tableName
+                + " SET name = ?, description = ?, price = ? WHERE id = ?;") ;
+            statement.setString(1, name);
+            statement.setString(2, description);
+            statement.setInt(3, price);
+            statement.setInt(4, id);
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return statement;
+    }
+
 }

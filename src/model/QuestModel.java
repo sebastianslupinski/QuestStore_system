@@ -3,6 +3,8 @@ package model;
 import java.util.ArrayList;
 import view.QuestView;
 
+import static java.lang.String.valueOf;
+
 
 public class QuestModel {
 
@@ -30,7 +32,7 @@ public class QuestModel {
 
     public String getDescription(){ return this.description;}
 
-    public int getPrice(){ return this.price; }
+    public int getPrice(){ return Integer.valueOf(this.price); }
 
     public static ArrayList<QuestModel> getQuests() {
         return quests;
@@ -38,7 +40,7 @@ public class QuestModel {
 
     public void setName(String newName) { this.name = newName; }
 
-    public void setDescription(String newDescription) { this.description = description;}
+    public void setDescription(String newDescription) { this.description = newDescription;}
 
     public void setPrice(int newPrice) { this.price = newPrice;}
 
@@ -50,19 +52,6 @@ public class QuestModel {
         return String.format("Id.: %s\nName: %s\nDescription: %s\nPrice: %s\n",
                 id, name, description, price);
     }
-
-//    public ArrayList<QuestModel> getQuests(){ return quests; }
-
-
-//
-//    public void changeMark(){
-//        if (this.mark){
-//            this.mark = false;
-//        }
-//        else {
-//            this.mark = true;
-//        }
-//    }
 
     public int getId() {
         return Integer.valueOf(this.id);
