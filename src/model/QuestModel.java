@@ -3,12 +3,7 @@ package model;
 import java.util.ArrayList;
 import view.QuestView;
 
-import static java.lang.String.valueOf;
-
-
 public class QuestModel {
-
-
 
     private static ArrayList<QuestModel> quests = new ArrayList();
     public QuestView view = new QuestView();
@@ -49,10 +44,6 @@ public class QuestModel {
 
     public void setPrice(int newPrice) { this.price = newPrice;}
 
-
-    public void addQuest(QuestModel quest) {quests.add(quest);}
-
-
     public String toString(){
         return String.format("Id.: %s\nName: %s\nDescription: %s\nPrice: %s\n",
                 quest_id, name, description, price);
@@ -62,7 +53,4 @@ public class QuestModel {
         return Integer.valueOf(this.quest_id);
     }
 
-
-//    public void updateQuestsCollection() {
-//    }
 }

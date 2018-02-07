@@ -35,53 +35,6 @@ public class QuestDBImplement implements QuestBD {
         return lastId;
     }
 
-//    public void insertQuestData(String description, int price){
-//        String sql = "INSERT INTO quests(description, price) VALUES(?, ?);";
-//
-//        try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
-//            pstmt.setString(1, description);
-//            pstmt.setInt(2, price);
-//            pstmt.executeUpdate();
-//        } catch (SQLException e) {
-//            System.out.println(e.getMessage());
-//        }
-//    }
-
-//    public void getOneQuestbyID(int id){
-//        String sql = "SELECT * FROM quests WHERE id = ?;";
-//
-//        try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
-//            pstmt.setInt(1, id);
-//            ResultSet rs = pstmt.executeQuery();
-//
-//            while (rs.next()) {
-//                System.out.println("ID: " + rs.getInt("id") + "\t" + "NAME: " +
-//                        rs.getString("name") + "\t" + "DISCRIPTION: " + rs.getString("description") +
-//                        "\t" + "PRICE: " + rs.getInt("price"));
-//            }
-//        } catch (SQLException e) {
-//            System.out.println(e.getMessage());
-//        }
-//    }
-//
-//    public QuestModel getQuest(ResultSet resultSet) {
-//        QuestModel quest = null;
-//
-//        try {
-//            while (resultSet.next()) {
-//                int id = resultSet.getInt("id");
-//                String name = resultSet.getString("name");
-//                String description = resultSet.getString("description");
-//                int price = resultSet.getInt("price");
-//
-//                quest = new QuestModel(String.valueOf(id), name, description, price)
-//            }
-//        } catch (SQLException e) {
-//            System.err.println(e.getClass().getName() + ": " + e.getMessage());
-//            System.exit(0);
-//        } return quest;
-//    }
-
     public QuestModel getAllQuests() {
 
         PreparedStatement statement = generator.getAllQuests(connection, tableName);

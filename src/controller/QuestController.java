@@ -5,7 +5,6 @@ import view.QuestView;
 import dao.*;
 
 import java.sql.Connection;
-import java.util.ArrayList;
 
 
 public class QuestController {
@@ -46,23 +45,16 @@ public class QuestController {
                     viewQuest.displayQuests(quests.getQuests());
                     break;
                 case 3:
-//                    viewQuest.displayQuests(quests.getQuests());
-//                    this.editQuest(quests);
-//                    questDB.updateEditedQuestInDatabase(quests);
                     QuestModel questToEdit = this.getQuest(quests);
                     this.editQuest(questToEdit);
                     questDB.updateEditedQuestInDatabase(questToEdit);
                     viewQuest.displayQuests(quests.getQuests());
                     break;
                 case 4:
-//                    System.out.println("//////delete quest///////5");
                     QuestModel questToDelete = this.getQuest(quests);
-//                    System.out.println(questToDelete);
                     questDB.deleteQuestByID(questToDelete);
                     quests.updateQuestsCollection(questToDelete);
-//                    System.out.println("AKUKUKUKUK");
                     viewQuest.displayQuests(quests.getQuests());
-
                     break;
                 case 5:
                     break;
@@ -107,8 +99,6 @@ public class QuestController {
         String[] options = {"Name", "Description", "Price", "Go back"};
         String header = "Edit:";
         int option = 1;
-//        QuestModel questToEdit = getQuest(quest);
-
 
         while (!(option == 4)) {
             viewQuest.displayMenu(header, options);
