@@ -1,5 +1,6 @@
 package dao;
 
+import model.GroupModel;
 import model.StudentModel;
 
 import java.sql.Connection;
@@ -12,4 +13,5 @@ public interface StudentDB {
     void exportStudent(Connection connection, StudentModel student);
     StudentModel getStudent(ResultSet resultSet);
     public ArrayList<StudentModel> getAllStudents(Connection connection);
+    public GroupModel getMentorGroupByMentorID(Connection connection, String mentorId);
 }

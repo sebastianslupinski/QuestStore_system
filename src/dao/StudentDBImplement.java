@@ -3,6 +3,7 @@ package dao;
 import java.sql.*;
 import java.util.ArrayList;
 
+import model.GroupModel;
 import model.StudentModel;
 
 public class StudentDBImplement implements StudentDB {
@@ -99,28 +100,47 @@ public class StudentDBImplement implements StudentDB {
         return existingStudents;
     }
 
-    public ArrayList<String> getMentorGroupByMentorID(Connection connection, String mentorId){
+    public GroupModel getMentorGroupByMentorID(Connection connection, String mentorId){
         ArrayList<StudentModel> studentsInGroup = new ArrayList<>();
         ArrayList<Integer> idsOfStudents = new ArrayList<>();
-
+        String groupName = null;
+        int groupId = 0;
+        ResultSet resultSet1;
+        ResultSet resultSet2;
 
         PreparedStatement statement1 = generator.getMentorGroup(connection, Integer.valueOf(mentorId));
         PreparedStatement statement2 = generator.getStudentsIdsFromExactGroup(connection, Integer.valueOf(mentorId));
 
         try {
-            Statement statement = connection.createStatement();
-            ResultSet rs = statement.executeQuery(sql);
-
-            while (rs.next()) {
-                String id = rs.getString("student_id");
-
-                idsOfStudentsInGroups.add(id);
+            resultSet1 = statement1.executeQuery();
+            while (resultSet1.next()) {
+                groupId = resultSet1.getInt("group_name_id");
+                groupName = resultSet1.getString("signature");
             }
         } catch (Exception e) {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
             System.exit(0);
         }
-        return idsOfStudentsInGroups;
+        try {
+            resultSet2 = statement2.executeQuery();
+            while (resultSet2.next()){
+                int studentId = resultSet2.getInt("student_id");
+                idsOfStudents.add(studentId);
+            }
+        }
+        catch (Exception e) {
+            System.err.println(e.getClass().getName() + ": " + e.getMessage());
+            System.exit(0);
+        }
+
+        for (int id : idsOfStudents){
+            StudentModel student = loadStudent(connection, id);
+            studentsInGroup.add(student);
+        }
+
+        GroupModel group = new GroupModel(groupName, groupId, Integer.valueOf(mentorId), studentsInGroup);
+        return group;
     }
+
     }
 

@@ -1,6 +1,7 @@
 package controller;
 
 import dao.*;
+import model.GroupModel;
 import model.MentorModel;
 import model.StudentModel;
 import view.AdminView;
@@ -41,6 +42,7 @@ public class MentorController {
     //  public void run(String id) {
 //      boolean mentorControllerRunning = true;
     public void run(String id) {
+        GroupModel mentorGroup = studentDB.getMentorGroupByMentorID(connection, id);
         Integer option = 1;
 
         while (!(option == 0)) {
