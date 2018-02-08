@@ -2,48 +2,31 @@ package model;
 
 public class ArtefactModel {
 
-    private String label;
     private String name;
     private String description;
     private int price;
     private int id;
-    private static int lastID = 0; // powinno wczytywac z pliku!
+    private int status;
+    // private static int lastID = 0; // powinno wczytywac z pliku!
 
-    public ArtefactModel(String label, String name, String description, int price) {
-        this.label = label;
+    public ArtefactModel(String name, String description, int price) {
         this.name = name;
         this.description = description;
         this.price = price;
-        this.id = lastID++;
+        //this.id = lastID++;
+        this.status = 1;
     }
 
-    public ArtefactModel(String label, String name, String description, int price, int id) {
-        this.label = label;
+    public ArtefactModel(String name, String description, int price, int id, int status) {
         this.name = name;
         this.description = description;
         this.price = price;
         this.id = id;
-    }
-
-    // !!!ta metoda bedzie wymieniona w momencie wczytania pliku z ostatnim id!!!
-    // public Artefact(String label, String name, String description, int price) {
-    //     this.label = label;
-    //     this.name = name;
-    //     this.description = description;
-    //     this.price = price;
-    //     this.id = ++lastID;
-    // }
-
-    public String getLabel() {
-        return this.label;
-    }
-
-    public void setLabel(String newLabel) {
-        this.label = newLabel;
+        this.status = status;
     }
 
     public String getName() {
-        return this.label;
+        return this.name;
     }
 
     public void setName(String newName) {
@@ -64,5 +47,10 @@ public class ArtefactModel {
 
     public void setPrice(int newPrice) {
         this.price = newPrice;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("Artefact name: %s.\nDescription: %s.\nPrice: %d.", name, description, price);
     }
 }

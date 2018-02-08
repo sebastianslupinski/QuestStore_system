@@ -38,10 +38,10 @@ public class QuestController {
                 case 1:
                     QuestModel newQuest = this.createQuest();
                     questDB.saveNewQuestToDatabase(newQuest);
-                    viewQuest.displayQuests(quests.getQuests());
+                    viewQuest.displayListOfObject(quests.getQuests());
                     break;
                 case 2:
-                    viewQuest.displayQuests(quests.getQuests());
+                    viewQuest.displayListOfObject(quests.getQuests());
                     break;
                 case 3:
                     System.out.println("edit quest");

@@ -40,7 +40,7 @@ public class QueriesGenerator {
             statement.setInt(3, newId);
         } catch (Exception e) {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
-            System.exit(0);
+            System.exit(1);
         }
         return statement;
     }
@@ -67,7 +67,7 @@ public class QueriesGenerator {
             statement.setInt(4, newId);
         } catch (Exception e) {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
-            System.exit(0);
+            System.exit(2);
         }
         return statement;
     }
@@ -79,7 +79,7 @@ public class QueriesGenerator {
             statement = newConnection.prepareStatement("SELECT * FROM " + tableName + ";");
         } catch (Exception e) {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
-            System.exit(0);
+            System.exit(3);
         }
         return statement;
     }
@@ -100,8 +100,45 @@ public class QueriesGenerator {
             statement.setInt(4, price);
         } catch (SQLException e) {
             System.out.println(e.getMessage());
+            System.exit(4);
+        }
+        return statement;
+    }
+    public PreparedStatement getUserItems(Connection newConnection,
+                                             String itemTableName, String idColumnName,
+                                             String studentItemsTableName, int id) {
+
+        PreparedStatement statement = null;
+
+        try {
+            statement = newConnection.prepareStatement("SELECT "
+                    + "artefacts.artefact_id, artefacts.name, artefacts.description, artefacts.price, status.status_name"
+                    + " FROM "
+                    + itemTableName
+                    + " INNER JOIN " + studentItemsTableName +" ON "
+                    + itemTableName + "." + idColumnName + "=" + studentItemsTableName + "." + idColumnName
+                    + " INNER JOIN status ON status.status_id = " + studentItemsTableName + ".status_id"
+                    + " WHERE student_id =?;");
+            statement.setInt(1, id);
+        } catch (Exception e) {
+            System.err.println(e.getClass().getName() + ": " + e.getMessage());
+            System.exit(5);
         }
         return statement;
     }
 
+    public PreparedStatement getUserWallet(Connection newConnection, int id) {
+
+        PreparedStatement statement = null;
+
+        try {
+            statement = newConnection.prepareStatement("SELECT student_id, balance, total_earned"
+                    + " FROM students_wallets WHERE student_id=?;");
+            statement.setInt(1, id);
+        } catch (Exception e) {
+            System.err.println(e.getClass().getName() + ": " + e.getMessage());
+            System.exit(6);
+        }
+        return statement;
+    }
 }
