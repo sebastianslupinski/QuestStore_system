@@ -65,8 +65,7 @@ public class MentorController {
                     quest.questOption();
                     break;
                 case 5:
-                    System.out.println("/////Artifact Option/////");
-                    quest.questOption();
+                    MentorView.displayText("Artefacts option should be implemented here!");
                     break;
                 case 6:
                     connectionWithDB.closeConnection(connection);

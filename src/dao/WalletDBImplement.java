@@ -43,11 +43,12 @@ public class WalletDBImplement {
             while (resultSet.next()) {
                 String artefactName = resultSet.getString("name");
                 String artefactDescription = resultSet.getString("description");
+                String artefactStatus = resultSet.getString("status_name");
                 int artefactPrice = resultSet.getInt("price");
                 int artefactId = resultSet.getInt("artefact_id");
-                int artefactStatus = resultSet.getInt("status_name");
+
                 ArtefactModel artefact = new ArtefactModel(artefactName, artefactDescription,
-                        artefactPrice, artefactId, artefactStatus);
+                        artefactStatus, artefactPrice, artefactId);
                 artefacts.add(artefact);
             }
             secondResultSet = secondStatement.executeQuery();
