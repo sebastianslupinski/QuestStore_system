@@ -6,6 +6,8 @@ import model.UserModel;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Set;
+import java.util.TreeSet;
 
 public class LoginDBImplement implements LoginDB {
 
@@ -20,6 +22,7 @@ public class LoginDBImplement implements LoginDB {
             e.printStackTrace();
         }
     }
+
 
     public String[] findUserIdAndRole(String login, String password) {
 
@@ -215,5 +218,23 @@ public class LoginDBImplement implements LoginDB {
             System.exit(0);
         }
         return lastId;
+    }
+
+    public Set<String> getExistingGroups() {
+        String sql = "SELECT signature FROM group_names";
+        Set<String> existingGroups = new TreeSet<>();
+
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(sql);
+
+            while (rs.next()) {
+                existingGroups.add(rs.getString("signature"));
+            }
+        } catch (Exception e) {
+            System.err.println(e.getClass().getName() + ": " + e.getMessage());
+            System.exit(0);
+        }
+        return existingGroups;
     }
 }
