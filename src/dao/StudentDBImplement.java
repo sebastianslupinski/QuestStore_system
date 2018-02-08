@@ -3,6 +3,7 @@ package dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import model.GroupModel;
@@ -145,5 +146,16 @@ public class StudentDBImplement implements StudentDB {
         return group;
     }
 
+    public void insertNewStudentToGroup(Connection connection, int studentId, int groupId){
+        String sql = "INSERT INTO groups(group_name_id, student_id) VALUES(?, ?);";
+
+        try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
+            pstmt.setInt(1, groupId);
+            pstmt.setInt(2, studentId);
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
     }
 
