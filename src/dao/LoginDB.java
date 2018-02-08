@@ -4,6 +4,7 @@ import model.UserModel;
 
 import java.sql.Connection;
 import java.util.ArrayList;
+import java.util.Set;
 
 public interface LoginDB {
 
@@ -15,5 +16,6 @@ public interface LoginDB {
     public ArrayList<String[]> getExistingIdsLoginAndPasswords(int roleToFind);
     public String getLastId();
     public void saveNewUserToDatabase(UserModel user);
+    public Set<String> getExistingGroups();
 
 }
