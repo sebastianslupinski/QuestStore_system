@@ -1,6 +1,5 @@
 package controller;
 
-import model.MentorModel;
 import view.AdminView;
 import model.AdminModel;
 import model.MentorModel;
@@ -54,7 +53,7 @@ public class AdminController {
                     this.editMentor(admin, adminDB);
                     break;
                 case 4:
-                    this.assignMentorToGroup(admin, adminDB);
+                    this.assignMentorToGroup(admin,loginDB, adminDB, connection);
                     break;
                 case 0:
                     connectionWithDB.closeConnection(connection);
@@ -64,33 +63,10 @@ public class AdminController {
         }
     }
 
-    public AdminModel loadAdmin(LoginDB database, String id) {
-        ArrayList<String[]> IdsLoginsAndPasswords = database.getExistingIdsLoginAndPasswords(1);
-        ArrayList<String[]> namesLastnamesEmails = database.getExistingNamesLastnamesAndEmails("admins");
-        AdminModel admin = null;
-        for (String[] userInfo : IdsLoginsAndPasswords) {
-            if (userInfo[0].equals(id)) {
-                String newId = userInfo[0];
-                String login = userInfo[1];
-                String password = userInfo[2];
-                for(String[] usersNames : namesLastnamesEmails){
-                    if (usersNames[0].equals(id)){
-                        String name = usersNames[1];
-                        String lastName = usersNames[2];
-                        String email = usersNames[3];
-                        admin = new AdminModel(newId, login, password, name, lastName, email);
-                    }
-                }
-            }
-        }
-        return admin;
-    }
-
     public void addExistingMentors(AdminDB database, AdminModel admin) {
-        int roleToFind = 2;
-        ArrayList<String[]> loginsInfo = database.getMentorsDataFromDatabase(roleToFind);
+        ArrayList<String[]> loginsInfo = database.getMentorsDataFromDatabase(2);
         for (String[] userInfo : loginsInfo) {
-            MentorModel mentorToAdd = null;
+            MentorModel mentorToAdd;
             String id = userInfo[0];
             String login = userInfo[1];
             String password = userInfo[2];
@@ -108,34 +84,12 @@ public class AdminController {
         String password = InputController.getString("Please enter mentor password: ");
         String name = InputController.getString("Please enter mentor name: ");
         String lastName = InputController.getString("Please enter mentor lastName: ");
-//        String group = setGroupForMentor(getExistingGroups(admin));
         MentorModel newMentor = new MentorModel(id, login, password, name, lastName);
         admin.getMentors().add(newMentor);
+        loginDB.saveNewUserToDatabase(newMentor);
         MentorView.displayText("Mentor created successfully");
         return newMentor;
     }
-
-
-    // public void createGroup() {
-    //   String name = view.getString("Please enter group name: ");
-    //   GroupModel newGroup = new GroupModel(name);
-    //   model.addGroup(newGroup);
-    //   MentorView.pressEnterToContinue("Group created successfully, press enter to continue");
-    // }
-
-//   public GroupModel getGroup(){
-//     boolean groupNotChosen = true;
-//     Integer groupIndex = 0;
-//     while(groupNotChosen){
-//         view.displayGroups(model.getGroups());
-//         String userInput = view.getInput("Choose group number");
-//         groupIndex = Integer.parseInt(userInput);
-//         if (groupIndex < model.getGroups().size()) {
-//             groupNotChosen = false;
-//         }
-//     }
-//     return model.getGroups().get(groupIndex);
-// }
 
      public MentorModel getMentor(AdminModel admin){
        boolean mentorNotChosen = true;
@@ -195,22 +149,25 @@ public class AdminController {
        }
      }
 
- public void assignMentorToGroup(AdminModel admin, AdminDB database){
-   MentorModel mentorToAssign = getMentor(admin);
-   String mentorId = mentorToAssign.getId();
-   String newGroup = this.setGroupForMentor(database.getExistingGroups());
-   database.createNewGroupAndAssignMentorToIt(newGroup, mentorId);
-   view.displayText("Mentor assigned succesfully");
+ public void assignMentorToGroup(AdminModel admin, LoginDB database,
+                                 AdminDB adminDatabase, Connection connection){
+        boolean mentorNotChosen = true;
+        String mentorId = null;
+        ArrayList<String> mentorsIdsWithGroups = adminDatabase.getIdsOfMentorsHavingGroupsAlready(connection);
+        while (mentorNotChosen) {
+            MentorModel mentorToAssign = getMentor(admin);
+            mentorId = mentorToAssign.getId();
+            if(mentorsIdsWithGroups.contains(mentorId)){
+                view.displayText("This Mentor have group already, " +
+                        "please choose another one or create new one");
+            }
+            else
+                {mentorNotChosen = false;}
+        }
+           String newGroup = this.setGroupForMentor(database.getExistingGroups());
+           adminDatabase.createNewGroupAndAssignMentorToIt(newGroup, mentorId);
+           view.displayText("Mentor assigned succesfully");
  }
-
-//    public static ArrayList<String> getExistingGroups(AdminModel admin) {
-//        ArrayList<MentorModel> mentors = admin.getMentors();
-//        ArrayList<String> existingGroups = new ArrayList<>();
-//        for (MentorModel mentor : mentors) {
-//            existingGroups.add(mentor.getGroup());
-//        }
-//        return existingGroups;
-//    }
 
     public static String setGroupForMentor(Set<String> existingGroups) {
         String group = null;

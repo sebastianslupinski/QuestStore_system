@@ -8,6 +8,10 @@ public abstract class AbstractView<T> {
     public static void displayText(String text) {
     System.out.println(text);
   }
+    public static void displayInteger(int text) {
+        System.out.println(text);
+    }
+
 
     public void displayMenu(String header, String[] options) {
         int optionNumber = 1;

@@ -18,7 +18,7 @@ public class QuestDBImplement implements QuestBD {
     }
 
     public Integer getLastId() {
-        String sql = "SELECT id FROM quests ORDER BY id ASC;";
+        String sql = "SELECT quest_id FROM quests ORDER BY quest_id ASC;";
         Integer lastId = null;
 
         try {
@@ -26,7 +26,7 @@ public class QuestDBImplement implements QuestBD {
             ResultSet rs = statement.executeQuery(sql);
 
             while (rs.next()) {
-                lastId = rs.getInt("id");
+                lastId = rs.getInt("quest_id");
             }
         } catch (Exception e) {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
@@ -34,53 +34,6 @@ public class QuestDBImplement implements QuestBD {
         }
         return lastId;
     }
-
-//    public void insertQuestData(String description, int price){
-//        String sql = "INSERT INTO quests(description, price) VALUES(?, ?);";
-//
-//        try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
-//            pstmt.setString(1, description);
-//            pstmt.setInt(2, price);
-//            pstmt.executeUpdate();
-//        } catch (SQLException e) {
-//            System.out.println(e.getMessage());
-//        }
-//    }
-
-//    public void getOneQuestbyID(int id){
-//        String sql = "SELECT * FROM quests WHERE id = ?;";
-//
-//        try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
-//            pstmt.setInt(1, id);
-//            ResultSet rs = pstmt.executeQuery();
-//
-//            while (rs.next()) {
-//                System.out.println("ID: " + rs.getInt("id") + "\t" + "NAME: " +
-//                        rs.getString("name") + "\t" + "DISCRIPTION: " + rs.getString("description") +
-//                        "\t" + "PRICE: " + rs.getInt("price"));
-//            }
-//        } catch (SQLException e) {
-//            System.out.println(e.getMessage());
-//        }
-//    }
-//
-//    public QuestModel getQuest(ResultSet resultSet) {
-//        QuestModel quest = null;
-//
-//        try {
-//            while (resultSet.next()) {
-//                int id = resultSet.getInt("id");
-//                String name = resultSet.getString("name");
-//                String description = resultSet.getString("description");
-//                int price = resultSet.getInt("price");
-//
-//                quest = new QuestModel(String.valueOf(id), name, description, price)
-//            }
-//        } catch (SQLException e) {
-//            System.err.println(e.getClass().getName() + ": " + e.getMessage());
-//            System.exit(0);
-//        } return quest;
-//    }
 
     public QuestModel getAllQuests() {
 
@@ -91,7 +44,7 @@ public class QuestDBImplement implements QuestBD {
             ResultSet resultSet = statement.executeQuery();
 
             while (resultSet.next()) {
-                int id = resultSet.getInt("id");
+                int id = resultSet.getInt("quest_id");
                 String name = resultSet.getString("name");
                 String description = resultSet.getString("description");
                 int price = resultSet.getInt("price");
@@ -114,4 +67,29 @@ public class QuestDBImplement implements QuestBD {
             System.exit(0);
         }
     }
+
+    public void updateEditedQuestInDatabase(QuestModel quest) {
+        PreparedStatement statement = generator.updateItem(connection, tableName, quest.getId(), quest.getName(),
+                quest.getDescription(), quest.getPrice());
+
+        try {
+            statement.executeUpdate();
+        } catch (Exception e) {
+            System.err.println(e.getClass().getName() + ": " + e.getMessage());
+            System.exit(0);
+        }
+    }
+
+    public void deleteQuestByID (QuestModel quest){
+        PreparedStatement statement = generator.deleteItem(connection, tableName, quest.getId());
+
+        try {
+            statement.executeUpdate();
+        } catch (Exception e) {
+            System.err.println(e.getClass().getName() + ": " + e.getMessage());
+            System.exit(0);
+            }
+        }
+
+
 }
