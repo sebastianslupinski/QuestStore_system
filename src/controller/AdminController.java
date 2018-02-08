@@ -1,5 +1,6 @@
 package controller;
 
+import model.GroupModel;
 import view.AdminView;
 import model.AdminModel;
 import model.MentorModel;
@@ -16,11 +17,13 @@ public class AdminController {
     private LoginDB loginDB;
     private OpenCloseConnectionWithDB connectionWithDB;
     private AdminDB adminDB;
+    private StudentDB studentDB;
     private AdminView view;
     private String HEADER = "======= HELLO-ADMIN =======\n";
     private String HEADER2 = "Choose what attribute you want to edit";
     private final String[] OPTIONS = {"Display existing mentors", "Create Mentor",
                                       "Edit mentor", "Create new group and assign mentor to it",
+                                        "Display mentor's group and his codecoolers",
                                         "Exit"};
     private final String[] OPTIONS2 = {"Login", "Password", "Name",
                                        "Surname", "Email"};
@@ -30,6 +33,7 @@ public class AdminController {
         this.connectionWithDB = new OpenCloseConnectionWithDB();
         this.connection = newConnection;
         this.adminDB = new AdminDBImplement();
+        this.studentDB = new StudentDBImplement();
         this.view = new AdminView();
 
     }
@@ -39,7 +43,7 @@ public class AdminController {
         this.addExistingMentors(adminDB, admin);
         Integer option = 1;
 
-        while (!(option == 0)) {
+        while (!(option == 6)) {
             view.displayMenu(HEADER, OPTIONS);
             option = InputController.getNumber("Choose option: ");
             switch (option) {
@@ -54,7 +58,10 @@ public class AdminController {
                     this.editMentor(admin, adminDB);
                     break;
                 case 4:
-                    this.assignMentorToGroup(admin,loginDB, adminDB, connection);
+                    this.assignMentorToGroup(admin, loginDB, adminDB, connection);
+                    break;
+                case 5:
+                    this.displayMentorsGroup(connection, admin, studentDB);
                     break;
                 case 0:
                     connectionWithDB.closeConnection(connection);
@@ -106,6 +113,16 @@ public class AdminController {
            }
        }
        return admin.getMentors().get(Integer.valueOf(mentorIndex));
+     }
+
+     public void displayMentorsGroup(Connection connection, AdminModel admin, StudentDB studentDB){
+        view.displayText("Choose admin to show his class (press enter to continue)");
+        InputController.getString();
+        MentorModel mentorToShow = getMentor(admin);
+        String mentorId = mentorToShow.getId();
+        GroupModel groupToShow = studentDB.getMentorGroupByMentorID(connection, mentorId);
+        view.displayText(mentorToShow.getName() + " " + mentorToShow.getLastName() + " Group:");
+        view.displayUsers(groupToShow.getStudents());
      }
 
      public void editMentor(AdminModel admin, AdminDB database) {
