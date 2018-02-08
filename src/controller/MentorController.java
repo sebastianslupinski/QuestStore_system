@@ -31,8 +31,6 @@ public class MentorController {
     private final String[] OPTIONS2 = {"Login", "Password", "Name",
                                         "Surname", "Email"};
 
-    // private WalletModel wallet;
-//    private MentorView view;
 
     public MentorController(Connection newConnection) {
         this.loginDB = new LoginDBImplement(newConnection);
