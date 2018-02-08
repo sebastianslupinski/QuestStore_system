@@ -72,7 +72,8 @@ public class QuestController {
         String name = InputController.getString("Please enter name of QuestModel: ");
         String description = InputController.getString("Please enter description of QuestModel: ");
         int price = InputController.getNumber("Please enter price of QuestModel: ");
-        QuestModel newQuestModel = new QuestModel(quest_id, name, description, price);
+        String status = "New";
+        QuestModel newQuestModel = new QuestModel(quest_id, name, description, price, status);
         QuestView.displayText("QuestModel created successfully, press enter to continue");
 
         return newQuestModel;

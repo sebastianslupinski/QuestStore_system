@@ -121,11 +121,12 @@ public class MentorController {
                     String newEmail = InputController.getString("Enter new email");
                     studentToEdit.setEmail(newEmail);
                     optionChosen = true;
-                    break;2
+                    break;
             }
         }
         return studentToEdit;
     }
+
 
     public StudentModel getStudent(){
         boolean studentNotChosen = true;
