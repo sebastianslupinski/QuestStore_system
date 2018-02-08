@@ -14,4 +14,5 @@ public interface StudentDB {
     StudentModel getStudent(ResultSet resultSet);
     public ArrayList<StudentModel> getAllStudents(Connection connection);
     public GroupModel getMentorGroupByMentorID(Connection connection, String mentorId);
+    public void insertNewStudentToGroup(Connection connection, int studentId, int groupId);
 }

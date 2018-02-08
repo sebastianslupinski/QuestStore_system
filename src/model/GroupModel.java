@@ -22,4 +22,8 @@ public class GroupModel{
         return students;
     }
 
+    public int getGroupId(){
+        return this.groupId;
+    }
+
 }

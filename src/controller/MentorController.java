@@ -43,7 +43,6 @@ public class MentorController {
         this.existingStudents = studentDB.getAllStudents(connection);
     }
 
-
     public void run(String id) {
         GroupModel mentorGroup = studentDB.getMentorGroupByMentorID(connection, id);
         Integer option = 1;
@@ -52,7 +51,7 @@ public class MentorController {
             option = InputController.getNumber("Choose option: ");
             switch (option) {
                 case 1:
-                    this.createStudent();
+                    this.createStudent(connection, studentDB, mentorGroup);
                     break;
                 case 2:
                     StudentModel studentToEdit = this.editStudent();
@@ -76,7 +75,9 @@ public class MentorController {
     }
 
 
-    public void createStudent() {
+    public void createStudent(Connection connection, StudentDB studentDB, GroupModel mentorGroup) {
+        mentorView.displayText("This student will be added to your group, press enter to continue");
+        InputController.getString();
         String id = loginDB.getLastId();
         String login = InputController.getString("Please enter student login: ");
         String password = InputController.getString("Please enter student password: ");
@@ -85,6 +86,7 @@ public class MentorController {
 //        String group = setGroupForMentor(getExistingGroups(admin));
         StudentModel newStudent = new StudentModel(id, login, password, name, lastName);
         loginDB.saveNewUserToDatabase(newStudent);
+        studentDB.insertNewStudentToGroup(connection, Integer.valueOf(newStudent.getId()), mentorGroup.getGroupId());
         MentorView.displayText("Student created successfully");
     }
 
@@ -92,7 +94,6 @@ public class MentorController {
         boolean optionChosen = false;
         StudentModel studentToEdit = getStudent();
         while(!optionChosen) {
-            String studentID = studentToEdit.getId();
             mentorView.displayMenu(HEADER2, OPTIONS2);
             Integer option = InputController.getNumber("Enter your option");
             switch (option) {
