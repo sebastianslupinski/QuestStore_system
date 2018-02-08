@@ -47,7 +47,7 @@ public class AdminController {
             switch (option) {
                 case 1:
 //                    System.out.println(this.loadAdmin(loginDB, "1"));
-                    view.displayUsers(admin.getMentors());
+                    view.displayListOfObjects(admin.getMentors());
                     break;
                 case 2:
                     this.createMentor(admin, loginDB);
@@ -144,7 +144,7 @@ public class AdminController {
        boolean mentorNotChosen = true;
        Integer mentorIndex = 0;
        while(mentorNotChosen){
-           view.displayUsers(admin.getMentors());
+           view.displayListOfObjects(admin.getMentors());
            mentorIndex = InputController.getNumber("Please enter a mentor number");
            if (mentorIndex < admin.getMentors().size()){
                mentorNotChosen = false;

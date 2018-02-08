@@ -34,14 +34,14 @@ public class QuestController {
         while(!(option == 4)) {
             viewQuest.displayMenu(HEADER, OPTIONS);
             option = InputController.getNumber("Choose option: ");
-            switch (option){
+            switch (option) {
                 case 1:
                     QuestModel newQuest = this.createQuest();
                     questDB.saveNewQuestToDatabase(newQuest);
-                    viewQuest.displayListOfObject(quests.getQuests());
+                    viewQuest.displayListOfObjects(quests.getQuests());
                     break;
                 case 2:
-                    viewQuest.displayListOfObject(quests.getQuests());
+                    viewQuest.displayListOfObjects(quests.getQuests());
                     break;
                 case 3:
                     System.out.println("edit quest");
