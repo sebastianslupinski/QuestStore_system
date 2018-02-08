@@ -45,8 +45,7 @@ public class AdminController {
             option = InputController.getNumber("Choose option: ");
             switch (option) {
                 case 1:
-                    view.displayUsers(admin.getMentors());
-                    InputController.getString();
+                    view.displayListOfObjects(admin.getMentors());
                     break;
                 case 2:
                     this.createMentor(admin, loginDB);
@@ -65,27 +64,27 @@ public class AdminController {
         }
     }
 
-//    public AdminModel loadAdmin(LoginDB database, String id) {
-//        ArrayList<String[]> IdsLoginsAndPasswords = database.getExistingIdsLoginAndPasswords(1);
-//        ArrayList<String[]> namesLastnamesEmails = database.getExistingNamesLastnamesAndEmails("admins");
-//        AdminModel admin = null;
-//        for (String[] userInfo : IdsLoginsAndPasswords) {
-//            if (userInfo[0].equals(id)) {
-//                String newId = userInfo[0];
-//                String login = userInfo[1];
-//                String password = userInfo[2];
-//                for(String[] usersNames : namesLastnamesEmails){
-//                    if (usersNames[0].equals(id)){
-//                        String name = usersNames[1];
-//                        String lastName = usersNames[2];
-//                        String email = usersNames[3];
-//                        admin = new AdminModel(newId, login, password, name, lastName, email);
-//                    }
-//                }
-//            }
-//        }
-//        return admin;
-//    }
+    public AdminModel loadAdmin(LoginDB database, String id) {
+        ArrayList<String[]> IdsLoginsAndPasswords = database.getExistingIdsLoginAndPasswords(1);
+        ArrayList<String[]> namesLastnamesEmails = database.getExistingNamesLastnamesAndEmails("admins");
+        AdminModel admin = null;
+        for (String[] userInfo : IdsLoginsAndPasswords) {
+            if (userInfo[0].equals(id)) {
+                String newId = userInfo[0];
+                String login = userInfo[1];
+                String password = userInfo[2];
+                for(String[] usersNames : namesLastnamesEmails){
+                    if (usersNames[0].equals(id)){
+                        String name = usersNames[1];
+                        String lastName = usersNames[2];
+                        String email = usersNames[3];
+                        admin = new AdminModel(newId, login, password, name, lastName, email);
+                    }
+                }
+            }
+        }
+        return admin;
+    }
 
     public void addExistingMentors(AdminDB database, AdminModel admin) {
         int roleToFind = 2;
@@ -142,7 +141,7 @@ public class AdminController {
        boolean mentorNotChosen = true;
        Integer mentorIndex = 0;
        while(mentorNotChosen){
-           view.displayUsers(admin.getMentors());
+           view.displayListOfObjects(admin.getMentors());
            mentorIndex = InputController.getNumber("Please enter a mentor number");
            if (mentorIndex < admin.getMentors().size()){
                mentorNotChosen = false;

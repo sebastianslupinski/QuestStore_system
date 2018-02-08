@@ -19,16 +19,7 @@ public abstract class AbstractView<T> {
         }
     }
 
-    public void displayUsers(ArrayList<T> users) {
-        int index = 0;
-
-        for (T user : users) {
-            AdminView.displayText(String.format("%d--->%s\n", index, user.toString()));
-            index++;
-        }
-    }
-
-    public void displayListOfObject(ArrayList<T> objects){
+    public void displayListOfObjects(ArrayList<T> objects){
         int index = 0;
         for (T object : objects) {
             AbstractView.displayText(index + "--->" + object.toString());

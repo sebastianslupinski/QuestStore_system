@@ -47,7 +47,7 @@ public class StudentController {
                     break;
                 case 2:
                     StudentView.displayText(wallet.toString());
-                    view.displayListOfObject(wallet.getArtefacts());
+                    view.displayListOfObjects(wallet.getArtefacts());
                     InputController.getString();
                     break;
                 case 3:
