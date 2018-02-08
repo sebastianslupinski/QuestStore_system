@@ -1,10 +1,8 @@
 package controller;
 
-import dao.LoginDB;
-import dao.LoginDBImplement;
-import dao.OpenCloseConnectionWithDB;
-import dao.StudentDB;
-import dao.StudentDBImplement;
+import dao.*;
+import model.WalletModel;
+import view.AbstractView;
 import view.StudentView;
 import model.StudentModel;
 
@@ -16,8 +14,7 @@ public class StudentController {
     private LoginDB loginDB;
     private OpenCloseConnectionWithDB connectionWithDB;
     private StudentDB studentDB;
-    private StudentModel student;
-    // private WalletModel wallet;
+    private WalletDBImplement walletDB;
     private StudentView view;
     private final String HEADER = "======= HELLO-STUDENT =======\n";
     private final String[] OPTIONS = {"Display my profile",
@@ -32,12 +29,13 @@ public class StudentController {
         this.connectionWithDB = new OpenCloseConnectionWithDB();
         this.connection = newConnection;
         this.studentDB = new StudentDBImplement();
-        // this.wallet = new WalletModel();
+        this.walletDB = new WalletDBImplement();
         this.view = new StudentView();
     }
 
     public void run(String id) {
         StudentModel student = studentDB.loadStudent(connection, Integer.valueOf(id));
+        WalletModel wallet = walletDB.loadWalletModel(connection, Integer.valueOf(id));
         Integer option = 1;
         while (!(option == 6)) {
             view.displayMenu(HEADER, OPTIONS);
@@ -48,13 +46,16 @@ public class StudentController {
                     InputController.getString();
                     break;
                 case 2:
-                    //this.displayStudentItems();
+                    StudentView.displayText(wallet.toString());
+                    view.displayListOfObject(wallet.getArtefacts());
+                    InputController.getString();
                     break;
                 case 3:
                     //this.displayQuests();
                     break;
                 case 4:
                     this.editProfile(student);
+                    studentDB.exportStudent(connection, student);
                     break;
                 case 5:
                     break;
@@ -88,17 +89,17 @@ public class StudentController {
                 case 3:
                     StudentView.displayText(student.getName());
                     String newName = InputController.getString("Type new Name");
-                    student.setPassword(newName);
+                    student.setName(newName);
                     break;
                 case 4:
                     StudentView.displayText(student.getLastName());
                     String newLastName = InputController.getString("Type new Last name");
-                    student.setPassword(newLastName);
+                    student.setLastName(newLastName);
                     break;
                 case 5:
                     StudentView.displayText(student.getEmail());
                     String newEmail = InputController.getString("Type new Email");
-                    student.setPassword(newEmail);
+                    student.setEmail(newEmail);
                     break;
             }
         }

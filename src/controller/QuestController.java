@@ -39,22 +39,22 @@ public class QuestController {
                 case 1:
                     QuestModel newQuest = this.createQuest();
                     questDB.saveNewQuestToDatabase(newQuest);
-                    viewQuest.displayQuests(quests.getQuests());
+                    viewQuest.displayListOfObject(quests.getQuests());
                     break;
                 case 2:
-                    viewQuest.displayQuests(quests.getQuests());
+                    viewQuest.displayListOfObject(quests.getQuests());
                     break;
                 case 3:
                     QuestModel questToEdit = this.getQuest(quests);
                     this.editQuest(questToEdit);
                     questDB.updateEditedQuestInDatabase(questToEdit);
-                    viewQuest.displayQuests(quests.getQuests());
+                    viewQuest.displayListOfObject(quests.getQuests());
                     break;
                 case 4:
                     QuestModel questToDelete = this.getQuest(quests);
                     questDB.deleteQuestByID(questToDelete);
                     quests.updateQuestsCollection(questToDelete);
-                    viewQuest.displayQuests(quests.getQuests());
+                    viewQuest.displayListOfObject(quests.getQuests());
                     break;
                 case 5:
                     break;
@@ -82,7 +82,7 @@ public class QuestController {
         boolean questNotChosen = true;
         Integer questIndex = 0;
         while(questNotChosen){
-            viewQuest.displayQuests(quest.getQuests());
+            viewQuest.displayListOfObject(quest.getQuests());
             questIndex = InputController.getNumber("Please enter a quest number");
             if (questIndex <quest.getQuests().size()){
                 questNotChosen = false;

@@ -3,6 +3,7 @@ package dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 
 import model.StudentModel;
 
@@ -31,6 +32,24 @@ public class StudentDBImplement implements StudentDB {
             System.exit(0);
         }
         return student;
+    }
+
+    public void exportStudent(Connection connection, StudentModel student) {
+
+        PreparedStatement statement = generator.updateLoginDataOfUser(connection, student.getLogin(),
+                student.getPassword(), Integer.valueOf(student.getId()));
+
+        PreparedStatement secondStatement = generator.updatePersonalDataOfUser(connection, tableName,
+                idColumnName, student.getName(), student.getLastName(), student.getEmail(),
+                Integer.valueOf(student.getId()));
+
+        try {
+            statement.executeUpdate();
+            secondStatement.executeUpdate();
+        } catch (Exception e) {
+            System.err.println(e.getClass().getName() + ": " + e.getMessage());
+            System.exit(0);
+        }
     }
 
     public StudentModel getStudent(ResultSet resultSet) {

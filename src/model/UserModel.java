@@ -79,8 +79,8 @@ public abstract class UserModel {
     }
 
     public String toString(){
-        return String.format("Id.: %s\nLogin: %s\nName: %s\nLast name: %s\nEmail: %s",
-                             id, login, name, lastName, email);
+        return String.format("Id.: %s\nPassword: %s\nLogin: %s\nName: %s\nLast name: %s\nEmail: %s",
+                             id, password, login, name, lastName, email);
     }
 
     public String getId(){
