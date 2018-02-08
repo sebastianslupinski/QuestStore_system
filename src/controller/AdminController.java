@@ -36,7 +36,7 @@ public class AdminController {
         this.adminDB = new AdminDBImplement();
         this.studentDB = new StudentDBImplement();
         this.view = new AdminView();
-
+        
     }
 
     public void run(String id) {
