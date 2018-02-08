@@ -39,6 +39,24 @@ public class AdminDBImplement implements AdminDB {
         return admin;
     }
 
+    public void exportAdmin(Connection connection, AdminModel admin){
+
+        PreparedStatement statement = generator.updateLoginDataOfUser(connection, admin.getLogin(),
+                admin.getPassword(), Integer.valueOf(admin.getId()));
+
+        PreparedStatement secondStatement = generator.updatePersonalDataOfUser(connection, tableName,
+                idColumnName, admin.getName(), admin.getLastName(), admin.getEmail(),
+                Integer.valueOf(admin.getId()));
+
+        try {
+            statement.executeUpdate();
+            secondStatement.executeUpdate();
+        } catch (Exception e) {
+            System.err.println(e.getClass().getName() + ": " + e.getMessage());
+            System.exit(0);
+        }
+    }
+
     public AdminModel getAdmin(ResultSet resultSet) {
 
         AdminModel admin = null;

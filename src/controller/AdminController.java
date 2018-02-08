@@ -44,7 +44,7 @@ public class AdminController {
         this.addExistingMentors(adminDB, admin);
         Integer option = 1;
 
-        while (!(option == 6)) {
+        while (!(option == 7)) {
             view.displayMenu(HEADER, OPTIONS);
             option = InputController.getNumber("Choose option: ");
             switch (option) {
@@ -65,8 +65,10 @@ public class AdminController {
                     this.displayMentorsGroup(connection, admin, studentDB);
                     break;
                 case 6:
-
-                case 0:
+                    this.editAdminInfo(admin);
+                    adminDB.exportAdmin(connection, admin);
+                    break;
+                case 7:
                     connectionWithDB.closeConnection(connection);
                     AdminView.displayText("Good bye");
                     break;
@@ -74,7 +76,7 @@ public class AdminController {
         }
     }
 
-    public void editAdminInfo(AdminModel admin, AdminDB database){
+    public void editAdminInfo(AdminModel admin){
         boolean optionChosen = false;
         while(!optionChosen) {
             view.displayMenu(HEADER2, OPTIONS2);
@@ -89,6 +91,11 @@ public class AdminController {
                         optionChosen = true;
                         break;
                     }
+                    else {
+                        view.displayText("Bad login, press enter to continue");
+                        InputController.getString();
+                        break;
+                    }
                 case 2:
                     String currentPassword = admin.getPassword();
                     String enteredPassword = InputController.getString("Enter your current password");
@@ -96,6 +103,11 @@ public class AdminController {
                         String newPassword = InputController.getString("Now enter your new password");
                         admin.setPassword(newPassword);
                         optionChosen = true;
+                        break;
+                    }
+                    else {
+                        view.displayText("Bad password, press enter to continue");
+                        InputController.getString();
                         break;
                     }
                 case 3:

@@ -19,4 +19,5 @@ public interface AdminDB {
     public AdminModel loadAdmin(Connection connection, int id);
     public void createNewGroupAndAssignMentorToIt(String newGroup, String mentorId);
     public ArrayList<String> getIdsOfMentorsHavingGroupsAlready(Connection connection);
+    public void exportAdmin(Connection connection, AdminModel admin);
 }
