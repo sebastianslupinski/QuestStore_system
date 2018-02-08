@@ -14,7 +14,7 @@ public class ArtefactModel {
         this.description = description;
         this.price = price;
         //this.id = lastID++;
-        this.status = status;
+        this.status = "default";
     }
 
     public ArtefactModel(String name, String description, String status, int price, int id) {
