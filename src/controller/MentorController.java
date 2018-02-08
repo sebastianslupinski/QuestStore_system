@@ -21,7 +21,7 @@ public class MentorController {
     private String HEADER = "======= HELLO-MENTOR =======\n";
     private String HEADER2 = "Choose what atribute you want to edit";
     private final String[] OPTIONS = {"Create Student",
-            "Edit Student"};
+            "Edit Student", "Display students in my group", "Exit"};
     private final String[] OPTIONS2 = {"Login", "Password", "Name",
             "Surname", "Email"};
     private ArrayList<StudentModel> existingStudents;
@@ -44,8 +44,7 @@ public class MentorController {
     public void run(String id) {
         GroupModel mentorGroup = studentDB.getMentorGroupByMentorID(connection, id);
         Integer option = 1;
-        mentorView.displayUsers(mentorGroup.getStudents());
-        while (!(option == 0)) {
+        while (!(option == 4)) {
             mentorView.displayMenu(HEADER, OPTIONS);
             option = InputController.getNumber("Choose option: ");
             switch (option) {
@@ -56,7 +55,10 @@ public class MentorController {
                     StudentModel studentToEdit = this.editStudent();
                     studentDB.exportStudent(connection, studentToEdit);
                     break;
-                case 0:
+                case 3:
+                    mentorView.displayUsers(mentorGroup.getStudents());
+                    break;
+                case 4:
                     connectionWithDB.closeConnection(connection);
                     MentorView.displayText("Good bye");
                     break;
