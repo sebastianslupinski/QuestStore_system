@@ -59,7 +59,7 @@ public class MentorController {
                     studentDB.exportStudent(connection, studentToEdit);
                     break;
                 case 3:
-                    mentorView.displayUsers(mentorGroup.getStudents());
+                    mentorView.displayListOfObjects(mentorGroup.getStudents());
                     break;
                 case 4:
                     quest.questOption();
@@ -131,7 +131,7 @@ public class MentorController {
         boolean studentNotChosen = true;
         Integer studentIndex = 0;
         while(studentNotChosen){
-            mentorView.displayUsers(this.existingStudents);
+            mentorView.displayListOfObjects(this.existingStudents);
             studentIndex = InputController.getNumber("Please enter a mentor number");
             if (studentIndex < this.existingStudents.size()){
                 studentNotChosen = false;
