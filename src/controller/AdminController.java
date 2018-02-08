@@ -24,6 +24,7 @@ public class AdminController {
     private final String[] OPTIONS = {"Display existing mentors", "Create Mentor",
                                       "Edit mentor", "Create new group and assign mentor to it",
                                         "Display mentor's group and his codecoolers",
+                                        "Edit your own info",
                                         "Exit"};
     private final String[] OPTIONS2 = {"Login", "Password", "Name",
                                        "Surname", "Email"};
@@ -63,9 +64,54 @@ public class AdminController {
                 case 5:
                     this.displayMentorsGroup(connection, admin, studentDB);
                     break;
+                case 6:
+
                 case 0:
                     connectionWithDB.closeConnection(connection);
                     AdminView.displayText("Good bye");
+                    break;
+            }
+        }
+    }
+
+    public void editAdminInfo(AdminModel admin, AdminDB database){
+        boolean optionChosen = false;
+        while(!optionChosen) {
+            view.displayMenu(HEADER2, OPTIONS2);
+            Integer option = InputController.getNumber("Enter what parameter you want to edit option");
+            switch (option) {
+                case 1:
+                    String currentLogin = admin.getLogin();
+                    String enteredLogin = InputController.getString("Enter your current login");
+                    if(currentLogin.equals(enteredLogin)){
+                        String newLogin = InputController.getString("Now enter your new login");
+                        admin.setLogin(newLogin);
+                        optionChosen = true;
+                        break;
+                    }
+                case 2:
+                    String currentPassword = admin.getPassword();
+                    String enteredPassword = InputController.getString("Enter your current password");
+                    if(currentPassword.equals(enteredPassword)){
+                        String newPassword = InputController.getString("Now enter your new password");
+                        admin.setPassword(newPassword);
+                        optionChosen = true;
+                        break;
+                    }
+                case 3:
+                    String newName = InputController.getString("Enter new name");
+                    admin.setName(newName);
+                    optionChosen = true;
+                    break;
+                case 4:
+                    String newLastName = InputController.getString("Enter new lastname");
+                    admin.setLastName(newLastName);
+                    optionChosen = true;
+                    break;
+                case 5:
+                    String newEmail = InputController.getString("Enter new email");
+                    admin.setEmail(newEmail);
+                    optionChosen = true;
                     break;
             }
         }

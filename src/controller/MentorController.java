@@ -95,7 +95,6 @@ public class MentorController {
         boolean optionChosen = false;
         StudentModel studentToEdit = getStudent();
         while(!optionChosen) {
-            String studentID = studentToEdit.getId();
             mentorView.displayMenu(HEADER2, OPTIONS2);
             Integer option = InputController.getNumber("Enter your option");
             switch (option) {
