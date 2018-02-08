@@ -2,23 +2,30 @@ package controller;
 
 import java.util.Scanner;
 import java.util.InputMismatchException;
+import java.util.regex.Pattern;
+import java.util.regex.Matcher;
 
 public class InputController{
 
-    public String getString(String message) {
+    public static String getString(String message) {
+        String input = null;
+        Boolean validated = true;
+        while (validated) {
+            Scanner scanner = new Scanner(System.in);
+            System.out.println(message);
+            input = scanner.nextLine();
+            validated = validateInput(input);
+        }
+        return input;
+    }
+
+    public static String getString() {
         Scanner scanner = new Scanner(System.in);
-        System.out.println(message);
         String input = scanner.nextLine();
         return input;
     }
 
-    public String getString() {
-        Scanner scanner = new Scanner(System.in);
-        String input = scanner.nextLine();
-        return input;
-    }
-
-    public Integer getNumber(String message) {
+    public static Integer getNumber(String message) {
         Boolean notDone = true;
         Integer output = 0;
         while (notDone) {
@@ -33,4 +40,14 @@ public class InputController{
         }
         return output;
     }
+    public static Boolean validateInput(String input) {
+        Pattern pattern = Pattern.compile("[!#$%&'()*+/:,;=?^_`{|}~]");
+        Matcher match = pattern.matcher(input);
+        Boolean result = match.find();
+        if (result) {
+            System.out.println("Special character in your input!");
+        }
+        return result;
+    }
+
 }

@@ -12,7 +12,9 @@ public abstract class UserModel {
 
     protected UserModel(String id, String login, String password,
                         String name, String lastName) {
-        this.id = id;
+        int newId = Integer.parseInt(id);
+        String finalId = Integer.valueOf(++newId).toString();
+        this.id = finalId;
         this.login = login;
         this.password = password;
         this.name = name;
@@ -77,7 +79,8 @@ public abstract class UserModel {
     }
 
     public String toString(){
-        return String.format("%03d | %s | %s %s | %s", id, login, name, lastName, email);
+        return String.format("Id.: %s\nLogin: %s\nName: %s\nLast name: %s\nEmail: %s",
+                             id, login, name, lastName, email);
     }
 
     public String getId(){

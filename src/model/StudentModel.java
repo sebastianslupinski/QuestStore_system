@@ -3,18 +3,12 @@ package model;
 
 public class StudentModel extends UserModel {
 
-    String group = "default";
-
-    public StudentModel(String login, String password, String name, String lastName){
-        super(login, password, name, lastName);
-        this.group = group;
-    }
-    
-    public String getGroup() {
-        return this.group;
+    public StudentModel(String id, String login, String password, String name,
+                        String lastName, String email) {
+        super(id, login, password, name, lastName, email);
     }
 
-    public void setGroup(String newGroup) {
-        this.group = newGroup;
+    public StudentModel(String id, String login, String password, String name, String lastName){
+        super(id, login, password, name, lastName);
     }
 }

@@ -1,6 +1,9 @@
 # Compiled class file
 *.class
 
+#database files
+*.db
+
 # Log file
 *.log
 
@@ -23,10 +26,23 @@
 
 
 # IntelliJ setup files #
+queststore-mswia.iml
 .idea/
 *.iml
 *.iws
 *.xml
 
+
+
+#Database file#
+sqlDataBase/
+*.sql
+*.csv
+*.db
+*.jar
+
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
+
+*.iml
+queststore.db-journal

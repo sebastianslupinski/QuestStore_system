@@ -1,18 +1,10 @@
 package view;
 
 
-public class StudentView extends ViewAbstract {
+public class StudentView extends AbstractView {
 
-    public void displayWallet(String studentName, String studentWallet) {
-        System.out.println("Student's name: " + studentName);
-        System.out.println("Wallet: " + studentWallet);
-    }
-
-    public void displayQuestBook(String questBook) {
-        System.out.println("QuestBook: " + questBook);
-    }
-
-    public void displayQuest(String questToDisplay) {
-        System.out.println("QuestModel: " + questToDisplay);
+    public void displayStudentData(String studentDataToString) {
+        System.out.println(studentDataToString);
+        //System.out.println(walletToString);
     }
 }

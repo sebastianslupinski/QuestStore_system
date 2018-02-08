@@ -77,7 +77,19 @@ public class QuestDAOImplement implements QuestDAO {
         return true;
     }
 
+    public String getLastId(){
+        String lastId = null;
+        ArrayList<String[]> allLogins = readDataFromFile();
+        for (String[] usersInfo : allLogins){
+            int highestId = Integer.parseInt(usersInfo[0]);
+            lastId = Integer.valueOf(highestId).toString();
+        }
+        return lastId;
+    }
+
     public ArrayList<String[]> getQuestsCollection() {
       return questsCollection;
     }
+
+
 }
