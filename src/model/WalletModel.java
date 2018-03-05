@@ -52,6 +52,10 @@ public class WalletModel {
         return artefacts;
     }
 
+    public void setArtefacts(ArrayList<ArtefactModel> newArtefacts) {
+        this.artefacts = newArtefacts;
+    }
+
     @Override
     public String toString() {
         return String.format("Student wallet\nbalance: %d\ntotal earned coolcoins: %d", balance, totalEarned);
