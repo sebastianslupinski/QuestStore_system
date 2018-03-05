@@ -179,7 +179,7 @@ public class AdminController {
         String mentorId = mentorToShow.getId();
         GroupModel groupToShow = studentDB.getMentorGroupByMentorID(connection, mentorId);
         view.displayText(mentorToShow.getName() + " " + mentorToShow.getLastName() + " Group:");
-        view.displayUsers(groupToShow.getStudents());
+        view.displayListOfObjects(groupToShow.getStudents());
      }
 
      public void editMentor(AdminModel admin, AdminDB database) {

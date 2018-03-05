@@ -87,7 +87,6 @@ public class AdminDBImplement implements AdminDB {
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
-
         return connection;
     }
 
