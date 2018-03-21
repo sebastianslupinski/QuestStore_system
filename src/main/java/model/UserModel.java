@@ -8,10 +8,9 @@ public abstract class UserModel {
     protected String password;
     protected String name;
     protected String lastName;
-    protected String email; 
+    protected String email;
 
-    protected UserModel(String id, String login, String password,
-                        String name, String lastName) {
+    protected UserModel(String id, String login, String password, String name, String lastName) {
         int newId = Integer.parseInt(id);
         String finalId = Integer.valueOf(++newId).toString();
         this.id = finalId;
@@ -23,8 +22,7 @@ public abstract class UserModel {
     }
 
 
-    protected UserModel(String id, String login, String password,
-                        String name, String lastName, String email) {
+    protected UserModel(String id, String login, String password, String name, String lastName, String email) {
         this.id = id;
         this.login = login;
         this.password = password;

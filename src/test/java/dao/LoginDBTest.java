@@ -1,5 +1,6 @@
 package dao;
 
+import model.AdminModel;
 import model.MentorModel;
 import model.StudentModel;
 import org.junit.jupiter.api.BeforeEach;
@@ -56,6 +57,16 @@ class LoginDBTest {
                 "Jerzy", "Mardaus");
         loginDB.saveNewUserToDatabase(userModel);
         String[] expected = {userModel.getId(), "2"};
+        String[] results = loginDB.findUserIdAndRole(userModel.getLogin(), userModel.getPassword());
+        assertArrayEquals(expected, results);
+    }
+
+    @Test
+    void savingAdminUserToDatabaseTest() {
+        AdminModel userModel = new AdminModel("1", "TestLogin", "TestPassword",
+                "Jerzy", "Mardaus");
+        loginDB.saveNewUserToDatabase(userModel);
+        String[] expected = {userModel.getId(), "1"};
         String[] results = loginDB.findUserIdAndRole(userModel.getLogin(), userModel.getPassword());
         assertArrayEquals(expected, results);
     }
