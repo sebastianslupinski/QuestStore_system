@@ -1,15 +1,13 @@
 package dao;
 
-import model.AdminModel;
+import model.MentorModel;
 import model.StudentModel;
-import model.UserModel;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
-import java.util.Arrays;
 
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -48,6 +46,16 @@ class LoginDBTest {
                 "Jerzy", "Mardaus");
         loginDB.saveNewUserToDatabase(userModel);
         String[] expected = {userModel.getId(), "3"};
+        String[] results = loginDB.findUserIdAndRole(userModel.getLogin(), userModel.getPassword());
+        assertArrayEquals(expected, results);
+    }
+
+    @Test
+    void savingMentorUserToDatabaseTest() {
+        MentorModel userModel = new MentorModel("1", "TestLogin", "TestPassword",
+                "Jerzy", "Mardaus");
+        loginDB.saveNewUserToDatabase(userModel);
+        String[] expected = {userModel.getId(), "2"};
         String[] results = loginDB.findUserIdAndRole(userModel.getLogin(), userModel.getPassword());
         assertArrayEquals(expected, results);
     }
