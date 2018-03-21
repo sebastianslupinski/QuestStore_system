@@ -28,7 +28,7 @@ CREATE TABLE "logins" (
   `user_id` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
   `login` TEXT NOT NULL UNIQUE,
   `password` TEXT NOT NULL UNIQUE,
-  `role` TEXT NOT NULL
+  `role` TEXT
 );
 
 CREATE TABLE "mentors" (
