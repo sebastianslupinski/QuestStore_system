@@ -51,7 +51,7 @@ public class MentorController {
             option = InputController.getNumber("Choose option: ");
             switch (option) {
                 case 1:
-                    this.createStudent(connection, studentDB, mentorGroup);
+                    this.createStudent(studentDB, mentorGroup);
                     break;
                 case 2:
                     StudentModel studentToEdit = this.editStudent();
@@ -75,7 +75,7 @@ public class MentorController {
     }
 
 
-    public void createStudent(Connection connection, StudentDB studentDB, GroupModel mentorGroup) {
+    public void createStudent(StudentDB studentDB, GroupModel mentorGroup) {
         mentorView.displayText("This student will be added to your group, press enter to continue");
         InputController.getString();
 
@@ -135,9 +135,12 @@ public class MentorController {
     public StudentModel getStudent(){
         boolean studentNotChosen = true;
         Integer studentIndex = 0;
+
         while(studentNotChosen){
+
             mentorView.displayListOfObjects(this.existingStudents);
             studentIndex = InputController.getNumber("Please enter a mentor number");
+
             if (studentIndex < this.existingStudents.size()){
                 studentNotChosen = false;
             }
@@ -145,7 +148,7 @@ public class MentorController {
                 mentorView.displayText("Wrong number");
             }
         }
-        return this.existingStudents.get(Integer.valueOf(studentIndex));
+        return this.existingStudents.get(studentIndex);
     }
 }
 
