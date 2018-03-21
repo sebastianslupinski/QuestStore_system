@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 public class AdminModel extends UserModel {
 
-    private ArrayList<MentorModel> mentors = new ArrayList();
+    private ArrayList<MentorModel> mentors = new ArrayList<>();
     public AdminView view = new AdminView();
 
     public AdminModel(String id, String login, String password, String name, String lastName){
