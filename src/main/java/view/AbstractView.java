@@ -5,7 +5,7 @@ import java.util.Arrays;
 
 public abstract class AbstractView<T> {
 
-    public static void displayText(String text) {
+    public void displayText(String text) {
     System.out.println(text);
   }
     public static void displayInteger(int text) {
@@ -15,10 +15,10 @@ public abstract class AbstractView<T> {
 
     public void displayMenu(String header, String[] options) {
         int optionNumber = 1;
-        AbstractView.displayText(header);
+        displayText(header);
 
         for (String option : options) {
-            AbstractView.displayText(optionNumber + "--->" + option);
+            displayText(optionNumber + "--->" + option);
             optionNumber ++;
         }
     }
@@ -26,7 +26,7 @@ public abstract class AbstractView<T> {
     public void displayListOfObjects(ArrayList<T> objects){
         int index = 0;
         for (T object : objects) {
-            AbstractView.displayText(index + "--->" + object.toString());
+            displayText(index + "--->" + object.toString());
             index++;
         }
     }

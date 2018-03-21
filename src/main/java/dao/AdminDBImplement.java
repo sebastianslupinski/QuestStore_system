@@ -4,6 +4,7 @@ import model.AdminModel;
 import model.MentorModel;
 import model.StudentModel;
 import model.UserModel;
+import utils.ProcessManager;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -13,10 +14,10 @@ import java.util.TreeSet;
 public class AdminDBImplement implements AdminDB {
 
     private Connection connection = this.createConnection();
-    private Statement statement = null;
     private String idColumnName;
     private String tableName;
-    QueriesGenerator generator;
+    private QueriesGenerator generator;
+    private ProcessManager processManager;
 
     public AdminDBImplement() {
         this.tableName = "admins";
@@ -24,9 +25,9 @@ public class AdminDBImplement implements AdminDB {
         this.generator = new QueriesGenerator();
     }
 
-    public AdminModel loadAdmin(Connection connection, int id) {
-        PreparedStatement statement = generator.getFullDataOfUser(connection, tableName, idColumnName, id);
-        ResultSet resultSet = null;
+    public AdminModel loadAdmin(int id) {
+        PreparedStatement statement = generator.getFullDataOfUser(tableName, idColumnName, id);
+        ResultSet resultSet;
         AdminModel admin = null;
 
         try {
@@ -39,14 +40,17 @@ public class AdminDBImplement implements AdminDB {
         return admin;
     }
 
-    public void exportAdmin(Connection connection, AdminModel admin){
+    public void exportAdmin(AdminModel admin){
 
-        PreparedStatement statement = generator.updateLoginDataOfUser(connection, admin.getLogin(),
-                admin.getPassword(), Integer.valueOf(admin.getId()));
-
-        PreparedStatement secondStatement = generator.updatePersonalDataOfUser(connection, tableName,
-                idColumnName, admin.getName(), admin.getLastName(), admin.getEmail(),
+        PreparedStatement statement = generator.updateLoginDataOfUser(
+                admin.getLogin(),
+                admin.getPassword(),
                 Integer.valueOf(admin.getId()));
+
+        PreparedStatement secondStatement = generator.updatePersonalDataOfUser(
+                tableName, idColumnName,
+                admin.getName(), admin.getLastName(),
+                admin.getEmail(), Integer.valueOf(admin.getId()));
 
         try {
             statement.executeUpdate();
@@ -156,90 +160,37 @@ public class AdminDBImplement implements AdminDB {
     public void updateUserLogin(String login, String user_id) {
 
         String sql = "UPDATE logins SET login=? WHERE user_id=?;";
-
-        try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
-            pstmt.setString(1, login);
-            pstmt.setString(2, user_id);
-            pstmt.executeUpdate();
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
+        processManager.executePreparedStatement(sql, login, user_id);
     }
 
     public void updateMentorsName(String newName, String user_id) {
         String sql = "UPDATE mentors SET name=? WHERE mentor_id=?";
-
-        try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
-            pstmt.setString(1, newName);
-            pstmt.setString(2, user_id);
-            pstmt.executeUpdate();
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
+        processManager.executePreparedStatement(sql, newName, user_id);
     }
 
     public void updateMentorsLastName(String newLastName, String user_id) {
         String sql = "UPDATE mentors SET lastname=? WHERE mentor_id=?";
-
-        try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
-            pstmt.setString(1, newLastName);
-            pstmt.setString(2, user_id);
-            pstmt.executeUpdate();
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
+        processManager.executePreparedStatement(sql, newLastName, user_id);
     }
 
     public void updateMentorsEmail(String newEmail, String user_id) {
         String sql = "UPDATE mentors SET email=? WHERE mentor_id=?";
-
-        try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
-            pstmt.setString(1, newEmail);
-            pstmt.setString(2, user_id);
-            pstmt.executeUpdate();
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
+        processManager.executePreparedStatement(sql, newEmail, user_id);
     }
 
-
     public void updateUserPassword(String newPassword, String user_id) {
-
         String sql = "UPDATE logins SET password=? WHERE user_id=?;";
-
-        try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
-            pstmt.setString(1, newPassword);
-            pstmt.setString(2, user_id);
-            pstmt.executeUpdate();
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
+        processManager.executePreparedStatement(sql, newPassword, user_id);
     }
 
     public void insertAdminData(String name, String lastname, String email) {
-        String sql = "INSERT INTO admins(name, lastname, email) VALUES(?, ?, ?);";
-
-        try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
-            pstmt.setString(1, name);
-            pstmt.setString(2, lastname);
-            pstmt.setString(3, email);
-            pstmt.executeUpdate();
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
+        String sql = "INSERT INTO admins (name, lastname, email) VALUES(?, ?, ?);";
+        processManager.executePreparedStatement(sql, name, lastname, email);
     }
-
 
     public void createNewGroupAndAssignMentorToIt(String newGroup, String mentorId) {
         String sqlQuerry1 = "INSERT INTO group_names(signature, mentor_id) VALUES(?, ?);";
-
-        try (PreparedStatement pstmt1 = connection.prepareStatement(sqlQuerry1)) {
-            pstmt1.setString(1, newGroup);
-            pstmt1.setString(2, mentorId);
-            pstmt1.executeUpdate();
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
+        processManager.executePreparedStatement(sqlQuerry1, newGroup, mentorId);
     }
 
     public ArrayList<String> getIdsOfMentorsHavingGroupsAlready(Connection connection){

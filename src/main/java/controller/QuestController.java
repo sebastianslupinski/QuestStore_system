@@ -73,7 +73,7 @@ public class QuestController {
         String description = InputController.getString("Please enter description of QuestModel: ");
         int price = InputController.getNumber("Please enter price of QuestModel: ");
         QuestModel newQuestModel = new QuestModel(quest_id, name, description, price);
-        QuestView.displayText("QuestModel created successfully, press enter to continue");
+        viewQuest.displayText("QuestModel created successfully, press enter to continue");
 
         return newQuestModel;
     }
@@ -88,7 +88,7 @@ public class QuestController {
                 questNotChosen = false;
             }
             else {
-                QuestView.displayText("Wrong number");
+                viewQuest.displayText("Wrong number");
             }
         }
         return QuestModel.getQuests().get(Integer.valueOf(questIndex));
@@ -105,17 +105,17 @@ public class QuestController {
             option = InputController.getNumber("Choose option: ");
             switch (option) {
                 case 1:
-                    QuestView.displayText(quest.getName());
+                    viewQuest.displayText(quest.getName());
                     String newName = InputController.getString("Type new name");
                     quest.setName(newName);
                     break;
                 case 2:
-                    QuestView.displayText(quest.getDescription());
+                    viewQuest.displayText(quest.getDescription());
                     String newDescription = InputController.getString("Type new description");
                     quest.setDescription(newDescription);
                     break;
                 case 3:
-                    QuestView.displayInteger(quest.getPrice());
+                    viewQuest.displayInteger(quest.getPrice());
                     String newPrice = InputController.getString("Type new price");
                     quest.setPrice(Integer.parseInt(newPrice));
                     break;

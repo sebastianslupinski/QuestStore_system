@@ -32,6 +32,13 @@ public abstract class UserModel {
         
     }
 
+    UserModel(String login, String password, String name, String lastName) {
+        this.login = login;
+        this.password = password;
+        this.name = name;
+        this.lastName = lastName;
+    }
+
     protected String createEmail(){
         return String.format("%s.%s@codecool.com", name, lastName);
     }

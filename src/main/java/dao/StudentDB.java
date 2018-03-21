@@ -9,10 +9,10 @@ import java.util.ArrayList;
 
 public interface StudentDB {
 
-    StudentModel loadStudent(Connection connection, int id);
-    void exportStudent(Connection connection, StudentModel student);
+    StudentModel loadStudent(int id);
+    void exportStudent(StudentModel student);
     StudentModel getStudent(ResultSet resultSet);
-    public ArrayList<StudentModel> getAllStudents(Connection connection);
-    public GroupModel getMentorGroupByMentorID(Connection connection, String mentorId);
-    public void insertNewStudentToGroup(Connection connection, int studentId, int groupId);
+    ArrayList<StudentModel> getAllStudents();
+    GroupModel getMentorGroupByMentorID(String mentorId);
+    void insertNewStudentToGroup(int studentId, int groupId);
 }
