@@ -23,8 +23,8 @@ public class StudentDBImplement implements StudentDB {
         this.generator = new QueriesGenerator();
     }
 
-    public StudentModel loadStudent(Connection connection, int id) {
-        PreparedStatement statement = generator.getFullDataOfUser(connection, tableName, idColumnName, id);
+    public StudentModel loadStudent(int id) {
+        PreparedStatement statement = generator.getFullDataOfUser(tableName, idColumnName, id);
         ResultSet resultSet = null;
         StudentModel student = null;
 
@@ -38,14 +38,15 @@ public class StudentDBImplement implements StudentDB {
         return student;
     }
 
-    public void exportStudent(Connection connection, StudentModel student) {
+    public void exportStudent(StudentModel student) {
 
-        PreparedStatement statement = generator.updateLoginDataOfUser(connection, student.getLogin(),
+        PreparedStatement statement = generator.updateLoginDataOfUser(student.getLogin(),
                 student.getPassword(), Integer.valueOf(student.getId()));
 
-        PreparedStatement secondStatement = generator.updatePersonalDataOfUser(connection, tableName,
-                idColumnName, student.getName(), student.getLastName(), student.getEmail(),
-                Integer.valueOf(student.getId()));
+        PreparedStatement secondStatement = generator.updatePersonalDataOfUser(
+                tableName, idColumnName,
+                student.getName(), student.getLastName(),
+                student.getEmail(), Integer.valueOf(student.getId()));
 
         try {
             statement.executeUpdate();
@@ -78,8 +79,8 @@ public class StudentDBImplement implements StudentDB {
         return student;
     }
 
-    public ArrayList<StudentModel> getAllStudents(Connection connection){
-        PreparedStatement statement = generator.getFullDataOfAllUsers(connection, tableName, idColumnName, role);
+    public ArrayList<StudentModel> getAllStudents(){
+        PreparedStatement statement = generator.getFullDataOfAllUsers(tableName, idColumnName, role);
         ResultSet resultSet = null;
         ArrayList<StudentModel> existingStudents = new ArrayList<>();
 
@@ -103,7 +104,7 @@ public class StudentDBImplement implements StudentDB {
         return existingStudents;
     }
 
-    public GroupModel getMentorGroupByMentorID(Connection connection, String mentorId){
+    public GroupModel getMentorGroupByMentorID(String mentorId){
         ArrayList<StudentModel> studentsInGroup = new ArrayList<>();
         ArrayList<Integer> idsOfStudents = new ArrayList<>();
         String groupName = null;
@@ -111,7 +112,7 @@ public class StudentDBImplement implements StudentDB {
         ResultSet resultSet1;
         ResultSet resultSet2;
 
-        PreparedStatement statement1 = generator.getMentorGroup(connection, Integer.valueOf(mentorId));
+        PreparedStatement statement1 = generator.getMentorGroup(Integer.valueOf(mentorId));
 
         try {
             resultSet1 = statement1.executeQuery();
@@ -124,7 +125,7 @@ public class StudentDBImplement implements StudentDB {
             System.exit(0);
         }
 
-        PreparedStatement statement2 = generator.getStudentsIdsFromExactGroup(connection, groupId);
+        PreparedStatement statement2 = generator.getStudentsIdsFromExactGroup(groupId);
         try {
             resultSet2 = statement2.executeQuery();
             while (resultSet2.next()){
@@ -138,7 +139,7 @@ public class StudentDBImplement implements StudentDB {
         }
 
         for (int id : idsOfStudents){
-            StudentModel student = loadStudent(connection, id);
+            StudentModel student = loadStudent(id);
             studentsInGroup.add(student);
         }
 
@@ -146,16 +147,26 @@ public class StudentDBImplement implements StudentDB {
         return group;
     }
 
-    public void insertNewStudentToGroup(Connection connection, int studentId, int groupId){
+    public void insertNewStudentToGroup(int studentId, int groupId){
         String sql = "INSERT INTO groups(group_name_id, student_id) VALUES(?, ?);";
+        OpenCloseConnectionWithDB connectionManager = new OpenCloseConnectionWithDB();
 
-        try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
+        Connection connection = connectionManager.getConnection();
+        try {
+
+            PreparedStatement pstmt = connection.prepareStatement(sql);
             pstmt.setInt(1, groupId);
             pstmt.setInt(2, studentId);
+
             pstmt.executeUpdate();
+
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
+
+        finally {
+            connectionManager.closeConnection(connection);
+        }
     }
-    }
+}
 
