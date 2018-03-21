@@ -64,4 +64,10 @@ class LoginDBTest {
         assertNull(results[0]);
         assertNull(results[1]);
     }
+
+    @Test
+    void gettingLastIdIfNoEntitiesInDatabaseTest() {
+        String id = loginDB.getLastId();
+        assertNull(id);
+    }
 }
