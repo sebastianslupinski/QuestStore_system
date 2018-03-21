@@ -25,3 +25,5 @@ logs/*
 queststore.db
 
 *.idea
+*.iml
+testDb.db
