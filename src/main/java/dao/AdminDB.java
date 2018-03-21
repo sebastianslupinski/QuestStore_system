@@ -8,16 +8,16 @@ import java.util.Set;
 
 public interface AdminDB {
 
-    public void findAllDataOfAdmin(int admin_id);
-    public void insertAdminData(String name, String lastname, String email);
-    public ArrayList<String[]> getMentorsDataFromDatabase(int roleToFind);
-    public void updateUserLogin(String login, String user_id);
-    public void updateUserPassword(String newPassword, String user_id);
-    public void updateMentorsName(String newName, String user_id);
-    public void updateMentorsLastName(String newLastName, String user_id);
-    public void updateMentorsEmail(String newEmail, String user_id);
-    public AdminModel loadAdmin(Connection connection, int id);
-    public void createNewGroupAndAssignMentorToIt(String newGroup, String mentorId);
-    public ArrayList<String> getIdsOfMentorsHavingGroupsAlready(Connection connection);
-    public void exportAdmin(Connection connection, AdminModel admin);
+    void findAllDataOfAdmin(int admin_id);
+    void insertAdminData(String name, String lastname, String email);
+    ArrayList<String[]> getMentorsDataFromDatabase(int roleToFind);
+    void updateUserLogin(String login, String user_id);
+    void updateUserPassword(String newPassword, String user_id);
+    void updateMentorsName(String newName, String user_id);
+    void updateMentorsLastName(String newLastName, String user_id);
+    void updateMentorsEmail(String newEmail, String user_id);
+    AdminModel loadAdmin(int id);
+    void createNewGroupAndAssignMentorToIt(String newGroup, String mentorId);
+    ArrayList<String> getIdsOfMentorsHavingGroupsAlready(Connection connection);
+    void exportAdmin(AdminModel admin);
 }
