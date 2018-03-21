@@ -37,7 +37,7 @@ public class QuestDBImplement implements QuestBD {
 
     public QuestModel getAllQuests() {
 
-        PreparedStatement statement = generator.getAllQuests(connection, tableName);
+        PreparedStatement statement = generator.getAllQuests(tableName);
         QuestModel quest = null;
 
         try {
@@ -57,7 +57,7 @@ public class QuestDBImplement implements QuestBD {
     }
 
     public void saveNewQuestToDatabase(QuestModel quest) {
-        PreparedStatement statement = generator.insertItem(connection, tableName,
+        PreparedStatement statement = generator.insertItem(tableName,
                 quest.getId(), quest.getName(), quest.getDescription(), quest.getPrice());
 
         try {
@@ -69,7 +69,7 @@ public class QuestDBImplement implements QuestBD {
     }
 
     public void updateEditedQuestInDatabase(QuestModel quest) {
-        PreparedStatement statement = generator.updateItem(connection, tableName, quest.getId(), quest.getName(),
+        PreparedStatement statement = generator.updateItem(tableName, quest.getId(), quest.getName(),
                 quest.getDescription(), quest.getPrice());
 
         try {
@@ -81,7 +81,7 @@ public class QuestDBImplement implements QuestBD {
     }
 
     public void deleteQuestByID (QuestModel quest){
-        PreparedStatement statement = generator.deleteItem(connection, tableName, quest.getId());
+        PreparedStatement statement = generator.deleteItem(tableName, quest.getId());
 
         try {
             statement.executeUpdate();
