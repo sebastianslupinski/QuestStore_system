@@ -9,6 +9,11 @@ import org.junit.jupiter.api.Test;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -26,7 +31,6 @@ class LoginDBTest {
         DatabaseCreator.setDatabasePath(testDbPath);
         new DatabaseCreator().createDatabaseFromScript("CreateTables.sql");
         loginDB = new LoginDBImplement(new OpenCloseConnectionWithDB().getConnection());
-
     }
 
     @Test
@@ -109,5 +113,25 @@ class LoginDBTest {
         loginDB.insertAllLoginData("TestLogin2", "TestPassword2", "TestRole2");
         String id = loginDB.getLastId();
         assertEquals("2", id);
+    }
+
+    @Test
+    void gettingExistingGroupsTest() {
+        addSampleGroup("Sign1", "1");
+        addSampleGroup("Sign2", "2");
+        Set<String> expected = new HashSet<>(Arrays.asList("Sign1", "Sign2"));
+        Set<String> result = loginDB.getExistingGroups();
+        assertEquals(expected, result);
+    }
+
+    private void addSampleGroup(String groupSignature, String mentorId) {
+        String sql = "INSERT INTO group_names(signature, mentor_id) VALUES(?, ?);";
+        try (PreparedStatement pstmt1 = new OpenCloseConnectionWithDB().getConnection().prepareStatement(sql)) {
+            pstmt1.setString(1, groupSignature);
+            pstmt1.setString(2, mentorId);
+            pstmt1.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
     }
 }
