@@ -70,4 +70,12 @@ class LoginDBTest {
         String id = loginDB.getLastId();
         assertNull(id);
     }
+
+    @Test
+    void gettingLastIdTest() {
+        loginDB.insertAllLoginData("TestLogin1", "TestPassword1", "TestRole1");
+        loginDB.insertAllLoginData("TestLogin2", "TestPassword2", "TestRole2");
+        String id = loginDB.getLastId();
+        assertEquals("2", id);
+    }
 }
