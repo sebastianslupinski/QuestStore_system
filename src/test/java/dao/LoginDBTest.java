@@ -30,9 +30,24 @@ class LoginDBTest {
         String login = "TestLogin";
         String password = "TestPassword";
         String role = "TestRole";
-        String[] expected = {"1", role};
-        loginDB.insertAllLoginData(login, password, "TestRole");
+        String id = "1";
+        String[] expected = {id, role};
+        loginDB.insertAllLoginData(login, password, role);
         String[] results = loginDB.findUserIdAndRole(login, password);
+        assertArrayEquals(expected, results);
+    }
+
+    @Test
+    void updatingUserLoginAndPasswordTest() {
+        String login = "TestLogin";
+        String password = "TestPassword";
+        String role = "TestRole";
+        loginDB.insertAllLoginData(login, password, role);
+        String newLogin = "NewLogin";
+        String newPassword = "NewPassword";
+        loginDB.updateUserLoginAndPassword(newLogin, newPassword, 1);
+        String[] results = loginDB.findUserIdAndRole(newLogin, newPassword);
+        String[] expected = {"1", role};
         assertArrayEquals(expected, results);
     }
 }
