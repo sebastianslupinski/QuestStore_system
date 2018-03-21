@@ -6,9 +6,11 @@ import org.junit.jupiter.api.Test;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.util.Arrays;
 
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 class LoginDBTest {
 
@@ -49,5 +51,17 @@ class LoginDBTest {
         String[] results = loginDB.findUserIdAndRole(newLogin, newPassword);
         String[] expected = {"1", role};
         assertArrayEquals(expected, results);
+    }
+
+    @Test
+    void deletingAllUserLoginDataTest() {
+        String login = "TestLogin";
+        String password = "TestPassword";
+        String role = "TestRole";
+        loginDB.insertAllLoginData(login, password, role);
+        loginDB.deleteAllUserLoginData(1);
+        String[] results = loginDB.findUserIdAndRole(login, password);
+        assertNull(results[0]);
+        assertNull(results[1]);
     }
 }
