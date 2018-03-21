@@ -3,6 +3,7 @@ package dao;
 import model.AdminModel;
 import model.MentorModel;
 import model.StudentModel;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -23,13 +24,18 @@ class LoginDBTest {
 
     private LoginDB loginDB;
 
-    @BeforeEach
-    void before() throws IOException {
+    @BeforeAll
+    static void beforeAll() throws IOException {
         String testDbPath = "testDb.db";
         Files.deleteIfExists(new File(testDbPath).toPath());
         OpenCloseConnectionWithDB.setDatabasePath(testDbPath);
         DatabaseCreator.setDatabasePath(testDbPath);
         new DatabaseCreator().createDatabaseFromScript("CreateTables.sql");
+    }
+
+    @BeforeEach
+    void beforeEach() {
+        truncateAllTables();
         loginDB = new LoginDBImplement(new OpenCloseConnectionWithDB().getConnection());
     }
 
@@ -126,10 +132,29 @@ class LoginDBTest {
 
     private void addSampleGroup(String groupSignature, String mentorId) {
         String sql = "INSERT INTO group_names(signature, mentor_id) VALUES(?, ?);";
-        try (PreparedStatement pstmt1 = new OpenCloseConnectionWithDB().getConnection().prepareStatement(sql)) {
-            pstmt1.setString(1, groupSignature);
-            pstmt1.setString(2, mentorId);
-            pstmt1.executeUpdate();
+        try (PreparedStatement ps = new OpenCloseConnectionWithDB().getConnection().prepareStatement(sql)) {
+            ps.setString(1, groupSignature);
+            ps.setString(2, mentorId);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    private void truncateAllTables() {
+        String truncateGroupNames = "DELETE FROM group_names;";
+        String resetRowIdGroupNames = "DELETE FROM sqlite_sequence WHERE name= 'group_names';";
+        String truncateLogins = "DELETE FROM logins;";
+        String resetRowIdLogins = "DELETE FROM sqlite_sequence WHERE name= 'logins';";
+        executeStatement(truncateGroupNames);
+        executeStatement(resetRowIdGroupNames);
+        executeStatement(truncateLogins);
+        executeStatement(resetRowIdLogins);
+    }
+
+    private void executeStatement(String sqlStatement) {
+        try (PreparedStatement ps = new OpenCloseConnectionWithDB().getConnection().prepareStatement(sqlStatement)) {
+            ps.executeUpdate();
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
