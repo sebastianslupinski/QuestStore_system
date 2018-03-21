@@ -17,6 +17,10 @@ public class MentorModel extends UserModel{
         super(id, login, password, name, lastName, email);
     }
 
+    public MentorModel(String login, String password, String name, String lastName) {
+        super(login, password, name, lastName);
+    }
+
 //    public String toString() {
 //        return String.format("%03d | %s | %s %s | %s", id, login, name, lastName, email);
 //    }
