@@ -1,13 +1,17 @@
 package dao;
 
+import model.StudentModel;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class StudentDBTest {
 
@@ -26,6 +30,15 @@ public class StudentDBTest {
     void beforeEach() {
         truncateAllTables();
         studentDB = new StudentDBImplement();
+    }
+
+    @Test
+    void exportingStudentToDatabaseTest() {
+        StudentModel expected = new StudentModel("1", "TestLogin", "TestPassword", "TestName",
+                "TestLastName");
+        studentDB.exportStudent(expected);
+        StudentModel result = studentDB.loadStudent(1);
+        assertEquals(expected, result);
     }
 
     private void truncateAllTables() {
