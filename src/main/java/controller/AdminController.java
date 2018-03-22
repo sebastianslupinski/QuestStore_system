@@ -13,7 +13,6 @@ import java.util.Set;
 
 public class AdminController {
 
-    private Connection connection;
     private LoginDB loginDB;
     private OpenCloseConnectionWithDB connectionWithDB;
     private AdminDB adminDB;
@@ -29,10 +28,9 @@ public class AdminController {
     private final String[] OPTIONS2 = {"Login", "Password", "Name",
                                        "Surname", "Email"};
 
-    public AdminController(Connection newConnection) {
-        this.loginDB = new LoginDBImplement(newConnection);
+    public AdminController() {
+        this.loginDB = new LoginDBImplement();
         this.connectionWithDB = new OpenCloseConnectionWithDB();
-        this.connection = newConnection;
         this.adminDB = new AdminDBImplement();
         this.studentDB = new StudentDBImplement();
         this.view = new AdminView();
@@ -69,7 +67,6 @@ public class AdminController {
                     adminDB.exportAdmin(admin);
                     break;
                 case 7:
-                    connectionWithDB.closeConnection(connection);
                     view.displayText("Good bye");
                     break;
             }
@@ -242,7 +239,7 @@ public class AdminController {
  private void assignMentorToGroup(AdminModel admin){
         boolean mentorNotChosen = true;
         String mentorId = null;
-        ArrayList<String> mentorsIdsWithGroups = adminDB.getIdsOfMentorsHavingGroupsAlready(connection);
+        ArrayList<String> mentorsIdsWithGroups = adminDB.getIdsOfMentorsHavingGroupsAlready();
 
         while (mentorNotChosen) {
             MentorModel mentorToAssign = getMentor(admin);
