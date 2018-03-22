@@ -58,6 +58,17 @@ class QuestDBTest {
         assertEquals(questModel1, QuestModel.getQuests().get(0));
     }
 
+    @Test
+    void gettingLastIdTest() {
+        QuestModel questModel1 = new QuestModel("1", "TestQuest1", "TestDesc1", 15);
+        QuestModel questModel2 = new QuestModel("2", "TestQuest2", "TestDesc2", 15);
+        questDB.saveNewQuestToDatabase(questModel1);
+        questDB.saveNewQuestToDatabase(questModel2);
+        Integer expected = 2;
+        Integer result = questDB.getLastId();
+        assertEquals(expected, result);
+    }
+
     private void truncateAllTables() {
         String truncateQuests = "DELETE FROM quests;";
         String resetRowIdQuests = "DELETE FROM sqlite_sequence WHERE name= 'quests';";
