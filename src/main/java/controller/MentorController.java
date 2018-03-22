@@ -13,9 +13,7 @@ import java.sql.Connection;
 import java.util.ArrayList;
 
 public class MentorController {
-    private Connection connection;
     private LoginDB loginDB;
-    private OpenCloseConnectionWithDB connectionWithDB;
     private StudentDB studentDB;
     private QuestController quest;
     private MentorView mentorView;
@@ -32,11 +30,9 @@ public class MentorController {
                                         "Surname", "Email"};
 
 
-    public MentorController(Connection newConnection) {
-        this.loginDB = new LoginDBImplement(newConnection);
-        this.quest = new QuestController(newConnection);
-        this.connectionWithDB = new OpenCloseConnectionWithDB();
-        this.connection = newConnection;
+    public MentorController() {
+        this.loginDB = new LoginDBImplement();
+        this.quest = new QuestController();
         this.studentDB = new StudentDBImplement();
         // this.wallet = new WalletModel();
         this.mentorView = new MentorView();
@@ -46,12 +42,14 @@ public class MentorController {
     public void run(String id) {
         GroupModel mentorGroup = studentDB.getMentorGroupByMentorID(id);
         Integer option = 1;
+
         while (!(option == 6)) {
             mentorView.displayMenu(HEADER, OPTIONS);
             option = InputController.getNumber("Choose option: ");
+
             switch (option) {
                 case 1:
-                    this.createStudent(studentDB, mentorGroup);
+                    createStudent(studentDB, mentorGroup);
                     break;
                 case 2:
                     StudentModel studentToEdit = this.editStudent();
@@ -67,7 +65,6 @@ public class MentorController {
                     mentorView.displayText("Artefacts option should be implemented here!");
                     break;
                 case 6:
-                    connectionWithDB.closeConnection(connection);
                     mentorView.displayText("Good bye");
                     break;
             }
