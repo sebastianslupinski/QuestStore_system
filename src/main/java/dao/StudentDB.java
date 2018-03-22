@@ -11,7 +11,6 @@ public interface StudentDB {
 
     StudentModel loadStudent(int id);
     void exportStudent(StudentModel student);
-    StudentModel getStudent(ResultSet resultSet);
     ArrayList<StudentModel> getAllStudents();
     GroupModel getMentorGroupByMentorID(String mentorId);
     void insertNewStudentToGroup(int studentId, int groupId);

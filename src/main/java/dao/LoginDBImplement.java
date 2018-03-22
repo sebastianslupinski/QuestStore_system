@@ -25,7 +25,7 @@ public class LoginDBImplement extends OpenCloseConnectionWithDB implements Login
         String[] idAndRole = new String[arrayCapacity];
 
         try {
-            getConnection();
+            openConnection();
             PreparedStatement pstmt = processManager.getPreparedStatement(sqlStatement, login, password);
 
             ResultSet rs  = pstmt.executeQuery();
@@ -57,7 +57,7 @@ public class LoginDBImplement extends OpenCloseConnectionWithDB implements Login
 
 
         try {
-            getConnection();
+            openConnection();
 
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery(sql);
@@ -101,7 +101,7 @@ public class LoginDBImplement extends OpenCloseConnectionWithDB implements Login
             columnWithId = "student_id";
         }
 
-        getConnection();
+        openConnection();
 
         try {
             Statement statement = connection.createStatement();
@@ -130,7 +130,7 @@ public class LoginDBImplement extends OpenCloseConnectionWithDB implements Login
     public void insertAllLoginData(String login, String password, String role){
         String sql = "INSERT INTO logins(login, password, role) VALUES(?, ?, ?);";
 
-        getConnection();
+        openConnection();
 
         try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
             pstmt.setString(1, login);
@@ -169,7 +169,7 @@ public class LoginDBImplement extends OpenCloseConnectionWithDB implements Login
 
         String sqlQuerry1 = "INSERT INTO logins(user_id, login, password, role) VALUES(?, ?, ?, ?);";
 
-        getConnection();
+        openConnection();
 
         try (PreparedStatement pstmt1 = connection.prepareStatement(sqlQuerry1)) {
             pstmt1.setString(1, Id);
@@ -198,7 +198,7 @@ public class LoginDBImplement extends OpenCloseConnectionWithDB implements Login
     public void updateUserLoginAndPassword(String login, String password, int user_id) {
 
         String sql = "UPDATE logins SET login=?, password=? WHERE user_id=?;";
-        getConnection();
+        openConnection();
 
         try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
             pstmt.setString(1, login);
@@ -215,7 +215,7 @@ public class LoginDBImplement extends OpenCloseConnectionWithDB implements Login
     public void deleteAllUserLoginData(int user_id) {
 
         String sql = "DELETE FROM logins WHERE user_id= ? ;";
-        getConnection();
+        openConnection();
 
 
         try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
@@ -233,7 +233,7 @@ public class LoginDBImplement extends OpenCloseConnectionWithDB implements Login
         int idColumn = 0;
         String lastId = null;
 
-        getConnection();
+        openConnection();
 
         try {
             Statement statement = connection.createStatement();
@@ -258,7 +258,7 @@ public class LoginDBImplement extends OpenCloseConnectionWithDB implements Login
         String sql = "SELECT signature FROM group_names";
         Set<String> existingGroups = new TreeSet<>();
 
-        getConnection();
+        openConnection();
 
         try {
             Statement statement = connection.createStatement();

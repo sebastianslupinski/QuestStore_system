@@ -2,7 +2,6 @@ package utils;
 
 import dao.OpenCloseConnectionWithDB;
 
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
@@ -13,7 +12,7 @@ public class ProcessManager extends OpenCloseConnectionWithDB {
         int index = 1;
 
         try {
-            getConnection();
+            openConnection();
             preparedStatement = connection.prepareStatement(statement);
 
             for (String element : args) {
@@ -29,7 +28,7 @@ public class ProcessManager extends OpenCloseConnectionWithDB {
 
     public void executePreparedStatement(PreparedStatement statement) {
         try {
-            getConnection();
+            openConnection();
 
             if (statement != null) {
                 statement.execute();

@@ -1,6 +1,5 @@
 package dao;
 
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -57,7 +56,7 @@ public class StudentDBImplement extends OpenCloseConnectionWithDB implements Stu
         }
     }
 
-    public StudentModel getStudent(ResultSet resultSet) {
+    private StudentModel getStudent(ResultSet resultSet) {
 
         StudentModel student = null;
 
@@ -115,7 +114,7 @@ public class StudentDBImplement extends OpenCloseConnectionWithDB implements Stu
         ResultSet resultSet1;
         ResultSet resultSet2;
 
-        getConnection();
+        openConnection();
         PreparedStatement statement1 = generator.getMentorGroup(Integer.valueOf(mentorId));
 
         try {
@@ -155,7 +154,7 @@ public class StudentDBImplement extends OpenCloseConnectionWithDB implements Stu
         String sql = "INSERT INTO groups(group_name_id, student_id) VALUES(?, ?);";
 
         try {
-            getConnection();
+            openConnection();
 
             PreparedStatement pstmt = connection.prepareStatement(sql);
             pstmt.setInt(1, groupId);

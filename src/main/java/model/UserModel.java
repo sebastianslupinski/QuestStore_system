@@ -1,6 +1,8 @@
 package model;
 
 
+import java.util.Objects;
+
 public abstract class UserModel {
 
     protected String id;
@@ -90,5 +92,24 @@ public abstract class UserModel {
 
     public String getId(){
         return this.id;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        UserModel userModel = (UserModel) o;
+        return Objects.equals(id, userModel.id) &&
+                Objects.equals(login, userModel.login) &&
+                Objects.equals(password, userModel.password) &&
+                Objects.equals(name, userModel.name) &&
+                Objects.equals(lastName, userModel.lastName) &&
+                Objects.equals(email, userModel.email);
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(id, login, password, name, lastName, email);
     }
 }

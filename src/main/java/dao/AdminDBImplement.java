@@ -1,15 +1,10 @@
 package dao;
 
 import model.AdminModel;
-import model.MentorModel;
-import model.StudentModel;
-import model.UserModel;
 import utils.ProcessManager;
 
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.Set;
-import java.util.TreeSet;
 
 public class AdminDBImplement extends OpenCloseConnectionWithDB implements AdminDB {
 
@@ -25,8 +20,9 @@ public class AdminDBImplement extends OpenCloseConnectionWithDB implements Admin
     }
 
     public AdminModel loadAdmin(int id) {
-        getConnection();
+        openConnection();
         PreparedStatement statement = generator.getFullDataOfUser("admins", "admin_id", id);
+
         ResultSet resultSet;
 
         try {
