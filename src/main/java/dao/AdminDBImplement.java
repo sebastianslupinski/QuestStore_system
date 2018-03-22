@@ -26,7 +26,7 @@ public class AdminDBImplement extends OpenCloseConnectionWithDB implements Admin
 
     public AdminModel loadAdmin(int id) {
         getConnection();
-        PreparedStatement statement = generator.getFullDataOfUser(tableName, idColumnName, id);
+        PreparedStatement statement = generator.getFullDataOfUser("admins", "admin_id", id);
         ResultSet resultSet;
 
         try {
@@ -158,18 +158,21 @@ public class AdminDBImplement extends OpenCloseConnectionWithDB implements Admin
 
     public void updateUserLogin(String login, String user_id) {
 
-        String sql = "UPDATE logins SET login=? WHERE user_id=?;";
-        processManager.getPreparedStatement(sql, login, user_id);
+        String sql = "UPDATE logins SET login = ? WHERE user_id = ? ;";
+        PreparedStatement preparedStatement = processManager.getPreparedStatement(sql, login, user_id);
+        processManager.executePreparedStatement(preparedStatement);
     }
 
     public void updateMentorsName(String newName, String user_id) {
         String sql = "UPDATE mentors SET name=? WHERE mentor_id=?";
-        processManager.getPreparedStatement(sql, newName, user_id);
+        PreparedStatement preparedStatement = processManager.getPreparedStatement(sql, newName, user_id);
+        processManager.executePreparedStatement(preparedStatement);
     }
 
     public void updateMentorsLastName(String newLastName, String user_id) {
         String sql = "UPDATE mentors SET lastname=? WHERE mentor_id=?";
-        processManager.getPreparedStatement(sql, newLastName, user_id);
+        PreparedStatement preparedStatement = processManager.getPreparedStatement(sql, newLastName, user_id);
+        processManager.executePreparedStatement(preparedStatement);
     }
 
     public void updateMentorsEmail(String newEmail, String user_id) {
@@ -180,12 +183,14 @@ public class AdminDBImplement extends OpenCloseConnectionWithDB implements Admin
 
     public void updateUserPassword(String newPassword, String user_id) {
         String sql = "UPDATE logins SET password=? WHERE user_id=?;";
-        processManager.getPreparedStatement(sql, newPassword, user_id);
+        PreparedStatement preparedStatement = processManager.getPreparedStatement(sql, newPassword, user_id);
+        processManager.executePreparedStatement(preparedStatement);
     }
 
     public void insertAdminData(String name, String lastname, String email) {
         String sql = "INSERT INTO admins (name, lastname, email) VALUES(?, ?, ?);";
-        processManager.getPreparedStatement(sql, name, lastname, email);
+        PreparedStatement preparedStatement = processManager.getPreparedStatement(sql, name, lastname, email);
+        processManager.executePreparedStatement(preparedStatement);
     }
 
     public void createNewGroupAndAssignMentorToIt(String newGroup, String mentorId) {
