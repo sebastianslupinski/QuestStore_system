@@ -6,31 +6,40 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-public class ProcessManager {
+public class ProcessManager extends OpenCloseConnectionWithDB {
 
-    private OpenCloseConnectionWithDB connectionManager = new OpenCloseConnectionWithDB();
-    private Connection connection;
-
-    public boolean executePreparedStatement(String statement, String... args) {
-        connection = connectionManager.getConnection();
+    public PreparedStatement getPreparedStatement(String statement, String... args) {
+        PreparedStatement preparedStatement = null;
         int index = 1;
 
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement(statement);
+            getConnection();
+            preparedStatement = connection.prepareStatement(statement);
 
             for (String element : args) {
                 preparedStatement.setObject(index, element);
                 index++;
             }
-            preparedStatement.executeUpdate();
-            return true;
 
         } catch (SQLException e) {
             System.err.println(e.getClass().getName() + " --> " + e.getMessage());
-            return false;
+        }
+        return preparedStatement;
+    }
+
+    public void executePreparedStatement(PreparedStatement statement) {
+        try {
+            getConnection();
+
+            if (statement != null) {
+                statement.execute();
+            }
+
+        } catch (SQLException e) {
+            System.err.println(e.getClass().getName() + " --> " + e.getMessage() + "statement cannot be update in DB");
 
         } finally {
-            connectionManager.closeConnection(connection);
+            closeConnection(connection);
         }
     }
 }
