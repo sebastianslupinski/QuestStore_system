@@ -3,9 +3,8 @@ package dao;
 import model.QuestModel;
 
 import java.sql.*;
-import java.util.ArrayList;
 
-public class QuestDBImplement implements QuestBD {
+public class QuestDBImplement implements QuestDB {
 
     private Connection connection;
     private QueriesGenerator generator;
