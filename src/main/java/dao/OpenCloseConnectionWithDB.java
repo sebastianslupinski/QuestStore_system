@@ -12,7 +12,7 @@ public class OpenCloseConnectionWithDB {
         DATABASE_PATH = path;
     }
 
-    public void getConnection() {
+    public void openConnection() {
 
         try {
             Class.forName(DRIVER);
@@ -22,6 +22,11 @@ public class OpenCloseConnectionWithDB {
             System.err.println( e.getClass().getName() + ": " + e.getMessage() );
             System.exit(0);
         }
+    }
+
+    public Connection getConnection() {
+        openConnection();
+        return connection;
     }
 
     public void closeConnection(Connection connectionToClose) {

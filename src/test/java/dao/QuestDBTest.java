@@ -31,7 +31,7 @@ class QuestDBTest {
     @BeforeEach
     void beforeEach() {
         truncateAllTables();
-        questDB = new QuestDBImplement(new OpenCloseConnectionWithDB().getConnection());
+        questDB = new QuestDBImplement();
     }
 
     @Test

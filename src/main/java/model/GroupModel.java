@@ -27,6 +27,14 @@ public class GroupModel{
         return this.groupId;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public int getMentorId() {
+        return mentor_id;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

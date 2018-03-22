@@ -1,6 +1,7 @@
 package dao;
 
 import model.AdminModel;
+import model.GroupModel;
 import model.MentorModel;
 import model.StudentModel;
 import org.junit.jupiter.api.BeforeAll;
@@ -13,6 +14,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
@@ -24,6 +26,7 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 class LoginDBTest {
 
     private LoginDB loginDB;
+    private GroupDB groupDB;
 
     @BeforeAll
     static void beforeAll() throws IOException {
@@ -37,7 +40,8 @@ class LoginDBTest {
     @BeforeEach
     void beforeEach() {
         truncateAllTables();
-        loginDB = new LoginDBImplement(new OpenCloseConnectionWithDB().getConnection());
+        loginDB = new LoginDBImplement();
+        groupDB = new GroupDBImplement();
     }
 
     @Test
@@ -124,22 +128,13 @@ class LoginDBTest {
 
     @Test
     void gettingExistingGroupsTest() {
-        addSampleGroup("Sign1", "1");
-        addSampleGroup("Sign2", "2");
+        GroupModel groupModel1 = new GroupModel("Sign1", 1, 1, new ArrayList<>());
+        GroupModel groupModel2 = new GroupModel("Sign2", 2, 2, new ArrayList<>());
+        groupDB.add(groupModel1);
+        groupDB.add(groupModel2);
         Set<String> expected = new HashSet<>(Arrays.asList("Sign1", "Sign2"));
         Set<String> result = loginDB.getExistingGroups();
         assertEquals(expected, result);
-    }
-
-    private void addSampleGroup(String groupSignature, String mentorId) {
-        String sql = "INSERT INTO group_names(signature, mentor_id) VALUES(?, ?);";
-        try (PreparedStatement ps = new OpenCloseConnectionWithDB().getConnection().prepareStatement(sql)) {
-            ps.setString(1, groupSignature);
-            ps.setString(2, mentorId);
-            ps.executeUpdate();
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
     }
 
     private void truncateAllTables() {
