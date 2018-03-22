@@ -1,5 +1,6 @@
 package dao;
 
+import model.GroupModel;
 import model.StudentModel;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -14,7 +15,7 @@ import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class StudentDBTest {
+class StudentDBTest {
 
     private StudentDB studentDB;
 
@@ -55,6 +56,27 @@ public class StudentDBTest {
         expected.add(studentModel2);
         ArrayList<StudentModel> result = studentDB.getAllStudents();
         assertEquals(expected, result);
+    }
+
+    @Test
+    void gettingMentorGroupByMentorIdTest() {
+        addSampleGroup("1", "sign1", "1");
+        addSampleGroup("2", "sign2", "2");
+        GroupModel expected = new GroupModel("sign2", 2, 2, new ArrayList<>());
+        GroupModel result = studentDB.getMentorGroupByMentorID("2");
+        assertEquals(expected, result);
+    }
+
+    private void addSampleGroup(String groupNameId, String groupSignature, String mentorId) {
+        String sql = "INSERT INTO group_names(group_name_id, signature, mentor_id) VALUES(?, ?, ?);";
+        try (PreparedStatement ps = new OpenCloseConnectionWithDB().getConnection().prepareStatement(sql)) {
+            ps.setString(1, groupNameId);
+            ps.setString(2, groupSignature);
+            ps.setString(3, mentorId);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     private void truncateAllTables() {
