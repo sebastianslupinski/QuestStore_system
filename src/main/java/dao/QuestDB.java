@@ -12,5 +12,4 @@ public interface QuestDB {
     void updateEditedQuestInDatabase(QuestModel quest);
     QuestModel getAllQuests();
 
-
 }
