@@ -17,7 +17,7 @@ public class QuestDBImplement extends OpenCloseConnectionWithDB implements Quest
 
     public Integer getLastId() {
         String sql = "SELECT quest_id FROM quests;";
-        Integer lastId = null;
+        Integer lastId = 0;
 
         try {
             openConnection();

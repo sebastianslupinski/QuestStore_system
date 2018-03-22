@@ -55,6 +55,12 @@ class QuestDBTest {
     }
 
     @Test
+    void gettingLastIdIfNoEntitiesInDbTest() {
+        Integer result = questDB.getLastId();
+        assertEquals(new Integer(0), result);
+    }
+
+    @Test
     void gettingLastIdTest() {
         QuestModel questModel1 = new QuestModel("1", "TestQuest1", "TestDesc1", 15);
         QuestModel questModel2 = new QuestModel("2", "TestQuest2", "TestDesc2", 15);

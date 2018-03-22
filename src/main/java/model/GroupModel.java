@@ -42,13 +42,16 @@ public class GroupModel{
         GroupModel that = (GroupModel) o;
         return groupId == that.groupId &&
                 mentor_id == that.mentor_id &&
-                Objects.equals(name, that.name) &&
-                Objects.equals(students, that.students);
+                Objects.equals(name, that.name);
     }
 
     @Override
     public int hashCode() {
+        return Objects.hash(name, groupId, mentor_id);
+    }
 
-        return Objects.hash(name, groupId, mentor_id, students);
+    @Override
+    public String toString() {
+        return "Name: " + name + " Group ID: " + groupId + " Mentor ID: " + mentor_id;
     }
 }
