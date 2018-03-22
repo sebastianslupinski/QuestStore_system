@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import model.GroupModel;
 import model.StudentModel;
 
-public class StudentDBImplement implements StudentDB {
+public class StudentDBImplement extends OpenCloseConnectionWithDB implements StudentDB {
 
     private String idColumnName;
     private String tableName;
@@ -80,23 +80,26 @@ public class StudentDBImplement implements StudentDB {
     }
 
     public ArrayList<StudentModel> getAllStudents(){
-        PreparedStatement statement = generator.getFullDataOfAllUsers(tableName, idColumnName, role);
-        ResultSet resultSet = null;
         ArrayList<StudentModel> existingStudents = new ArrayList<>();
+        ResultSet resultSet;
+
+        PreparedStatement statement = generator.getFullDataOfAllUsers(tableName, idColumnName, role);
 
         try {
             resultSet = statement.executeQuery();
-            while (resultSet.next()) {
-                int id = resultSet.getInt("user_id");
-                String login = resultSet.getString("login");
-                String password = resultSet.getString("password");
-                String name = resultSet.getString("name");
-                String lastname = resultSet.getString("lastname");
-                String email = resultSet.getString("email");
 
-                StudentModel student = new StudentModel(String.valueOf(id), login, password, name, lastname, email);
-                existingStudents.add(student);
+            while (resultSet.next()) {
+                existingStudents.add(new StudentModel(
+
+                        String.valueOf(resultSet.getInt("user_id")),
+                        resultSet.getString("login"),
+                        resultSet.getString("password"),
+                        resultSet.getString("name"),
+                        resultSet.getString("lastname"),
+                        resultSet.getString("email")
+                ));
             }
+
         } catch (Exception e) {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
             System.exit(0);
@@ -112,6 +115,7 @@ public class StudentDBImplement implements StudentDB {
         ResultSet resultSet1;
         ResultSet resultSet2;
 
+        getConnection();
         PreparedStatement statement1 = generator.getMentorGroup(Integer.valueOf(mentorId));
 
         try {
@@ -149,10 +153,9 @@ public class StudentDBImplement implements StudentDB {
 
     public void insertNewStudentToGroup(int studentId, int groupId){
         String sql = "INSERT INTO groups(group_name_id, student_id) VALUES(?, ?);";
-        OpenCloseConnectionWithDB connectionManager = new OpenCloseConnectionWithDB();
 
-        Connection connection = connectionManager.getConnection();
         try {
+            getConnection();
 
             PreparedStatement pstmt = connection.prepareStatement(sql);
             pstmt.setInt(1, groupId);
@@ -165,7 +168,7 @@ public class StudentDBImplement implements StudentDB {
         }
 
         finally {
-            connectionManager.closeConnection(connection);
+            closeConnection(connection);
         }
     }
 }
