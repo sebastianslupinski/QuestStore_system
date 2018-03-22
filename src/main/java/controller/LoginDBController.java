@@ -1,6 +1,7 @@
 package controller;
 
 import dao.LoginDBImplement;
+import utils.ProcessManager;
 import view.LoginView;
 
 import java.sql.Connection;
@@ -11,8 +12,8 @@ public class LoginDBController {
     LoginDBImplement loginDB;
     LoginView view;
 
-    public LoginDBController(Connection newConnection) {
-        this.loginDB = new LoginDBImplement(newConnection);
+    public LoginDBController() {
+        this.loginDB = new LoginDBImplement();
         this.view = new LoginView();
     }
 
@@ -23,15 +24,19 @@ public class LoginDBController {
         int roleColumn = 1;
         int counter = 3;
         int arrayCapacity = 2;
+
         String[] idAndRole = new String[arrayCapacity];
         Boolean process = true;
+
         while (process && (counter > 0)) {
             String login = InputController.getString("Please enter your login");
             String password = InputController.getString("Please enter your password");
             idAndRole = loginDB.findUserIdAndRole(login, password);
+
             if (idAndRole[idColumn] == null || idAndRole[roleColumn] == null) {
                 counter--;
                 view.displayText("Login or password incorrect, try again!");
+
             } else {
                 process = false;
             }

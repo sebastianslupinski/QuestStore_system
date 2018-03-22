@@ -10,8 +10,7 @@ public class RootController{
 
     private RootView rootView = new RootView();
     private OpenCloseConnectionWithDB connectionWithDB = new OpenCloseConnectionWithDB();
-    private Connection newConnection = connectionWithDB.getConnection();
-    private LoginDBController loginController = new LoginDBController(newConnection);
+    private LoginDBController loginController = new LoginDBController();
 
     public void startApplication(){
  
@@ -22,15 +21,15 @@ public class RootController{
         String option = String.valueOf(idAndRole[1]);
         switch (option) {
             case "1":
-                AdminController adminController = new AdminController(newConnection);
+                AdminController adminController = new AdminController();
                 adminController.run(id);
                 break;
             case "2":
-                MentorController mentorController = new MentorController(newConnection);
+                MentorController mentorController = new MentorController();
                 mentorController.run(id);
                 break;
             case "3":
-                StudentController studentController = new StudentController(newConnection);
+                StudentController studentController = new StudentController();
                 studentController.run(id);
                 break;
         }

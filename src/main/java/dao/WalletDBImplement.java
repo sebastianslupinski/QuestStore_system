@@ -22,7 +22,7 @@ public class WalletDBImplement {
         this.artefactIdColumn = "artefact_id";
     }
 
-    public WalletModel loadWalletModel(Connection connection, int id) {
+    public WalletModel loadWalletModel(int id) {
 
         PreparedStatement statement = generator.getUserItems(artefactTableName,
                 artefactIdColumn, studentsTableName, id);

@@ -7,32 +7,31 @@ import java.util.ArrayList;
 
 public class QuestDBImplement implements QuestDB {
 
-    private Connection connection;
     private QueriesGenerator generator;
     private String tableName;
 
-    public QuestDBImplement(Connection connection) {
+    public QuestDBImplement() {
         this.tableName = "quests";
-        this.connection = connection;
         this.generator = new QueriesGenerator();
     }
 
     public Integer getLastId() {
-        String sql = "SELECT quest_id FROM quests ORDER BY quest_id ASC;";
-        Integer lastId = null;
-
-        try {
-            Statement statement = connection.createStatement();
-            ResultSet rs = statement.executeQuery(sql);
-
-            while (rs.next()) {
-                lastId = rs.getInt("quest_id");
-            }
-        } catch (Exception e) {
-            System.err.println(e.getClass().getName() + ": " + e.getMessage());
-            System.exit(0);
-        }
-        return lastId;
+//        String sql = "SELECT quest_id FROM quests ORDER BY quest_id ASC;";
+//        Integer lastId = null;
+//
+//        try {
+//            Statement statement = connection.createStatement();
+//            ResultSet rs = statement.executeQuery(sql);
+//
+//            while (rs.next()) {
+//                lastId = rs.getInt("quest_id");
+//            }
+//        } catch (Exception e) {
+//            System.err.println(e.getClass().getName() + ": " + e.getMessage());
+//            System.exit(0);
+//        }
+//        return lastId;
+        return null;
     }
 
     public QuestModel getAllQuests() {

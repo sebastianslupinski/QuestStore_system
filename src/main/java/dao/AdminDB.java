@@ -18,6 +18,6 @@ public interface AdminDB {
     void updateMentorsEmail(String newEmail, String user_id);
     AdminModel loadAdmin(int id);
     void createNewGroupAndAssignMentorToIt(String newGroup, String mentorId);
-    ArrayList<String> getIdsOfMentorsHavingGroupsAlready(Connection connection);
+    ArrayList<String> getIdsOfMentorsHavingGroupsAlready();
     void exportAdmin(AdminModel admin);
 }

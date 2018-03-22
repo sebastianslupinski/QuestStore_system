@@ -4,38 +4,30 @@ import model.AdminModel;
 import model.MentorModel;
 import model.StudentModel;
 import model.UserModel;
+import utils.ProcessManager;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.Set;
 import java.util.TreeSet;
 
-public class LoginDBImplement implements LoginDB {
+public class LoginDBImplement extends OpenCloseConnectionWithDB implements LoginDB {
 
-    Connection connection = null;
-    Statement statement = null;
-
-    public LoginDBImplement(Connection newConnection) {
-        this.connection = newConnection;
-        try {
-            this.statement = connection.createStatement();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
+    private ProcessManager processManager = new ProcessManager();
 
     public String[] findUserIdAndRole(String login, String password) {
 
-        String sql = "SELECT user_id, role FROM logins WHERE login=? AND password=?;";
+        String sqlStatement = "SELECT user_id, role FROM logins WHERE login = ? AND password = ?;";
         int idColumn = 0;
         int roleColumn = 1;
+
         int arrayCapacity = 2;
         String[] idAndRole = new String[arrayCapacity];
 
-        try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
-            pstmt.setString(1, login);
-            pstmt.setString(2, password);
+        try {
+            getConnection();
+            PreparedStatement pstmt = processManager.getPreparedStatement(sqlStatement, login, password);
+
             ResultSet rs  = pstmt.executeQuery();
 
             while (rs.next()) {
@@ -47,7 +39,11 @@ public class LoginDBImplement implements LoginDB {
 
         } catch (SQLException e) {
             System.out.println(e.getMessage());
+
+        } finally {
+            closeConnection(connection);
         }
+
         return idAndRole;
     }
 
@@ -59,7 +55,10 @@ public class LoginDBImplement implements LoginDB {
         String[] idLoginAndPassword = new String[3];
         ArrayList<String[]> allIdsLoginsAndPasswords = new ArrayList<>();
 
+
         try {
+            getConnection();
+
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery(sql);
 
@@ -74,7 +73,11 @@ public class LoginDBImplement implements LoginDB {
         catch (Exception e) {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
             System.exit(0);
+
+        } finally {
+            closeConnection(connection);
         }
+
         return allIdsLoginsAndPasswords;
     }
 
@@ -98,6 +101,8 @@ public class LoginDBImplement implements LoginDB {
             columnWithId = "student_id";
         }
 
+        getConnection();
+
         try {
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery(sql);
@@ -113,7 +118,11 @@ public class LoginDBImplement implements LoginDB {
         catch (Exception e) {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
             System.exit(0);
+
+        } finally {
+            closeConnection(connection);
         }
+
         return allNamesLastnamesAndEmails;
     }
 
@@ -121,13 +130,19 @@ public class LoginDBImplement implements LoginDB {
     public void insertAllLoginData(String login, String password, String role){
         String sql = "INSERT INTO logins(login, password, role) VALUES(?, ?, ?);";
 
+        getConnection();
+
         try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
             pstmt.setString(1, login);
             pstmt.setString(2, password);
             pstmt.setString(3, role);
             pstmt.executeUpdate();
+
         } catch (SQLException e) {
             System.out.println(e.getMessage());
+
+        } finally {
+            closeConnection(connection);
         }
     }
 
@@ -154,6 +169,8 @@ public class LoginDBImplement implements LoginDB {
 
         String sqlQuerry1 = "INSERT INTO logins(user_id, login, password, role) VALUES(?, ?, ?, ?);";
 
+        getConnection();
+
         try (PreparedStatement pstmt1 = connection.prepareStatement(sqlQuerry1)) {
             pstmt1.setString(1, Id);
             pstmt1.setString(2, login);
@@ -173,12 +190,15 @@ public class LoginDBImplement implements LoginDB {
         }
         catch (SQLException e) {
             System.out.println(e.getMessage());
+        } finally {
+            closeConnection(connection);
         }
     }
 
     public void updateUserLoginAndPassword(String login, String password, int user_id) {
 
         String sql = "UPDATE logins SET login=?, password=? WHERE user_id=?;";
+        getConnection();
 
         try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
             pstmt.setString(1, login);
@@ -187,18 +207,24 @@ public class LoginDBImplement implements LoginDB {
             pstmt.executeUpdate();
         } catch (SQLException e) {
             System.out.println(e.getMessage());
+        } finally {
+            closeConnection(connection);
         }
     }
 
     public void deleteAllUserLoginData(int user_id) {
 
         String sql = "DELETE FROM logins WHERE user_id= ? ;";
+        getConnection();
+
 
         try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
             pstmt.setInt(1, user_id);
             pstmt.executeUpdate();
         } catch (SQLException e) {
             System.out.println(e.getMessage());
+        } finally {
+            closeConnection(connection);
         }
     }
 
@@ -206,6 +232,8 @@ public class LoginDBImplement implements LoginDB {
         String sql = "SELECT user_id FROM logins ORDER BY user_id ASC;";
         int idColumn = 0;
         String lastId = null;
+
+        getConnection();
 
         try {
             Statement statement = connection.createStatement();
@@ -220,12 +248,17 @@ public class LoginDBImplement implements LoginDB {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
             System.exit(0);
         }
+        finally {
+            closeConnection(connection);
+        }
         return lastId;
     }
 
     public Set<String> getExistingGroups() {
         String sql = "SELECT signature FROM group_names";
         Set<String> existingGroups = new TreeSet<>();
+
+        getConnection();
 
         try {
             Statement statement = connection.createStatement();
@@ -237,6 +270,8 @@ public class LoginDBImplement implements LoginDB {
         } catch (Exception e) {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
             System.exit(0);
+        } finally {
+            closeConnection(connection);
         }
         return existingGroups;
     }

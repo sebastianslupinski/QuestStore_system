@@ -11,13 +11,12 @@ import java.util.ArrayList;
 import java.util.Set;
 import java.util.TreeSet;
 
-public class AdminDBImplement implements AdminDB {
+public class AdminDBImplement extends OpenCloseConnectionWithDB implements AdminDB {
 
-    private Connection connection = this.createConnection();
     private String idColumnName;
     private String tableName;
     private QueriesGenerator generator;
-    private ProcessManager processManager;
+    private ProcessManager processManager = new ProcessManager();
 
     public AdminDBImplement() {
         this.tableName = "admins";
@@ -26,13 +25,35 @@ public class AdminDBImplement implements AdminDB {
     }
 
     public AdminModel loadAdmin(int id) {
+        getConnection();
         PreparedStatement statement = generator.getFullDataOfUser(tableName, idColumnName, id);
         ResultSet resultSet;
-        AdminModel admin = null;
 
         try {
             resultSet = statement.executeQuery();
-            admin = this.getAdmin(resultSet);
+            return getAdmin(resultSet);
+
+        } catch (Exception e) {
+            System.err.println(e.getClass().getName() + ": " + e.getMessage());
+            System.exit(0);
+        }
+        return null;
+    }
+
+    public AdminModel getAdmin(ResultSet resultSet) {
+        AdminModel admin = null;
+
+        try {
+            while (resultSet.next()) {
+                int id = resultSet.getInt("user_id");
+                String login = resultSet.getString("login");
+                String password = resultSet.getString("password");
+                String name = resultSet.getString("name");
+                String lastname = resultSet.getString("lastname");
+                String email = resultSet.getString("email");
+
+                admin = new AdminModel(String.valueOf(id), login, password, name, lastname, email);
+            }
         } catch (Exception e) {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
             System.exit(0);
@@ -59,28 +80,6 @@ public class AdminDBImplement implements AdminDB {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
             System.exit(0);
         }
-    }
-
-    public AdminModel getAdmin(ResultSet resultSet) {
-
-        AdminModel admin = null;
-
-        try {
-            while (resultSet.next()) {
-                int id = resultSet.getInt("user_id");
-                String login = resultSet.getString("login");
-                String password = resultSet.getString("password");
-                String name = resultSet.getString("name");
-                String lastname = resultSet.getString("lastname");
-                String email = resultSet.getString("email");
-
-                admin = new AdminModel(String.valueOf(id), login, password, name, lastname, email);
-            }
-        } catch (Exception e) {
-            System.err.println(e.getClass().getName() + ": " + e.getMessage());
-            System.exit(0);
-        }
-        return admin;
     }
 
     public Connection createConnection() {
@@ -160,40 +159,42 @@ public class AdminDBImplement implements AdminDB {
     public void updateUserLogin(String login, String user_id) {
 
         String sql = "UPDATE logins SET login=? WHERE user_id=?;";
-        processManager.executePreparedStatement(sql, login, user_id);
+        processManager.getPreparedStatement(sql, login, user_id);
     }
 
     public void updateMentorsName(String newName, String user_id) {
         String sql = "UPDATE mentors SET name=? WHERE mentor_id=?";
-        processManager.executePreparedStatement(sql, newName, user_id);
+        processManager.getPreparedStatement(sql, newName, user_id);
     }
 
     public void updateMentorsLastName(String newLastName, String user_id) {
         String sql = "UPDATE mentors SET lastname=? WHERE mentor_id=?";
-        processManager.executePreparedStatement(sql, newLastName, user_id);
+        processManager.getPreparedStatement(sql, newLastName, user_id);
     }
 
     public void updateMentorsEmail(String newEmail, String user_id) {
-        String sql = "UPDATE mentors SET email=? WHERE mentor_id=?";
-        processManager.executePreparedStatement(sql, newEmail, user_id);
+        String sql = "UPDATE mentors SET email = ? WHERE mentor_id = ?";
+        PreparedStatement preparedStatement = processManager.getPreparedStatement(sql, newEmail, user_id);
+        processManager.executePreparedStatement(preparedStatement);
     }
 
     public void updateUserPassword(String newPassword, String user_id) {
         String sql = "UPDATE logins SET password=? WHERE user_id=?;";
-        processManager.executePreparedStatement(sql, newPassword, user_id);
+        processManager.getPreparedStatement(sql, newPassword, user_id);
     }
 
     public void insertAdminData(String name, String lastname, String email) {
         String sql = "INSERT INTO admins (name, lastname, email) VALUES(?, ?, ?);";
-        processManager.executePreparedStatement(sql, name, lastname, email);
+        processManager.getPreparedStatement(sql, name, lastname, email);
     }
 
     public void createNewGroupAndAssignMentorToIt(String newGroup, String mentorId) {
         String sqlQuerry1 = "INSERT INTO group_names(signature, mentor_id) VALUES(?, ?);";
-        processManager.executePreparedStatement(sqlQuerry1, newGroup, mentorId);
+        PreparedStatement preparedStatement = processManager.getPreparedStatement(sqlQuerry1, newGroup, mentorId);
+        processManager.executePreparedStatement(preparedStatement);
     }
 
-    public ArrayList<String> getIdsOfMentorsHavingGroupsAlready(Connection connection){
+    public ArrayList<String> getIdsOfMentorsHavingGroupsAlready(){
         ArrayList<String> idsOfMentorsInGroups = new ArrayList<>();
 
         String sql = "SELECT mentor_id FROM group_names";
