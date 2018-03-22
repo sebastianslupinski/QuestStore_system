@@ -7,37 +7,36 @@ import java.util.ArrayList;
 
 public class QuestDBImplement implements QuestBD {
 
-    private Connection connection;
     private QueriesGenerator generator;
     private String tableName;
 
-    public QuestDBImplement(Connection connection) {
+    public QuestDBImplement() {
         this.tableName = "quests";
-        this.connection = connection;
         this.generator = new QueriesGenerator();
     }
 
     public Integer getLastId() {
-        String sql = "SELECT quest_id FROM quests ORDER BY quest_id ASC;";
-        Integer lastId = null;
-
-        try {
-            Statement statement = connection.createStatement();
-            ResultSet rs = statement.executeQuery(sql);
-
-            while (rs.next()) {
-                lastId = rs.getInt("quest_id");
-            }
-        } catch (Exception e) {
-            System.err.println(e.getClass().getName() + ": " + e.getMessage());
-            System.exit(0);
-        }
-        return lastId;
+//        String sql = "SELECT quest_id FROM quests ORDER BY quest_id ASC;";
+//        Integer lastId = null;
+//
+//        try {
+//            Statement statement = connection.createStatement();
+//            ResultSet rs = statement.executeQuery(sql);
+//
+//            while (rs.next()) {
+//                lastId = rs.getInt("quest_id");
+//            }
+//        } catch (Exception e) {
+//            System.err.println(e.getClass().getName() + ": " + e.getMessage());
+//            System.exit(0);
+//        }
+//        return lastId;
+        return null;
     }
 
     public QuestModel getAllQuests() {
 
-        PreparedStatement statement = generator.getAllQuests(connection, tableName);
+        PreparedStatement statement = generator.getAllQuests(tableName);
         QuestModel quest = null;
 
         try {
@@ -57,7 +56,7 @@ public class QuestDBImplement implements QuestBD {
     }
 
     public void saveNewQuestToDatabase(QuestModel quest) {
-        PreparedStatement statement = generator.insertItem(connection, tableName,
+        PreparedStatement statement = generator.insertItem(tableName,
                 quest.getId(), quest.getName(), quest.getDescription(), quest.getPrice());
 
         try {
@@ -69,7 +68,7 @@ public class QuestDBImplement implements QuestBD {
     }
 
     public void updateEditedQuestInDatabase(QuestModel quest) {
-        PreparedStatement statement = generator.updateItem(connection, tableName, quest.getId(), quest.getName(),
+        PreparedStatement statement = generator.updateItem(tableName, quest.getId(), quest.getName(),
                 quest.getDescription(), quest.getPrice());
 
         try {
@@ -81,7 +80,7 @@ public class QuestDBImplement implements QuestBD {
     }
 
     public void deleteQuestByID (QuestModel quest){
-        PreparedStatement statement = generator.deleteItem(connection, tableName, quest.getId());
+        PreparedStatement statement = generator.deleteItem(tableName, quest.getId());
 
         try {
             statement.executeUpdate();
