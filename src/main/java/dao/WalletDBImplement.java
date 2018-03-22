@@ -22,11 +22,11 @@ public class WalletDBImplement {
         this.artefactIdColumn = "artefact_id";
     }
 
-    public WalletModel loadWalletModel(Connection connection, int id) {
+    public WalletModel loadWalletModel(int id) {
 
-        PreparedStatement statement = generator.getUserItems(connection, artefactTableName,
+        PreparedStatement statement = generator.getUserItems(artefactTableName,
                 artefactIdColumn, studentsTableName, id);
-        PreparedStatement secondStatement = generator.getUserWallet(connection, id);
+        PreparedStatement secondStatement = generator.getUserWallet(id);
 
         ResultSet resultSet = null;
         ResultSet secondResultSet = null;
