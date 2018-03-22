@@ -35,7 +35,7 @@ class QuestDBTest {
     }
 
     @Test
-    void savingNewQuestToDbAndGettingAllQuestsTest() {
+    void savingNewQuestToDbAndGettingQuestByIdTest() {
         QuestModel expected = new QuestModel("1", "TestQuest1", "TestDesc1", 15);
         questDB.saveNewQuestToDatabase(expected);
         QuestModel result = questDB.getQuestById(1);
@@ -50,7 +50,6 @@ class QuestDBTest {
         questModel1.setName("NewName");
         questModel1.setPrice(150);
         questDB.updateEditedQuestInDatabase(questModel1);
-        questDB.getAllQuests();
         assertEquals(questModel1, QuestModel.getQuests().get(0));
     }
 

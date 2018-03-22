@@ -38,9 +38,10 @@ class StudentDBTest {
 
     @Test
     void exportingStudentToDatabaseTest() {
-        loginDB.insertAllLoginData("TestLogin", "TestPassword", "1");
-        StudentModel expected = new StudentModel("1", "TestLogin", "TestPassword", "TestName",
-                "TestLastName");
+        StudentModel expected = new StudentModel("0", "TestLogin", "TestPassword",
+                "TestName","TestLastName");
+        loginDB.saveNewUserToDatabase(expected);
+        expected.setLogin("New login");
         studentDB.exportStudent(expected);
         StudentModel result = studentDB.loadStudent(1);
         assertEquals(expected, result);
@@ -62,14 +63,12 @@ class StudentDBTest {
     }
 
     private void truncateAllTables() {
-        String truncateGroupNames = "DELETE FROM group_names;";
-        String resetRowIdGroupNames = "DELETE FROM sqlite_sequence WHERE name= 'group_names';";
+        String truncateLogin = "DELETE FROM logins;";
         String truncateStudents = "DELETE FROM students;";
-        String resetRowIdStudents = "DELETE FROM sqlite_sequence WHERE name= 'students';";
-        executeStatement(truncateGroupNames);
-        executeStatement(resetRowIdGroupNames);
+        String resetIds = "DELETE FROM sqlite_sequence;";
+        executeStatement(truncateLogin);
         executeStatement(truncateStudents);
-        executeStatement(resetRowIdStudents);
+        executeStatement(resetIds);
     }
 
     private void executeStatement(String sqlStatement) {
