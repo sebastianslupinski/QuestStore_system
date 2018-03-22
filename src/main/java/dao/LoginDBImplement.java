@@ -1,5 +1,6 @@
 package dao;
 
+import model.AdminModel;
 import model.MentorModel;
 import model.StudentModel;
 import model.UserModel;
@@ -153,13 +154,15 @@ public class LoginDBImplement extends OpenCloseConnectionWithDB implements Login
         String lastName = user.getLastName();
         String email = user.getEmail();
         String role = null;
-        String sqlQuerry2 = null;
+        String sqlQuerry2 = "";
 
         if (user instanceof MentorModel) {
             role = "2";
             sqlQuerry2 = "INSERT INTO mentors(mentor_id, name, lastname, email) VALUES(?, ?, ?, ?);";
-        }
-        else if (user instanceof StudentModel) {
+        } else if (user instanceof AdminModel) {
+            role = "1";
+            sqlQuerry2 = "INSERT INTO admins(admin_id, name, lastname, email) VALUES(?, ?, ?, ?);";
+        } else if (user instanceof StudentModel) {
             role = "3";
             sqlQuerry2 = "INSERT INTO students(student_id, name, lastname, email) VALUES(?, ?, ?, ?);";
         }
