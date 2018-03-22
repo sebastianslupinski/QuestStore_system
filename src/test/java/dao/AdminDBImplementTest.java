@@ -5,11 +5,11 @@ import model.MentorModel;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import utils.DatabaseCreator;
 
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
-import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -17,15 +17,10 @@ class AdminDBImplementTest {
 
     private AdminDB adminDao;
     private LoginDB userDao;
-    private OpenCloseConnectionWithDB connectionManager;
     private String testDbPath = "testDb.db";
     private String createTables = "CreateTables.sql";
     private AdminModel admin;
     private MentorModel mentor;
-
-    AdminDBImplementTest(MentorModel mentor) {
-        this.mentor = mentor;
-    }
 
     @BeforeAll
     static void changeDbPathForTests() {
@@ -35,7 +30,6 @@ class AdminDBImplementTest {
 
     @BeforeEach
     void createAdminDao() throws IOException {
-        connectionManager = new OpenCloseConnectionWithDB();
         adminDao = new AdminDBImplement();
         userDao = new LoginDBImplement();
         admin = new AdminModel("1", "login", "password", "name", "lastName", "email");
@@ -64,14 +58,4 @@ class AdminDBImplementTest {
 
         assertEquals("login", result.getLogin());
     }
-
-//    @Test
-//    void updateMentorsNameTest() {
-//        adminDao.updateMentorsName("newName", "2");
-//        AdminModel adminTest = adminDao.loadAdmin(1);
-//
-//        List<MentorModel> result = adminTest.getMentors();
-//    }
-
-
 }
