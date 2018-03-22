@@ -4,6 +4,7 @@ import model.QuestModel;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import utils.DatabaseCreator;
 
 import java.io.File;
 import java.io.IOException;
