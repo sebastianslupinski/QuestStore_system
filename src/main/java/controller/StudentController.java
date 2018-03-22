@@ -22,9 +22,8 @@ public class StudentController {
                                       "Buy artifact",
                                       "Exit"};
 
-    public StudentController(Connection newConnection) {
-        this.loginDB = new LoginDBImplement(newConnection);
-        this.connection = newConnection;
+    public StudentController() {
+        this.loginDB = new LoginDBImplement();
         this.studentDB = new StudentDBImplement();
         this.walletDB = new WalletDBImplement();
         this.view = new StudentView();
@@ -32,7 +31,7 @@ public class StudentController {
 
     public void run(String id) {
         StudentModel student = studentDB.loadStudent(Integer.valueOf(id));
-        WalletModel wallet = walletDB.loadWalletModel(connection, Integer.valueOf(id));
+        WalletModel wallet = walletDB.loadWalletModel(Integer.valueOf(id));
         Integer option = 1;
         while (!(option == 6)) {
             view.displayMenu(HEADER, OPTIONS);

@@ -3,6 +3,7 @@ package dao;
 import java.sql.*;
 
 public class OpenCloseConnectionWithDB {
+    protected Connection connection;
 
     private static String DATABASE_PATH = "queststore.db";
     private static final String DRIVER = "org.sqlite.JDBC";
@@ -11,18 +12,16 @@ public class OpenCloseConnectionWithDB {
         DATABASE_PATH = path;
     }
 
-    public Connection getConnection() {
-
-        Connection newConnection = null;
+    public void getConnection() {
 
         try {
             Class.forName(DRIVER);
-            newConnection = DriverManager.getConnection("jdbc:sqlite:" + DATABASE_PATH);
+            connection = DriverManager.getConnection("jdbc:sqlite:" + DATABASE_PATH);
+
         } catch ( Exception e ) {
             System.err.println( e.getClass().getName() + ": " + e.getMessage() );
             System.exit(0);
         }
-        return newConnection;
     }
 
     public void closeConnection(Connection connectionToClose) {
@@ -33,5 +32,6 @@ public class OpenCloseConnectionWithDB {
             System.exit(0);
         }
     }
+
 }
 

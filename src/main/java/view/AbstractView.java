@@ -8,7 +8,7 @@ public abstract class AbstractView<T> {
     public void displayText(String text) {
     System.out.println(text);
   }
-    public static void displayInteger(int text) {
+    public void displayInteger(int text) {
         System.out.println(text);
     }
 
