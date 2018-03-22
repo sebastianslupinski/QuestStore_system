@@ -19,9 +19,9 @@ public class QuestController {
                                      "Go back"};
 
 
-    public QuestController(Connection connection) {
+    public QuestController() {
         viewQuest = new QuestView();
-        questDB = new QuestDBImplement(connection);
+        questDB = new QuestDBImplement();
 
     }
 
