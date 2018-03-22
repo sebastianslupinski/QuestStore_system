@@ -57,7 +57,7 @@ public class StudentDBImplement implements StudentDB {
         }
     }
 
-    public StudentModel getStudent(ResultSet resultSet) {
+    private StudentModel getStudent(ResultSet resultSet) {
 
         StudentModel student = null;
 
