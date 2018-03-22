@@ -80,8 +80,12 @@ class StudentDBTest {
     }
 
     private void truncateAllTables() {
+        String truncateGroupNames = "DELETE FROM group_names;";
+        String resetRowIdGroupNames = "DELETE FROM sqlite_sequence WHERE name= 'group_names';";
         String truncateStudents = "DELETE FROM students;";
         String resetRowIdStudents = "DELETE FROM sqlite_sequence WHERE name= 'students';";
+        executeStatement(truncateGroupNames);
+        executeStatement(resetRowIdGroupNames);
         executeStatement(truncateStudents);
         executeStatement(resetRowIdStudents);
     }
