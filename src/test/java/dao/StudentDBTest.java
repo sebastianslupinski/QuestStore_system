@@ -53,8 +53,8 @@ class StudentDBTest {
                 "TestName1","TestLastName1");
         StudentModel studentModel2 = new StudentModel("2", "TestLogin2", "TestPassword2",
                 "TestName2","TestLastName2");
-        studentDB.exportStudent(studentModel1);
-        studentDB.exportStudent(studentModel2);
+        loginDB.saveNewUserToDatabase(studentModel1);
+        loginDB.saveNewUserToDatabase(studentModel2);
         ArrayList<StudentModel> expected = new ArrayList<>();
         expected.add(studentModel1);
         expected.add(studentModel2);
