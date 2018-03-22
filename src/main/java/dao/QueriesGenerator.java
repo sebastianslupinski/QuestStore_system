@@ -91,6 +91,12 @@ public class QueriesGenerator {
 
     }
 
+    public PreparedStatement getQuestById(int id) {
+        String statement = "SELECT * FROM quests WHERE quest_id = ?;";
+        return processManager.getPreparedStatement(statement, Integer.toString(id));
+
+    }
+
     public PreparedStatement insertItem(String tableName, int quest_id, String name, String description, int price) {
         String statement = "INSERT INTO "
             + tableName

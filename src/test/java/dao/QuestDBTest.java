@@ -36,15 +36,10 @@ class QuestDBTest {
 
     @Test
     void savingNewQuestToDbAndGettingAllQuestsTest() {
-        QuestModel questModel1 = new QuestModel("1", "TestQuest1", "TestDesc1", 15);
-        QuestModel questModel2 = new QuestModel("2", "TestQuest2", "TestDesc2", 15);
-        questDB.saveNewQuestToDatabase(questModel1);
-        questDB.saveNewQuestToDatabase(questModel2);
-        ArrayList<QuestModel> expected = new ArrayList<>();
-        expected.add(questModel1);
-        expected.add(questModel2);
-        questDB.getAllQuests();
-        assertEquals(expected, QuestModel.getQuests());
+        QuestModel expected = new QuestModel("1", "TestQuest1", "TestDesc1", 15);
+        questDB.saveNewQuestToDatabase(expected);
+        QuestModel result = questDB.getQuestById(1);
+        assertEquals(expected, result);
     }
 
     @Test

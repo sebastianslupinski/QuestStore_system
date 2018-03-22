@@ -34,6 +34,27 @@ public class QuestDBImplement extends OpenCloseConnectionWithDB implements Quest
         return lastId;
     }
 
+    @Override
+    public QuestModel getQuestById(int id) {
+        PreparedStatement statement = generator.getQuestById(id);
+        QuestModel quest = null;
+        try {
+            ResultSet resultSet = statement.executeQuery();
+
+            while (resultSet.next()) {
+                int quest_id = resultSet.getInt("quest_id");
+                String name = resultSet.getString("name");
+                String description = resultSet.getString("description");
+                int price = resultSet.getInt("price");
+                quest = new QuestModel(String.valueOf(quest_id), name, description, price);
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return quest;
+    }
+
+
     public QuestModel getAllQuests() {
 
         PreparedStatement statement = generator.getAllQuests(tableName);

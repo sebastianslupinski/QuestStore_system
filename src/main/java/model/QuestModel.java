@@ -1,6 +1,8 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.Objects;
+
 import view.QuestView;
 
 public class QuestModel {
@@ -53,4 +55,20 @@ public class QuestModel {
         return Integer.valueOf(this.quest_id);
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        QuestModel that = (QuestModel) o;
+        return price == that.price &&
+                Objects.equals(name, that.name) &&
+                Objects.equals(description, that.description) &&
+                Objects.equals(quest_id, that.quest_id);
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(view, name, description, price, quest_id);
+    }
 }
