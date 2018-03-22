@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -38,6 +39,21 @@ public class StudentDBTest {
                 "TestLastName");
         studentDB.exportStudent(expected);
         StudentModel result = studentDB.loadStudent(1);
+        assertEquals(expected, result);
+    }
+
+    @Test
+    void gettingAllStudentsTest() {
+        StudentModel studentModel1 = new StudentModel("1", "TestLogin1", "TestPassword1",
+                "TestName1","TestLastName1");
+        StudentModel studentModel2 = new StudentModel("2", "TestLogin2", "TestPassword2",
+                "TestName2","TestLastName2");
+        studentDB.exportStudent(studentModel1);
+        studentDB.exportStudent(studentModel2);
+        ArrayList<StudentModel> expected = new ArrayList<>();
+        expected.add(studentModel1);
+        expected.add(studentModel2);
+        ArrayList<StudentModel> result = studentDB.getAllStudents();
         assertEquals(expected, result);
     }
 
